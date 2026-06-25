@@ -1,0 +1,61 @@
+/* CSS Reset & Variables */
+:root {
+    --color-surface: #fbf9f5;
+    --color-inverse-surface: #30312e;
+    --color-on-surface: #1b1c1a;
+    --color-surface-container-high: #eae8e4;
+    --color-surface-container-highest: #e4e2de;
+    --color-primary: #271310;
+    --color-surface-tint: #745853;
+    --color-on-tertiary-container: #889885;
+    --color-error: #ba1a1a;
+    --color-on-error-container: #93000a;
+    --color-error-container: #ffdad6;
+    --color-primary-container: #3e2723;
+    --color-on-primary-container: #ffdad4;
+    --color-on-primary: #ffffff;
+    --color-secondary: #835425;
+    --color-outline: #827472;
+    --color-on-secondary: #ffffff;
+    --color-on-surface-variant: #504442;
+    --color-surface-variant: #f4dfdb;
+    --color-outline-variant: #d3c3c0;
+    --color-secondary-container: #ffbf87;
+    --color-on-secondary-container: #2f1500;
+    --color-surface-container: #efeeea;
+    --color-surface-container-low: #f5f3ef;
+    --color-surface-container-lowest: #ffffff;
+    
+    --tertiary-container: #223021;
+    --on-tertiary-container: #889885;
+
+    --font-playfair: 'Playfair Display', serif;
+    --font-merriweather: 'Merriweather', serif;
+
+    --max-width: 1200px;
+    --margin-desktop: 40px;
+    --margin-mobile: 16px;
+    --gutter: 24px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-merriweather);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    background-repeat: repeat;
+    line-height: 1.5;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button, input { border: none; background: none; font-family: inherit; outline: none; }
+button { cursor: pointer; }
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+}

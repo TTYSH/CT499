@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>The Archive - Đăng nhập</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <style>
+        /* Variables based on Tailwind Config */
+        :root {
+            --surface: #fbf9f4;
+            --primary: #171920;
+            --secondary-container: #f6ddae;
+            --on-secondary-container: #73603b;
+            --surface-dim: #dbdad5;
+            --tertiary-fixed: #e8e2d6;
+            --on-surface-variant: #46464b;
+            --outline-variant: #c7c6cb;
+            --on-primary: #ffffff;
+            --primary-container: #2c2e35;
+            --secondary: #6e5c37;
+        }
+
+        /* Base Resets & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--surface);
+            color: var(--primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        ::selection {
+            background-color: var(--secondary-container);
+            color: var(--on-secondary-container);
+        }
+
+        /* Typography */
+        .font-display-lg {
+            font-family: "EB Garamond", serif;
+            font-size: 48px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            font-weight: 500;
+        }
+        .font-display-lg-mobile {
+            font-family: "EB Garamond", serif;
+            font-size: 36px;
+            line-height: 1.2;
+            font-weight: 500;
+        }
+        .font-headline-sm {
+            font-family: "EB Garamond", serif;
+            font-size: 24px;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+        .font-body-md {
+            font-family: "Manrope", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        .font-label-md {
+            font-family: "Manrope", sans-serif;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+        .font-label-sm {
+            font-family: "Manrope", sans-serif;
+            font-size: 12px;
+            line-height: 1.2;
+            letter-spacing: 0.03em;
+            font-weight: 500;
+        }
+        .italic { font-style: italic; }
+        .text-primary { color: var(--primary); }
+        .text-on-surface-variant { color: var(--on-surface-variant); }
+        
+        /* Layout */
+        .main-container {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--surface);
+        }
+
+        /* Left Side */
+        .left-side {
+            display: none;
+        }
+
+        /* Right Side */
+        .right-side {
+            width: 100%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Desktop Media Query */
+        @media (min-width: 768px) {
+            body {
+                padding: 0;
+            }
+            .main-container {
+                flex-direction: row;
+                border: 1px solid var(--tertiary-fixed);
+            }
+            .left-side {
+                display: flex;
+                width: 50%;
+                position: relative;
+                background-color: var(--surface-dim);
+                align-items: center;
+                justify-content: center;
+                border-right: 1px solid var(--tertiary-fixed);
+                overflow: hidden;
+            }
+            .right-side {
+                width: 50%;
+                padding: 4rem;
+            }
+            .mobile-header {
+                display: none;
+            }
+            .footer-note {
+                text-align: left;
+            }
+        }
+
+        /* Components inside Left Side */
+        .bg-image {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8;
+            mix-blend-mode: multiply;
+        }
+        .overlay-card {
+            position: relative;
+            z-index: 10;
+            padding: 3rem;
+            text-align: center;
+            color: var(--primary);
+            background-color: rgba(251, 249, 244, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--tertiary-fixed);
+            margin: 2rem;
+            max-width: 24rem;
+        }
+        .overlay-icon {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .overlay-title { margin-bottom: 1rem; }
+
+        /* Mobile Header */
+        .mobile-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .mobile-icon {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Tabs */
+        .tab-nav {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--outline-variant);
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0;
+        }
+        .tab-btn:focus { outline: none; }
+        .tab-indicator {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: all 0.3s;
+            width: 70px;
+        }
+
+        /* Forms Area */
+        .form-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+        }
+        .form-panel {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        .form-active {
+            transform: translateX(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .form-inactive-right {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .form-inactive-left {
+            transform: translateX(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .form-group-container { display: flex; flex-direction: column; gap: 2rem; }
+        .form-group-container-sm { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        /* Inputs */
+        .ledger-input {
+            border: none;
+            border-bottom: 1px solid var(--primary);
+            background: transparent;
+            padding: 8px 0;
+            width: 100%;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        .ledger-input:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom-width: 2px;
+            border-bottom-color: var(--secondary);
+        }
+        .ledger-input::placeholder {
+            color: var(--outline-variant);
+            font-style: italic;
+        }
+
+        .forgot-link-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+        .forgot-link, .footer-link {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 1px;
+            color: var(--on-surface-variant);
+            transition: color 0.3s;
+        }
+        .forgot-link:hover, .footer-link:hover {
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--on-primary);
+            padding: 0.75rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-container);
+        }
+        .btn-secondary {
+            width: 100%;
+            background-color: var(--surface);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.75rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background-color: var(--surface-dim);
+        }
+
+        /* Footer */
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .footer-note {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Main Container -->
+<main class="main-container">
+    <!-- Left Side: Atmospheric Image -->
+    <div class="left-side">
+        <div class="bg-image" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxXaeAnEO6oWuAmoQYYUywwfHi0bqn6WS3SSXMB9gvjGch3c6mkPafYxeQ5gch9xZsHyVAu9lGQoHgfrJDwcqoeaMnF2EuDDDCKiTvnkAp5CH1KvQar9VK9n5UVSZ6tIw1OIwo2lxs8sfRtaBDXix1XvFR_xd3qVOz8ZsYpklccwAH3zb3mKHIDjuSlqsoBtaaIRV-YdOpb0ItxLDvdh23d_LmJcmS8z4Rw9bMiDjFRDMOCaP407AxkMKfc3Q7Bk4DAkVhZDrkuIWl');">
+        </div>
+        <!-- Overlay Text/Logo -->
+        <div class="overlay-card">
+            <span class="material-symbols-outlined overlay-icon">menu_book</span>
+            <h1 class="font-display-lg italic overlay-title">The Archive</h1>
+            <p class="font-body-md text-on-surface-variant">Một bộ sưu tập tri thức được tuyển chọn, lưu giữ cho những tâm hồn thích suy ngẫm.</p>
+        </div>
+    </div>
+    <!-- Right Side: The Ledger Card -->
+    <div class="right-side">
+        <!-- Mobile Header (Hidden on Desktop) -->
+        <div class="mobile-header">
+            <span class="material-symbols-outlined mobile-icon">menu_book</span>
+            <h1 class="font-display-lg-mobile italic text-primary">The Archive</h1>
+        </div>
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn font-headline-sm text-primary" id="tab-signin" onclick="switchTab('signin')">Đăng nhập</button>
+            <button class="tab-btn font-headline-sm text-on-surface-variant" id="tab-register" onclick="switchTab('register')">Đăng ký</button>
+            <!-- Active Indicator Line -->
+            <div class="tab-indicator" id="tab-indicator"></div>
+        </div>
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Sign In Form -->
+            <form class="form-panel form-active" id="form-signin">
+                <div class="form-group-container">
+                    <div>
+                        <label class="form-label font-label-md text-on-surface-variant">Email</label>
+                        <input class="ledger-input font-body-md text-primary" placeholder="Nhập địa chỉ email của bạn" required="" type="email"/>
+                    </div>
+                    <div>
+                        <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
+                        <input class="ledger-input font-body-md text-primary" placeholder="Nhập mật khẩu của bạn" required="" type="password"/>
+                        <div class="forgot-link-container">
+                            <a class="forgot-link font-label-sm" href="#">Quên mật khẩu?</a>
+                        </div>
+                    </div>
+                    <button class="btn-primary font-label-md" type="submit">Vào thư viện</button>
+                </div>
+            </form>
+            <!-- Register Form -->
+            <form class="form-panel form-inactive-right" id="form-register">
+                <div class="form-group-container-sm">
+                    <div>
+                        <label class="form-label font-label-md text-on-surface-variant">Họ và tên</label>
+                        <input class="ledger-input font-body-md text-primary" placeholder="Tên đầy đủ của bạn" required="" type="text"/>
+                    </div>
+                    <div>
+                        <label class="form-label font-label-md text-on-surface-variant">Email</label>
+                        <input class="ledger-input font-body-md text-primary" placeholder="Email dùng để liên lạc" required="" type="email"/>
+                    </div>
+                    <div>
+                        <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
+                        <input class="ledger-input font-body-md text-primary" placeholder="Tạo một mật khẩu an toàn" required="" type="password"/>
+                    </div>
+                    <button class="btn-secondary font-label-md" type="submit">Đăng ký thành viên</button>
+                </div>
+            </form>
+        </div>
+        <!-- Footer Note -->
+        <div class="footer-note">
+            <p class="font-label-sm text-on-surface-variant">Bằng việc tiếp tục, bạn đồng ý với <a class="footer-link" href="#">Nội quy của thư viện</a>.</p>
+        </div>
+    </div>
+</main>
+<script>
+    function switchTab(tab) {
+        const formSignIn = document.getElementById('form-signin');
+        const formRegister = document.getElementById('form-register');
+        const tabSignIn = document.getElementById('tab-signin');
+        const tabRegister = document.getElementById('tab-register');
+        const indicator = document.getElementById('tab-indicator');
+
+        if (tab === 'signin') {
+            // Form transition
+            formSignIn.classList.remove('form-inactive-left');
+            formSignIn.classList.add('form-active');
+            
+            formRegister.classList.remove('form-active');
+            formRegister.classList.add('form-inactive-right');
+
+            // Text color transition
+            tabSignIn.classList.replace('text-on-surface-variant', 'text-primary');
+            tabRegister.classList.replace('text-primary', 'text-on-surface-variant');
+
+            // Indicator positioning
+            indicator.style.left = '0';
+            indicator.style.width = tabSignIn.offsetWidth + 'px';
+        } else {
+            // Form transition
+            formSignIn.classList.remove('form-active');
+            formSignIn.classList.add('form-inactive-left');
+            
+            formRegister.classList.remove('form-inactive-right');
+            formRegister.classList.add('form-active');
+
+            // Text color transition
+            tabRegister.classList.replace('text-on-surface-variant', 'text-primary');
+            tabSignIn.classList.replace('text-primary', 'text-on-surface-variant');
+
+            // Indicator positioning
+            // Gap is 2rem = 32px
+            indicator.style.left = (tabSignIn.offsetWidth + 32) + 'px'; 
+            indicator.style.width = tabRegister.offsetWidth + 'px';
+        }
+    }
+
+    // Initialize indicator width on load
+    window.onload = () => {
+        const tabSignIn = document.getElementById('tab-signin');
+        const indicator = document.getElementById('tab-indicator');
+        indicator.style.width = tabSignIn.offsetWidth + 'px';
+    };
+</script>
+</body>
+</html>
