@@ -8,18 +8,18 @@
         </div>
         <div class="container hero-content">
             <div class="hero-inner">
-                <h1 class="hero-title">Preserving the Ledger of Knowledge</h1>
+                <h1 class="hero-title">Bảo Tồn Kho Tàng Tri Thức</h1>
                 <p class="hero-desc">
-                    Access the world's most meticulous archival registry. A digital haven for historical manuscripts, academic volumes, and the whispered secrets of forgotten shelves.
+                   Tiếp cận kho lưu trữ được biên soạn công phu bậc nhất thế giới. Một thiên đường kỹ thuật số dành cho các bản thảo lịch sử, những ấn phẩm học thuật và cả những bí mật thầm kín từ những kệ sách đã bị lãng quên.
                 </p>
                 <!-- Search Bar -->
-                <div class="search-form">
+                <!-- <div class="search-form">
                     <div class="search-input-wrapper">
                         <span class="material-symbols-outlined search-icon">search</span>
                         <input class="search-input" placeholder="Search the Collection..." type="text">
                     </div>
                     <button class="search-btn">Explore Archive</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -27,9 +27,9 @@
     <!-- Archivist's Note / Divider -->
     <div class="container divider-section">
         <div class="divider-inner">
-            <div class="divider-line"></div>
+            <!-- <div class="divider-line"></div>
             <span class="divider-text">Established 1954</span>
-            <div class="divider-line"></div>
+            <div class="divider-line"></div> -->
         </div>
     </div>
 
@@ -38,11 +38,11 @@
         <div class="container">
             <div class="section-header">
                 <div>
-                    <h2 class="section-title">Newly Cataloged Acquisitions</h2>
-                    <p class="section-subtitle">The latest additions to our permanent physical registry.</p>
+                    <h2 class="section-title">Các Sách Mới Thêm Vào</h2>
+                    <p class="section-subtitle">Các tác phẩm mới được thêm vào tủ sách</p>
                 </div>
                 <a class="view-all-link" href="#">
-                    View Entire Catalog
+                    Xem Tất Cả
                     <span class="material-symbols-outlined view-all-icon">arrow_right_alt</span>
                 </a>
             </div>
@@ -116,10 +116,10 @@
     </section>
 
     <!-- Bento Featured Section -->
-    <section class="bento-section">
+    <!-- <section class="bento-section">
         <div class="container">
             <div class="bento-grid">
-                <!-- Large Highlight -->
+    
                 <div class="bento-large paper-card">
                     <img alt="Archival Process" class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb0PR5bqFtPbsdbzhcmvrrQYo7PrVNOKmTaQ6ciw-Bd80Cni3xis-DsuAQoJ4FtFZ7Si1dIhHBslyL9-nS5dELSJ5Iaaw7PPL6coYE_1trdATp7Na7FoHCTY_FRdoEpK_qT8ZGkErQE-ZMbzCyBVzBHIumtY9WUvpne5k0X2VXrJQWfFnhlXj8hfTpfLm-hm-bd8UUhQJ2UWaN0KJPoLMijxu9a4kebzfz8QN4R3jSnczcvYomxHVPFGyV5k7DuX8kDBGigYrH9to">
                     <div class="bento-content">
@@ -130,10 +130,9 @@
                         <button class="btn-solid">The Archival Ledger</button>
                     </div>
                 </div>
-                
-                <!-- Side Grid -->
+   
                 <div class="bento-side">
-                    <!-- Top Mini -->
+      
                     <div class="bento-mini top paper-card">
                         <div class="icon-circle">
                             <span class="material-symbols-outlined">history_edu</span>
@@ -144,7 +143,7 @@
                         </div>
                     </div>
                     
-                    <!-- Bottom Mini -->
+        
                     <div class="bento-mini bottom paper-card">
                         <div class="icon-circle">
                             <span class="material-symbols-outlined">inventory_2</span>
@@ -157,7 +156,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
@@ -377,6 +376,7 @@ const handleHorizontalScroll = (evt) => {
     flex-direction: column;
     border: 1px solid rgba(39, 19, 16, 0.1);
     box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.1);
+    border-radius: 12px;
     transition: all 0.2s ease;
 }
 .book-card-container:hover .paper-card {
@@ -390,6 +390,7 @@ const handleHorizontalScroll = (evt) => {
     transition: filter 0.3s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     margin-bottom: 16px;
+    border-radius: 8px;
 }
 .book-card-container:hover .book-cover { filter: grayscale(0%); }
 
