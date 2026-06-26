@@ -72,10 +72,10 @@
                         the making.
                     </p>
                     
-                    <div class="end-mark">
+                    <!-- <div class="end-mark">
                         <span class="material-symbols-outlined end-icon">flare</span>
                         <p class="end-text">End of Official Statement</p>
-                    </div>
+                    </div> -->
                 </article>
             </div>
 
