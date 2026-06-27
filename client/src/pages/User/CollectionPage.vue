@@ -22,7 +22,7 @@
                     </li>
                     <li>
                         <label class="category-item">
-                            <input class="category-checkbox" type="checkbox" checked>
+                            <input class="category-checkbox" type="checkbox">
                             <span class="category-label">Triết học</span>
                         </label>
                     </li>
@@ -45,7 +45,8 @@
                 <h3>Thể loại</h3>
                 <div class="tags-container">
                     <button class="tag-btn">Kinh điển</button>
-                    <button class="tag-btn active">Hiện đại</button>
+                    <!-- <button class="tag-btn active">Hiện đại</button> -->
+                    <button class="tag-btn ">Hiện đại</button>
                     <button class="tag-btn">Tiểu luận</button>
                     <button class="tag-btn">Thơ ca</button>
                     <button class="tag-btn">Hồi ký</button>
@@ -255,6 +256,9 @@ const handleRequest = (event) => {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .category-item {
@@ -422,6 +426,7 @@ const handleRequest = (event) => {
     transition: all 0.3s;
     min-height: 500px;
     position: relative;
+    border-radius: 16px;
 }
 
 .book-card:hover {
@@ -450,6 +455,7 @@ const handleRequest = (event) => {
     position: relative;
     background-color: var(--color-surface-container-high);
     border: 1px solid rgba(211, 195, 192, 0.2);
+    border-radius: 8px;
 }
 
 .card-image {
@@ -535,6 +541,7 @@ const handleRequest = (event) => {
     margin-top: auto;
     position: relative;
     z-index: 2;
+    border-radius: 8px;
 }
 
 .add-btn:hover {

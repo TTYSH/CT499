@@ -5,8 +5,8 @@
                 <div class="ornament-hr">
                     <span class="material-symbols-outlined ornament-icon">auto_stories</span>
                 </div>
-                <h1 class="hero-title">The Custodians of Knowledge</h1>
-                <p class="hero-subtitle">Founded Anno Domini 1924</p>
+                <h1 class="hero-title">Những Người Gìn Giữ Tri Thức</h1>
+                <p class="hero-subtitle">Thành lập năm 1924</p>
             </div>
 
             <!-- Main Narrative -->
@@ -14,15 +14,15 @@
                 <!-- Side Metadata (Journal Style) -->
                 <aside class="metadata-aside">
                     <div class="meta-block">
-                        <h3 class="meta-title">ARCHIVAL REFERENCE</h3>
-                        <p class="meta-text">Registry Vol. LXIV<br>Series: Institutional Histories<br>Document: 001-ALPHA</p>
+                        <h3 class="meta-title">THAM KHẢO LƯU TRỮ</h3>
+                        <p class="meta-text">Sổ đăng ký Tập LXIV<br>Chuỗi: Lịch sử Tổ chức<br>Tài liệu: 001-ALPHA</p>
                     </div>
                     <div class="meta-block">
-                        <h3 class="meta-title">PRESERVATION STATUS</h3>
-                        <span class="status-badge">Permanent Record</span>
+                        <h3 class="meta-title">TRẠNG THÁI BẢO QUẢN</h3>
+                        <span class="status-badge">Hồ sơ vĩnh viễn</span>
                     </div>
                     <div class="quote-card library-punch">
-                        <p class="quote-text">"A library is not a luxury but one of the necessities of life."</p>
+                        <p class="quote-text">"Thư viện không phải là một sự xa xỉ mà là một trong những nhu cầu thiết yếu của cuộc sống."</p>
                         <p class="quote-author">— Henry Ward Beecher</p>
                     </div>
                 </aside>
@@ -30,34 +30,34 @@
                 <!-- Main Journal Text -->
                 <article class="journal-column">
                     <p class="drop-cap journal-text-lead">
-                        In the quiet autumn of 1924, amidst the echoing halls of the Old Academic Quarter, the first entry
-                        was inked into what would become the Librarian's Registry. What began as a humble ledger for a
-                        private collection has evolved into a global bastion of archival integrity, preserving the
-                        intellectual legacy of nearly a century of scholarship and narrative.
+                        Vào mùa thu tĩnh lặng năm 1924, giữa những sảnh đường vang vọng của Khu Học thuật Cũ, mục đầu tiên
+                        đã được viết bằng mực vào cuốn sổ mà sau này trở thành Sổ Đăng ký của Thủ thư. Những gì bắt đầu như một cuốn sổ khiêm tốn cho một
+                        bộ sưu tập cá nhân đã phát triển thành một pháo đài toàn cầu về tính toàn vẹn của lưu trữ, bảo tồn
+                        di sản trí tuệ của gần một thế kỷ học thuật và tường thuật.
                     </p>
                     <p class="journal-text">
-                        The Registry was founded on the principle of *Lex Scientia*—the law of knowledge. In an era where
-                        information was fragile and physical, the founders recognized that a book is more than paper and
-                        binding; it is a vessel for human consciousness. Their mission was simple yet profound: to create a
-                        system so robust that no thought, however small, would ever be lost to the ravages of time or
-                        neglect.
+                        Sổ Đăng ký được thành lập dựa trên nguyên tắc *Lex Scientia* — luật của tri thức. Trong một thời đại mà
+                        thông tin còn mỏng manh và mang tính vật lý, những người sáng lập đã nhận ra rằng một cuốn sách không chỉ là giấy và
+                        bìa; nó là một vật chứa đựng ý thức của con người. Sứ mệnh của họ đơn giản nhưng sâu sắc: tạo ra một
+                        hệ thống vững chắc đến mức không một suy nghĩ nào, dù nhỏ bé đến đâu, có thể bị mai một bởi sự tàn phá của thời gian hoặc
+                        sự lãng quên.
                     </p>
                     
                     <blockquote class="block-quote">
                         <span class="material-symbols-outlined quote-icon">format_quote</span>
                         <p class="block-quote-text">
-                            "We do not merely store books; we curate the very threads of the human conversation, weaving
-                            them into a tapestry that spans generations."
+                            "Chúng tôi không đơn thuần lưu trữ những cuốn sách; chúng tôi tuyển chọn những sợi chỉ của cuộc trò chuyện nhân loại, dệt
+                            chúng thành một bức tranh thảm trải dài qua nhiều thế hệ."
                         </p>
-                        <cite class="block-quote-cite">— Director Emerita Eleanor Vance (1954)</cite>
+                        <cite class="block-quote-cite">— Cựu Giám đốc Eleanor Vance (1954)</cite>
                     </blockquote>
                     
                     <p class="journal-text">
-                        As decades passed, the Registry adapted. It weathered the transition from handwritten cards to the
-                        rhythmic clack of typewriters, and eventually, the silent hum of the digital age. Yet, through every
-                        technological shift, we have maintained our "Tactile Soul." Every digital record in our system is
-                        treated with the same reverence as a vellum scroll, ensuring that the *feeling* of research remains
-                        intimate and focused.
+                        Qua nhiều thập kỷ, Sổ Đăng ký đã thích nghi. Nó đã vượt qua quá trình chuyển đổi từ những thẻ viết tay sang
+                        tiếng gõ nhịp nhàng của máy đánh chữ, và cuối cùng là tiếng ồn ào lặng lẽ của kỷ nguyên số. Tuy nhiên, qua mỗi
+                        sự thay đổi công nghệ, chúng tôi vẫn duy trì "Linh hồn Xúc giác" của mình. Mỗi hồ sơ kỹ thuật số trong hệ thống của chúng tôi
+                        đều được đối xử với cùng sự tôn kính như một cuộn giấy da, đảm bảo rằng *cảm giác* nghiên cứu vẫn luôn
+                        gần gũi và tập trung.
                     </p>
                     
                     <div class="image-wrapper">
@@ -65,41 +65,40 @@
                     </div>
                     
                     <p class="journal-text">
-                        Today, the Librarian's Registry serves as a bridge. We connect the modern researcher with the
-                        scholarly discipline of the past. Our mission remains steadfast: to organize the world's wisdom with
-                        the precision of an accountant and the passion of a poet. Whether you are seeking a rare manuscript
-                        or cataloging a new collection, you are participating in a tradition that is one hundred years in
-                        the making.
+                        Ngày nay, Sổ Đăng ký của Thủ thư đóng vai trò như một cây cầu. Chúng tôi kết nối nhà
+                        nghiên cứu hiện đại với kỷ luật học thuật của quá khứ. Sứ mệnh của chúng tôi vẫn kiên định: tổ chức trí tuệ của thế giới với
+                        độ chính xác của một kế toán viên và niềm đam mê của một nhà thơ. Dù bạn đang tìm kiếm một bản thảo quý hiếm
+                        hay lập danh mục cho một bộ sưu tập mới, bạn đang tham gia vào một truyền thống đã được xây dựng suốt một trăm năm qua.
                     </p>
                     
                     <!-- <div class="end-mark">
                         <span class="material-symbols-outlined end-icon">flare</span>
-                        <p class="end-text">End of Official Statement</p>
+                        <p class="end-text">Kết thúc Tuyên bố Chính thức</p>
                     </div> -->
                 </article>
             </div>
 
             <!-- Mission Grid -->
             <section class="mission-section">
-                <h2 class="mission-title">Our Foundational Pillars</h2>
+                <h2 class="mission-title">Những Trụ cột Nền tảng của Chúng tôi</h2>
                 <div class="pillars-grid">
                     <!-- Pillar 1 -->
                     <div class="pillar-card">
                         <span class="material-symbols-outlined pillar-icon">verified_user</span>
-                        <h4 class="pillar-title">Permanence</h4>
-                        <p class="pillar-desc">Records designed to outlast the platforms they inhabit, ensuring access for the scholars of tomorrow.</p>
+                        <h4 class="pillar-title">Sự vĩnh cửu</h4>
+                        <p class="pillar-desc">Các hồ sơ được thiết kế để tồn tại lâu hơn các nền tảng chứa chúng, đảm bảo quyền truy cập cho các học giả của ngày mai.</p>
                     </div>
                     <!-- Pillar 2 -->
                     <div class="pillar-card highlight">
                         <span class="material-symbols-outlined pillar-icon">balance</span>
-                        <h4 class="pillar-title">Precision</h4>
-                        <p class="pillar-desc">The meticulous application of cataloging rules that have defined bibliographic science since 1924.</p>
+                        <h4 class="pillar-title">Độ chính xác</h4>
+                        <p class="pillar-desc">Việc áp dụng tỉ mỉ các quy tắc biên mục đã định hình khoa học thư mục kể từ năm 1924.</p>
                     </div>
                     <!-- Pillar 3 -->
                     <div class="pillar-card">
                         <span class="material-symbols-outlined pillar-icon">diversity_3</span>
-                        <h4 class="pillar-title">Community</h4>
-                        <p class="pillar-desc">A shared global ledger of knowledge, accessible to all who seek truth and academic rigor.</p>
+                        <h4 class="pillar-title">Cộng đồng</h4>
+                        <p class="pillar-desc">Một cuốn sổ tri thức toàn cầu được chia sẻ, dễ dàng tiếp cận với tất cả những ai tìm kiếm chân lý và sự nghiêm túc trong học thuật.</p>
                     </div>
                 </div>
             </section>
