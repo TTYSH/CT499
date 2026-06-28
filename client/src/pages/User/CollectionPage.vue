@@ -53,13 +53,7 @@
                 </div>
             </section>
 
-            <section class="quote-box">
-                <div class="quote-content">
-                    <p class="quote-text">"Mỗi cuốn sách là một thế giới đang chờ được khám phá."</p>
-                    <p class="quote-author">— Thủ thư đời thứ IV</p>
-                </div>
-                <span class="material-symbols-outlined quote-icon">menu_book</span>
-            </section>
+       
         </div>
     </aside>
 
@@ -434,19 +428,6 @@ const handleRequest = (event) => {
     box-shadow: 6px 6px 0px 0px rgba(131, 84, 37, 0.15);
 }
 
-.book-card::after {
-    content: "";
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 14px;
-    background: #fbf9f5;
-    border: 1px solid #d3c3c0;
-    border-radius: 50%;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 .card-image-wrapper {
     height: 256px;

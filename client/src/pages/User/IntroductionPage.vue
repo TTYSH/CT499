@@ -15,7 +15,7 @@
                 <aside class="metadata-aside">
                     <div class="meta-block">
                         <h3 class="meta-title">THAM KHẢO LƯU TRỮ</h3>
-                        <p class="meta-text">Sổ đăng ký Tập LXIV<br>Chuỗi: Lịch sử Tổ chức<br>Tài liệu: 001-ALPHA</p>
+                        <p class="meta-text">BookWorm Tập LXIV<br>Chuỗi: Lịch sử Tổ chức<br>Tài liệu: 001-ALPHA</p>
                     </div>
                     <div class="meta-block">
                         <h3 class="meta-title">TRẠNG THÁI BẢO QUẢN</h3>
@@ -31,12 +31,12 @@
                 <article class="journal-column">
                     <p class="drop-cap journal-text-lead">
                         Vào mùa thu tĩnh lặng năm 1924, giữa những sảnh đường vang vọng của Khu Học thuật Cũ, mục đầu tiên
-                        đã được viết bằng mực vào cuốn sổ mà sau này trở thành Sổ Đăng ký của Thủ thư. Những gì bắt đầu như một cuốn sổ khiêm tốn cho một
+                        đã được viết bằng mực vào cuốn sổ mà sau này trở thành BookWorm của Thủ thư. Những gì bắt đầu như một cuốn sổ khiêm tốn cho một
                         bộ sưu tập cá nhân đã phát triển thành một pháo đài toàn cầu về tính toàn vẹn của lưu trữ, bảo tồn
                         di sản trí tuệ của gần một thế kỷ học thuật và tường thuật.
                     </p>
                     <p class="journal-text">
-                        Sổ Đăng ký được thành lập dựa trên nguyên tắc *Lex Scientia* — luật của tri thức. Trong một thời đại mà
+                        BookWorm được thành lập dựa trên nguyên tắc *Lex Scientia* — luật của tri thức. Trong một thời đại mà
                         thông tin còn mỏng manh và mang tính vật lý, những người sáng lập đã nhận ra rằng một cuốn sách không chỉ là giấy và
                         bìa; nó là một vật chứa đựng ý thức của con người. Sứ mệnh của họ đơn giản nhưng sâu sắc: tạo ra một
                         hệ thống vững chắc đến mức không một suy nghĩ nào, dù nhỏ bé đến đâu, có thể bị mai một bởi sự tàn phá của thời gian hoặc
@@ -49,11 +49,10 @@
                             "Chúng tôi không đơn thuần lưu trữ những cuốn sách; chúng tôi tuyển chọn những sợi chỉ của cuộc trò chuyện nhân loại, dệt
                             chúng thành một bức tranh thảm trải dài qua nhiều thế hệ."
                         </p>
-                        <cite class="block-quote-cite">— Cựu Giám đốc Eleanor Vance (1954)</cite>
                     </blockquote>
                     
                     <p class="journal-text">
-                        Qua nhiều thập kỷ, Sổ Đăng ký đã thích nghi. Nó đã vượt qua quá trình chuyển đổi từ những thẻ viết tay sang
+                        Qua nhiều thập kỷ, BookWorm đã thích nghi. Nó đã vượt qua quá trình chuyển đổi từ những thẻ viết tay sang
                         tiếng gõ nhịp nhàng của máy đánh chữ, và cuối cùng là tiếng ồn ào lặng lẽ của kỷ nguyên số. Tuy nhiên, qua mỗi
                         sự thay đổi công nghệ, chúng tôi vẫn duy trì "Linh hồn Xúc giác" của mình. Mỗi hồ sơ kỹ thuật số trong hệ thống của chúng tôi
                         đều được đối xử với cùng sự tôn kính như một cuộn giấy da, đảm bảo rằng *cảm giác* nghiên cứu vẫn luôn
@@ -65,7 +64,7 @@
                     </div>
                     
                     <p class="journal-text">
-                        Ngày nay, Sổ Đăng ký của Thủ thư đóng vai trò như một cây cầu. Chúng tôi kết nối nhà
+                        Ngày nay, BookWorm của Thủ thư đóng vai trò như một cây cầu. Chúng tôi kết nối nhà
                         nghiên cứu hiện đại với kỷ luật học thuật của quá khứ. Sứ mệnh của chúng tôi vẫn kiên định: tổ chức trí tuệ của thế giới với
                         độ chính xác của một kế toán viên và niềm đam mê của một nhà thơ. Dù bạn đang tìm kiếm một bản thảo quý hiếm
                         hay lập danh mục cho một bộ sưu tập mới, bạn đang tham gia vào một truyền thống đã được xây dựng suốt một trăm năm qua.
@@ -210,19 +209,6 @@
 }
 
 .library-punch { position: relative; }
-.library-punch::after {
-    content: '';
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 14px;
-    background: var(--color-surface-container);
-    border-radius: 50%;
-    border: 1px solid var(--color-outline-variant);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-}
 
 /* Journal Column */
 .journal-column { grid-column: span 1; }
@@ -286,15 +272,7 @@
     font-weight: 600;
     line-height: 1.4;
 }
-.block-quote-cite {
-    display: block;
-    text-align: center;
-    margin-top: 16px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-secondary);
-    font-style: normal;
-}
+
 
 .image-wrapper {
     margin: 32px 0;

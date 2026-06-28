@@ -4,8 +4,6 @@
         <nav class="breadcrumbs">
             <a class="breadcrumb-link" href="#">Registry</a>
             <span class="material-symbols-outlined breadcrumb-separator">chevron_right</span>
-            <a class="breadcrumb-link" href="#">Classic Literature</a>
-            <span class="material-symbols-outlined breadcrumb-separator">chevron_right</span>
             <span class="breadcrumb-current">The Midnight Library</span>
         </nav>
 
@@ -167,37 +165,11 @@ button { border: none; background: none; font-family: inherit; cursor: pointer; 
     vertical-align: middle;
 }
 
-/* Common Styles */
-.sticker-shadow {
-    box-shadow: 4px 4px 0px 0px rgba(39, 19, 16, 0.2);
-    transition: all 0.2s;
-}
-.sticker-shadow:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 6px 6px 0px 0px rgba(39, 19, 16, 0.3);
-}
-.sticker-shadow:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px 0px rgba(39, 19, 16, 0.2);
-}
 
 .library-card {
     position: relative;
     border: 1px solid rgba(39, 19, 16, 0.15);
     background: #ffffff;
-}
-.library-card::after {
-    content: "";
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--color-surface);
-    border: 1px solid rgba(39, 19, 16, 0.1);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .ink-stamp {

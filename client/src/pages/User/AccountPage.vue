@@ -2,8 +2,7 @@
     <div class="account-page">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-title">Account Portal</h1>
-            <p class="page-description">Access your personal archives, borrowing logs, and scholarly preferences within the Librarian's Registry system.</p>
+            <h1 class="page-title">Thông tin tài khoản</h1>
         </div>
 
         <!-- Tabbed Interface -->
@@ -39,7 +38,6 @@
                     <div class="tab-header">
                         <div>
                             <h2 class="tab-title">Thông tin cá nhân</h2>
-                            <p class="tab-subtitle">Academic Record ID: #LR-1954-0082</p>
                         </div>
                     </div>
                     
@@ -58,23 +56,23 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label class="form-label">Họ tên</label>
-                                <input class="form-input" type="text" value="Nguyễn Văn Bảo">
+                                <input class="form-input" type="text" value="">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Số điện thoại</label>
-                                <input class="form-input" type="tel" value="0901234567">
+                                <input class="form-input" type="tel" value="">
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Email</label>
-                                <input class="form-input" type="email" value="baonv.academic@registry.org">
+                                <input class="form-input" type="email" value="">
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Địa chỉ</label>
-                                <input class="form-input" type="text" value="42 Phố Cổ, Hoàn Kiếm, Hà Nội">
+                                <input class="form-input" type="text" value="">
                             </div>
                         </div>
 
-                        <div class="preferences-section">
+                        <!-- <div class="preferences-section">
                             <h3 class="preferences-title">Reading Preferences</h3>
                             <div class="checkbox-group">
                                 <label class="checkbox-label">
@@ -86,10 +84,10 @@
                                     <span>Monthly physical catalog mailing</span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-actions">
-                            <button class="btn-submit" type="button">Cập nhật Ledger</button>
+                            <button class="btn-submit" type="button">Cập nhật</button>
                         </div>
                     </form>
                 </section>
@@ -102,7 +100,7 @@
                             <p class="tab-subtitle">Academic Archival Tracking System</p>
                         </div>
                         <div class="history-stats">
-                            <span>Current Holdings: 2</span>
+                            <span>Số đơn đang mượn: 2</span>
                         </div>
                     </div>
                     
@@ -146,35 +144,13 @@
                     </div>
 
                     <div class="pagination">
-                        <span class="pagination-info">Showing last 4 entries of 12</span>
+                        <span class="pagination-info"></span>
                         <div class="pagination-controls">
                             <button class="page-btn"><span class="material-symbols-outlined" style="font-size: 16px;">chevron_left</span></button>
                             <button class="page-btn"><span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span></button>
                         </div>
                     </div>
                 </section>
-            </div>
-        </div>
-
-        <!-- Asymmetric Decorative Element -->
-        <div class="decorative-grid">
-            <div class="deco-card paper-card">
-                <span class="material-symbols-outlined deco-icon">verified_user</span>
-                <div>
-                    <h4 class="deco-title">Credentialed Access</h4>
-                    <p class="deco-desc">Your account grants access to the Level 3 Academic Wing.</p>
-                </div>
-            </div>
-            <div class="deco-card paper-card">
-                <span class="material-symbols-outlined deco-icon">history_edu</span>
-                <div>
-                    <h4 class="deco-title">Ledger Integrity</h4>
-                    <p class="deco-desc">All borrowed items must be recorded in the physical ledger upon exit.</p>
-                </div>
-            </div>
-            <div class="deco-image-card paper-card">
-                <img class="deco-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnURf1Pon52HUuWlkv1Z1CyaasBl0l4aR41Xk0at5_BIFGZ_ft-RGHIiRvGMdmsvV5qA922b1EXuT7TxQ4XkRF4JWJLOSltOhdvm0AR8UQC-m8ajIZibx5lpathQCc8EEbBDqgSO8yNx4UMR_5ScObggrd2vjDj4-E5UAhZQxqz746st8r2l5H1nE4CT7qXdPcTyqMxrss7clb6xXLFuknlp2GfTlHxjK_wii-m-ECcdATAbIvQiV_X0kImLVNZkhruvIT9J7apJs" alt="Decorative Library Image">
-                <div class="deco-overlay"></div>
             </div>
         </div>
     </div>
