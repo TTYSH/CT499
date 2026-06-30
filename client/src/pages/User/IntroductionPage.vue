@@ -5,8 +5,8 @@
                 <div class="ornament-hr">
                     <span class="material-symbols-outlined ornament-icon">auto_stories</span>
                 </div>
-                <h1 class="hero-title">Những Người Gìn Giữ Tri Thức</h1>
-                <p class="hero-subtitle">Thành lập năm 1924</p>
+                <h1 class="hero-title">Bảo Tồn Tinh Hoa Văn Hóa</h1>
+
             </div>
 
             <!-- Main Narrative -->
@@ -14,93 +14,59 @@
                 <!-- Side Metadata (Journal Style) -->
                 <aside class="metadata-aside">
                     <div class="meta-block">
-                        <h3 class="meta-title">THAM KHẢO LƯU TRỮ</h3>
-                        <p class="meta-text">BookWorm Tập LXIV<br>Chuỗi: Lịch sử Tổ chức<br>Tài liệu: 001-ALPHA</p>
-                    </div>
-                    <div class="meta-block">
-                        <h3 class="meta-title">TRẠNG THÁI BẢO QUẢN</h3>
-                        <span class="status-badge">Hồ sơ vĩnh viễn</span>
+                        <h3 class="meta-title">HỒ SƠ LƯU TRỮ</h3>
+                        <p class="meta-text">Kỷ Yếu Thư Viện Tập I<br>Chủ đề: Lịch sử Văn hóa Việt Nam</p>
                     </div>
                     <div class="quote-card library-punch">
-                        <p class="quote-text">"Thư viện không phải là một sự xa xỉ mà là một trong những nhu cầu thiết yếu của cuộc sống."</p>
-                        <p class="quote-author">— Henry Ward Beecher</p>
+                        <p class="quote-text">"Sách là ngọn đèn sáng bất diệt của trí tuệ con người, soi đường cho những thế hệ mai sau."</p>
                     </div>
                 </aside>
                 
                 <!-- Main Journal Text -->
                 <article class="journal-column">
                     <p class="drop-cap journal-text-lead">
-                        Vào mùa thu tĩnh lặng năm 1924, giữa những sảnh đường vang vọng của Khu Học thuật Cũ, mục đầu tiên
-                        đã được viết bằng mực vào cuốn sổ mà sau này trở thành BookWorm của Thủ thư. Những gì bắt đầu như một cuốn sổ khiêm tốn cho một
-                        bộ sưu tập cá nhân đã phát triển thành một pháo đài toàn cầu về tính toàn vẹn của lưu trữ, bảo tồn
-                        di sản trí tuệ của gần một thế kỷ học thuật và tường thuật.
+                        Ra đời vào những năm 2000 , BookWSorm bắt đầu từ một bộ sưu tập nhỏ những mộc bản và thư tịch cổ quý hiếm. Từ những ngày đầu đầy gian khó, chúng tôi đã vươn lên trở thành một biểu tượng của sự kiên trì bảo tồn di sản văn hóa và trí tuệ của dân tộc Việt Nam qua nhiều thế hệ.
                     </p>
                     <p class="journal-text">
-                        BookWorm được thành lập dựa trên nguyên tắc *Lex Scientia* — luật của tri thức. Trong một thời đại mà
-                        thông tin còn mỏng manh và mang tính vật lý, những người sáng lập đã nhận ra rằng một cuốn sách không chỉ là giấy và
-                        bìa; nó là một vật chứa đựng ý thức của con người. Sứ mệnh của họ đơn giản nhưng sâu sắc: tạo ra một
-                        hệ thống vững chắc đến mức không một suy nghĩ nào, dù nhỏ bé đến đâu, có thể bị mai một bởi sự tàn phá của thời gian hoặc
-                        sự lãng quên.
+                        Thư viện được xây dựng trên niềm tin rằng mỗi trang sách, mỗi nét chữ không chỉ là nơi lưu giữ thông tin, mà còn là linh hồn và nhịp đập của lịch sử. Sứ mệnh của chúng tôi rất rõ ràng: gìn giữ mọi luồng tư tưởng, mọi giá trị văn học nghệ thuật từ ca dao tục ngữ, thi ca cổ điển cho đến những công trình nghiên cứu hiện đại, để không một thành tựu nào bị mai một bởi thời gian.
                     </p>
                     
                     <blockquote class="block-quote">
                         <span class="material-symbols-outlined quote-icon">format_quote</span>
                         <p class="block-quote-text">
-                            "Chúng tôi không đơn thuần lưu trữ những cuốn sách; chúng tôi tuyển chọn những sợi chỉ của cuộc trò chuyện nhân loại, dệt
-                            chúng thành một bức tranh thảm trải dài qua nhiều thế hệ."
+                            "Chúng tôi không chỉ xếp những cuốn sách lên kệ; chúng tôi nâng niu những mảnh ghép của hồn cốt dân tộc, dệt nên một bức tranh toàn cảnh về quá trình phát triển của văn hóa Việt Nam."
                         </p>
                     </blockquote>
                     
                     <p class="journal-text">
-                        Qua nhiều thập kỷ, BookWorm đã thích nghi. Nó đã vượt qua quá trình chuyển đổi từ những thẻ viết tay sang
-                        tiếng gõ nhịp nhàng của máy đánh chữ, và cuối cùng là tiếng ồn ào lặng lẽ của kỷ nguyên số. Tuy nhiên, qua mỗi
-                        sự thay đổi công nghệ, chúng tôi vẫn duy trì "Linh hồn Xúc giác" của mình. Mỗi hồ sơ kỹ thuật số trong hệ thống của chúng tôi
-                        đều được đối xử với cùng sự tôn kính như một cuộn giấy da, đảm bảo rằng *cảm giác* nghiên cứu vẫn luôn
-                        gần gũi và tập trung.
+                        Cùng với sự phát triển của đất nước, BookWorm cũng không ngừng đổi mới. Từ những bản sao chép tay trên giấy dó, đến những danh mục thẻ phân loại, và nay là hệ thống lưu trữ kỹ thuật số hiện đại. Dù công nghệ có thay đổi, chúng tôi vẫn giữ nguyên sự trân trọng đối với từng con chữ, đảm bảo rằng mỗi độc giả khi đến đây đều cảm nhận được không gian học thuật sâu lắng và tinh thần hiếu học truyền thống của người Việt.
                     </p>
-                    
-                    <div class="image-wrapper">
-                        <img alt="Historic Archives" class="journal-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLjPSMLfI-MF_8c4tt5EuM4uFhNRcWOZ0jYkL8dW7q_pmp1-HhhHcYs_bLoKnEcIBXGj7fpejPDBpr_TjBGBg_N5ggEhyFezv-AP_ytixo1ba2I7gj-fSQ07nEisGp79ofCr-069ue9usnLxBZodJmIGWMZzaOQnIX5av6bQ_gxd72zWuc-ENeyBbIuMYoUaJgsf9ucFqUnTJCjA3646vE7ao6cn3yvjEAZrR7fzSA2tnTinxESrbVuvIcwEw6QyNdqmY5wTc6diU">
-                    </div>
-                    
-                    <p class="journal-text">
-                        Ngày nay, BookWorm của Thủ thư đóng vai trò như một cây cầu. Chúng tôi kết nối nhà
-                        nghiên cứu hiện đại với kỷ luật học thuật của quá khứ. Sứ mệnh của chúng tôi vẫn kiên định: tổ chức trí tuệ của thế giới với
-                        độ chính xác của một kế toán viên và niềm đam mê của một nhà thơ. Dù bạn đang tìm kiếm một bản thảo quý hiếm
-                        hay lập danh mục cho một bộ sưu tập mới, bạn đang tham gia vào một truyền thống đã được xây dựng suốt một trăm năm qua.
-                    </p>
-                    
-                    <!-- <div class="end-mark">
-                        <span class="material-symbols-outlined end-icon">flare</span>
-                        <p class="end-text">Kết thúc Tuyên bố Chính thức</p>
-                    </div> -->
+              
                 </article>
             </div>
 
             <!-- Mission Grid -->
             <section class="mission-section">
-                <h2 class="mission-title">Những Trụ cột Nền tảng của Chúng tôi</h2>
-                <div class="pillars-grid">
-                    <!-- Pillar 1 -->
-                    <div class="pillar-card">
-                        <span class="material-symbols-outlined pillar-icon">verified_user</span>
-                        <h4 class="pillar-title">Sự vĩnh cửu</h4>
-                        <p class="pillar-desc">Các hồ sơ được thiết kế để tồn tại lâu hơn các nền tảng chứa chúng, đảm bảo quyền truy cập cho các học giả của ngày mai.</p>
-                    </div>
-                    <!-- Pillar 2 -->
-                    <div class="pillar-card highlight">
-                        <span class="material-symbols-outlined pillar-icon">balance</span>
-                        <h4 class="pillar-title">Độ chính xác</h4>
-                        <p class="pillar-desc">Việc áp dụng tỉ mỉ các quy tắc biên mục đã định hình khoa học thư mục kể từ năm 1924.</p>
-                    </div>
-                    <!-- Pillar 3 -->
-                    <div class="pillar-card">
-                        <span class="material-symbols-outlined pillar-icon">diversity_3</span>
-                        <h4 class="pillar-title">Cộng đồng</h4>
-                        <p class="pillar-desc">Một cuốn sổ tri thức toàn cầu được chia sẻ, dễ dàng tiếp cận với tất cả những ai tìm kiếm chân lý và sự nghiêm túc trong học thuật.</p>
-                    </div>
-                </div>
+               
             </section>
+            <section class="footer-quote-section">
+        <div class="footer-quote-container">
+            <h2 class="footer-quote-title">Literary Reflections</h2>
+            <div class="footer-quotes">
+                <div class="quote-item">
+                    <p class="quote-text">“Sách là kho tàng trí tuệ của nhân loại, là chìa khóa mở ra cánh cửa tri thức.”</p>
+                    <div class="quote-divider"></div>
+                </div>
+                <div class="quote-item">
+                    <p class="quote-text">“Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn.”</p>
+                    <div class="quote-divider"></div>
+                </div>
+                <div class="quote-item">
+                    <p class="quote-text">“Một cuốn sách hay trên giá là một người bạn dù quay lưng lại vẫn là người bạn tốt.”</p>
+                </div>
+            </div>
+        </div>
+    </section>
         </div>
 </template>
 
@@ -328,6 +294,55 @@
     grid-template-columns: 1fr;
     gap: 32px;
 }
+
+
+/* Footer Quotes */
+.footer-quote-section {
+    /* background-color: var(--color-surface-container); */
+    padding: 96px 0;
+    border-top: 1px solid var(--color-outline-variant);
+}
+.footer-quote-container {
+    max-width: var(--max-width, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--margin-mobile);
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .footer-quote-container {
+        padding: 0 var(--margin-desktop);
+    }
+}
+.footer-quote-title {
+    font-family: var(--font-playfair);
+    font-size: 32px;
+    color: var(--color-primary);
+    margin-bottom: 48px;
+    letter-spacing: -0.02em;
+}
+.footer-quotes {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+.quote-item {
+    max-width: 42rem;
+    margin: 0 auto;
+}
+.quote-text {
+    font-family: var(--font-playfair);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--color-primary);
+    line-height: 1.6;
+}
+.quote-divider {
+    width: 48px;
+    height: 1px;
+    background-color: var(--color-outline-variant);
+    margin: 24px auto 0;
+}
+
 @media (min-width: 768px) { .pillars-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .pillar-card {

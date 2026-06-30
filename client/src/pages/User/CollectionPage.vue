@@ -87,7 +87,7 @@
                     <img class="card-image"
                         data-alt="A weathered vintage book cover for a philosophy text titled 'The Republic' by Plato. The book rests on an aged oak desk in a dusty, sun-drenched library. The aesthetic is academic and nostalgic with warm amber lighting and sharp detail of the paper texture. The atmosphere evokes a deep sense of historical intellectualism."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Kg3vt96yw8n--nt_9T3Xlq58Qz9a0Rl5H-uuIP9H5PrMxh9H4M9MEBzkGPpJG97gDw_bOtxSNM3uDPFiDptbNsETLcIGjUdlHZvzYVrhjx9-YwO2ZeT77wXSp74LBjGsVb9tFW5GzObelyZBYcycFE2r4Uvgamo7GAWXXy-RpBcwiCYMbR4YeJ-BRS04CwuR3MQST-f4mFUsBU1odf-P0dqj8jRtYiPfTRHXWUtZFGzDvhfTZb636U64cbH2vH_-aUdNtlf9xiE">
-                    <span class="status-badge status-reserved">Reserved</span>
+        
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Cộng Hòa (The Republic)</h2>
@@ -104,7 +104,7 @@
                     <img class="card-image"
                         data-alt="A beautiful leather-bound book with gold filigree on the spine titled 'Meditations' by Marcus Aurelius. The book is placed upright in a collection of other ancient volumes within a dark mahogany shelf. The lighting is low and moody, highlighting the rich textures of the leather and the dusty environment of an old-world archive."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9JmVW2MPRCD-doNKvbvMjrnBHbq9skRPHcwlEzX6jEZMRRqZyvSIm3aFlYkLpucooPqAxIaeX8E-B-8HuAIXNUKzVDsEQyZmQ3p_TqtIfdE3Tvgfg-aADCy8Px0lDhwVi7VsspygJ0kaB5R8dvah_PlEjLNxhfPAMVw5Wkumlu8tLavIy0gA8o2p2p9EGYTrc30F6WlS9Mt-XDaYJz-wF_dSlngfxUxh3lqVE0eG64loP9GxQp9mG6yGXChwbPO6P_gVfy0TEqL8">
-                    <span class="status-badge status-available">Available</span>
+            
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Suy Tưởng (Meditations)</h2>
@@ -121,7 +121,7 @@
                     <img class="card-image"
                         data-alt="A classic literary masterpiece with a simple, cream-colored paper dust jacket featuring elegant serif typography for 'Crime and Punishment' by Fyodor Dostoevsky. The book is set against a backdrop of a parchment paper texture with subtle ink splatters. The mood is serious, scholarly, and deeply grounded in mid-century academic aesthetics."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuJqiHtE7arMrKqxX7UlPAnj3WFEYBmhkzVymDXb4IR91F01L0Qr5mzl130SrtyUdRpfFdxY_uj9qQgoVrpsFbhvO9RMRc85ns6wCMM-265eQ1XEd1mzgCzXN_efR5guYQT8-Zki-n5trHf4YhYcwXZEvvdnnLBLSyfZfBj-UOC7BqnFp_ZboIce1v_yBYeRj5QYp2CF0L8ryDWFIJlDR6udUGHQMTyyzpuKZ9DiJoI0MFtaPtPC2Zc45UUxockFdjkIy_93BO2NU">
-                    <span class="status-badge status-available">Available</span>
+                
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Tội Ác và Hình Phạt</h2>
@@ -138,7 +138,7 @@
                     <img class="card-image"
                         data-alt="A scientific archival document or book cover featuring diagrams of celestial bodies and elegant calligraphy for 'Principia Mathematica' by Isaac Newton. The paper looks heavily aged, with sepia tones and tactile grain. It is resting on a linen surface under a soft lamp light that creates a focused, scholarly atmosphere."
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNKi2v-iZ5P7NH34sEH2fBM2ZGoP6OFZwyjou2cT2rbkCEYQostyEYCcm0McvjBh5gJ2-E8hHbnNEkeKeiPiLHA8XpWS_itbpfA-ErITuOke8-SKFcC-vArSunld8ytQrloi5XkuKsqB80Gn_igw1vmzL_T94Tv_Fu98Mq3lB-Qhm_1AagUoV6wBPe1yoJcZRCgOiL99m_pxalvcTuSEFV9I8ltncHS0DPkynk9TvYXhpkziwbUemJxl7K8V92H6ErJaz9Z3ZIA2Q">
-                    <span class="status-badge status-reserved">Reserved</span>
+                 
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Principia Mathematica</h2>
