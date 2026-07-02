@@ -1,16 +1,23 @@
 <template>
     <div class="container">
-        <!-- View Header -->
+        <!-- Page Header -->
         <div class="page-header">
-            <div>
-                <h2 class="page-title">Danh mục Độc giả</h2>
-                <p class="page-subtitle">Quản lý hồ sơ và quyền truy cập thư viện toàn cầu.</p>
-            </div>
-            <div>
-                <button class="btn-filter">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">filter_list</span>
-                    Lọc
-                </button>
+            <h1 class="page-title">Quản Lý Độc Giả</h1>
+            <div class="header-actions">
+                <div class="search-section">
+                    <span>Tìm kiếm độc giả</span>
+                    <div class="search-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <span>Loại tài khoản</span>
+                    <select class="filter-select">
+                        <option>Quản trị viên</option>
+                        <option>Người dùng</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -79,12 +86,16 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table-footer">
-                <span class="pagination-info">Hiển thị 1-3 trong số 142 hồ sơ</span>
-                <div class="pagination-controls">
-                    <button class="page-arrow material-symbols-outlined" disabled>chevron_left</button>
-                    <button class="page-arrow material-symbols-outlined">chevron_right</button>
-                </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="pagination-controls">
+                <button class="page-btn"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><span class="material-symbols-outlined">chevron_right</span></button>
             </div>
         </div>
 
@@ -178,43 +189,77 @@ function closeProfile() {
 /* Page Header */
 .page-header {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
-    border-bottom: 2px solid rgba(39, 19, 16, 0.1);
-    padding-bottom: 24px;
-    margin-bottom: 32px;
-}
-@media (min-width: 768px) {
-    .page-header { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+    gap: 22px;
+    border-bottom: 2px solid rgba(39, 19, 16, 0.2);
+    padding-bottom: 16px;
+    margin-bottom: var(--gutter);
 }
 
 .page-title {
     font-family: var(--font-playfair);
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 700;
     color: var(--color-primary);
-    letter-spacing: -0.02em;
-    margin-bottom: 4px;
-}
-.page-subtitle {
-    font-size: 18px;
-    color: var(--color-on-surface-variant);
-    font-style: italic;
+    margin-top: 4px;
 }
 
-.btn-filter {
+.search-section, .filter-section {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 24px;
-    border: 1px solid var(--color-outline);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-on-surface);
-    transition: all 0.1s;
+    gap: 10px;
 }
-.btn-filter:hover { background-color: var(--color-surface-container-high); }
-.btn-filter:active { transform: translateY(1px); }
+
+.search-wrapper {
+    display: none;
+    align-items: center;
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+@media (min-width: 768px) { .search-wrapper { display: flex; } }
+
+.search-input {
+    width: 256px;
+    font-size: 16px;
+    padding: 0 8px;
+    color: var(--color-on-surface);
+}
+
+.search-input::placeholder {
+    font-size: 14px;
+}
+
+.search-icon { 
+    color: var(--color-outline); 
+}
+
+@media (min-width: 768px) {
+    .page-header { 
+        flex-direction: column; 
+        justify-content: space-between; 
+        /* align-items: flex-end;  */
+    }
+}
+
+.header-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: 600;
+}
+.filter-select {
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-family: var(--font-merriweather);
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
+    transition: border-color 0.2s;
+}
 
 /* Table Area */
 .table-container {
@@ -263,23 +308,36 @@ function closeProfile() {
 .action-btn:hover { color: var(--color-primary); }
 .action-btn.delete:hover { color: var(--color-error); }
 
-.table-footer {
-    padding: 16px;
-    background-color: var(--color-surface-container-low);
-    border-top: 1px solid rgba(211, 195, 192, 0.3);
+/* Pagination */
+.pagination-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    padding: 16px;
 }
-.pagination-info { font-size: 12px; color: var(--color-on-surface-variant); }
-.pagination-controls { display: flex; gap: 8px; }
-.page-arrow {
-    padding: 8px;
+
+.pagination-controls { 
+    display: flex; 
+    gap: 8px; 
+}
+.page-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid rgba(211, 195, 192, 0.5);
-    transition: background-color 0.2s;
+    transition: all 0.2s;
 }
-.page-arrow:hover:not(:disabled) { background-color: #ffffff; }
-.page-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+.page-btn:hover { background-color: var(--color-surface-container-high); }
+.page-btn.active {
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
+    font-weight: 700;
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
+    border-color: transparent;
+}
+
 
 /* Detail Modal */
 .modal-overlay {

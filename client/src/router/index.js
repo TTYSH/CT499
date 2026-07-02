@@ -12,7 +12,7 @@ import ReadersPage from '../pages/Admin/ReadersPage.vue'
 import LedgerPage from '../pages/Admin/LedgerPage.vue'
 import AuthorPage from '../pages/Admin/AuthorPage.vue'
 import DashboardPage from '../pages/Admin/DashboardPage.vue'
-import LoginPage from '../pages/LoginPage.vue'
+import LoginPage from '@/pages/LoginPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

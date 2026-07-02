@@ -25,7 +25,7 @@
                 <!-- Main Journal Text -->
                 <article class="journal-column">
                     <p class="drop-cap journal-text-lead">
-                        Ra đời vào những năm 2000 , BookWSorm bắt đầu từ một bộ sưu tập nhỏ những mộc bản và thư tịch cổ quý hiếm. Từ những ngày đầu đầy gian khó, chúng tôi đã vươn lên trở thành một biểu tượng của sự kiên trì bảo tồn di sản văn hóa và trí tuệ của dân tộc Việt Nam qua nhiều thế hệ.
+                        Ra đời vào những năm 2000, BookWSorm bắt đầu từ một bộ sưu tập nhỏ những mộc bản và thư tịch cổ quý hiếm. Từ những ngày đầu đầy gian khó, chúng tôi đã vươn lên trở thành một biểu tượng của sự kiên trì bảo tồn di sản văn hóa và trí tuệ của dân tộc Việt Nam qua nhiều thế hệ.
                     </p>
                     <p class="journal-text">
                         Thư viện được xây dựng trên niềm tin rằng mỗi trang sách, mỗi nét chữ không chỉ là nơi lưu giữ thông tin, mà còn là linh hồn và nhịp đập của lịch sử. Sứ mệnh của chúng tôi rất rõ ràng: gìn giữ mọi luồng tư tưởng, mọi giá trị văn học nghệ thuật từ ca dao tục ngữ, thi ca cổ điển cho đến những công trình nghiên cứu hiện đại, để không một thành tựu nào bị mai một bởi thời gian.

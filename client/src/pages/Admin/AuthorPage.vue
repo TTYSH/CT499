@@ -2,14 +2,20 @@
     <div class="container custom-scrollbar">
         <!-- Page Header -->
         <div class="page-header">
-            <div>
-                <h2 class="page-title">Quản lý Tác giả</h2>
-                <p class="page-subtitle">Registry of distinguished authors and literary contributors.</p>
+            <h1 class="page-title">Quản Lý Tác Giả</h1>
+            <div class="header-actions">
+                <div class="search-section">
+                    <span>Tìm kiếm tác giả</span>
+                    <div class="search-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                    </div>
+                </div>
+                <button class="btn-add sticker-shadow" @click="isAddModalOpen = true">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    THÊM TÁC GIẢ
+                </button>
             </div>
-            <button class="btn-primary sticker-shadow pressed-state" @click="openAddModal">
-                <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
-                Thêm tác giả
-            </button>
         </div>
 
         <!-- Authors Table -->
@@ -63,14 +69,16 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Pagination -->
-            <div class="table-footer">
-                <span class="pagination-info">Showing 2 of 84 authors</span>
-                <div class="pagination-controls">
-                    <button class="page-arrow material-symbols-outlined" disabled>chevron_left</button>
-                    <span class="page-current">Page 1 of 42</span>
-                    <button class="page-arrow material-symbols-outlined">chevron_right</button>
-                </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="pagination-controls">
+                <button class="page-btn"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><span class="material-symbols-outlined">chevron_right</span></button>
             </div>
         </div>
 
@@ -113,9 +121,89 @@ function closeViewModal() {
 @media (min-width: 768px) { .container { padding-bottom: 0; } }
 
 /* Page Header */
-.page-header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
-@media (min-width: 768px) { .page-header { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
-.page-title { font-family: var(--font-playfair); font-size: 32px; font-weight: 700; color: var(--color-primary); letter-spacing: -0.02em; margin: 0;}
+.page-header {
+    display: flex;
+    gap: 22px;
+    border-bottom: 2px solid rgba(39, 19, 16, 0.2);
+    padding-bottom: 16px;
+    margin-bottom: var(--gutter);
+}
+
+.page-title {
+    font-family: var(--font-playfair);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 4px;
+}
+
+.search-section, .filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-wrapper {
+    display: none;
+    align-items: center;
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+@media (min-width: 768px) { .search-wrapper { display: flex; } }
+
+.search-input {
+    width: 256px;
+    font-size: 16px;
+    padding: 0 8px;
+    color: var(--color-on-surface);
+}
+
+.search-input::placeholder {
+    font-size: 14px;
+}
+
+.search-icon { 
+    color: var(--color-outline); 
+}
+
+@media (min-width: 768px) {
+    .page-header { 
+        flex-direction: column; 
+        justify-content: space-between; 
+        /* align-items: flex-end;  */
+    }
+}
+
+.header-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.btn-add {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: 5px;
+    padding: 8px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.2s;
+    display: flex;
+    gap: 5px;
+    margin-left: 3.8rem;
+}
+
+.btn-add:hover { 
+    transform: translateY(-2px); 
+}
+
 .page-subtitle { font-size: 16px; color: var(--color-on-surface-variant); margin-top: 4px; font-style: italic; }
 
 /* Table Area */
@@ -139,13 +227,35 @@ function closeViewModal() {
 .action-btn.delete { color: var(--color-error); }
 .action-btn.delete:hover { color: var(--color-on-error-container); }
 
-.table-footer { padding: 16px 24px; background-color: var(--color-surface-container); border-top: 1px solid var(--color-outline); display: flex; justify-content: space-between; align-items: center; }
-.pagination-info { font-size: 12px; color: var(--color-on-surface-variant); }
-.pagination-controls { display: flex; align-items: center; gap: 16px; }
-.page-arrow { color: var(--color-on-surface-variant); padding: 4px; transition: color 0.2s; border: none; background: transparent; cursor: pointer;}
-.page-arrow:hover:not(:disabled) { color: var(--color-primary); }
-.page-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
-.page-current { font-size: 14px; font-weight: 700; }
+/* Pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.pagination-controls { 
+    display: flex; 
+    gap: 8px; 
+}
+.page-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    transition: all 0.2s;
+}
+.page-btn:hover { background-color: var(--color-surface-container-high); }
+.page-btn.active {
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
+    font-weight: 700;
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
+    border-color: transparent;
+}
 
 .btn-primary { background-color: var(--color-primary); color: var(--color-on-primary); padding: 12px 32px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s; white-space: nowrap; border: none; cursor: pointer; }
 .btn-primary:hover { background-color: var(--color-primary-container); }

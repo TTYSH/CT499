@@ -2,25 +2,35 @@
     <div>
         <!-- Page Header -->
         <div class="page-header">
-            <div>
-                <div class="page-subtitle">Danh mục lưu trữ</div>
-                <h1 class="page-title">Quản lý kho sách</h1>
-            </div>
+            <h1 class="page-title">Quản Lý Kho Sách</h1>
             <div class="header-actions">
-                <select class="filter-select">
-                    <option>Trạng thái</option>
-                    <option>Sẵn có</option>
-                    <option>Đang mượn</option>
-                    <option>Hết hàng</option>
-                </select>
-                <select class="filter-select">
-                    <option>Tất cả thể loại</option>
-                    <option>Triết học</option>
-                    <option>Lịch sử</option>
-                    <option>Văn học cổ điển</option>
-                    <option>Khoa học tự nhiên</option>
-                </select>
-                <button class="btn-add sticker-shadow" @click="isAddModalOpen = true">THÊM SÁCH</button>
+                <div class="search-section">
+                    <span>Tìm kiếm sách</span>
+                    <div class="search-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                    </div>
+                </div>
+                <div class="filter-section status-filter">
+                    <span>Trạng thái</span>
+                    <select class="filter-select">
+                        <option>Sẵn có</option>
+                        <option>Hết hàng</option>
+                    </select>
+                </div>
+                <div class="filter-section categories-filter">
+                    <span>Thể loại</span>
+                    <select class="filter-select">
+                        <option>Triết học</option>
+                        <option>Lịch sử</option>
+                        <option>Văn học cổ điển</option>
+                        <option>Khoa học tự nhiên</option>
+                    </select>
+                </div>
+                <button class="btn-add sticker-shadow" @click="isAddModalOpen = true">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    THÊM SÁCH
+                </button>
             </div>
         </div>
 
@@ -36,25 +46,25 @@
                             <th>NXB</th>
                             <th>Tác giả</th>
                             <th>Thể loại</th>
-                            <th class="th-center">Số lượng</th>
+                            <th>Số lượng</th>
                             <th>Trạng thái</th>
-                            <th class="th-right">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(book, index) in books" :key="book.id">
-                            <td class="bold">{{ index + 1 }}</td>
-                            <td class="text-secondary bold">{{ book.code }}</td>
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ book.code }}</td>
                             <td class="book-title">{{ book.title }}</td>
-                            <td>{{ book.publisher }}</td>
-                            <td class="italic text-on-surface-variant">{{ book.author }}</td>
+                            <td class="book-publisher">{{ book.publisher }}</td>
+                            <td class="book-author">{{ book.author }}</td>
                             <td><span class="badge" :class="book.genreBadgeClass">{{ book.genre }}</span></td>
-                            <td class="td-center bold" :class="{'text-error': book.stock === 0}">{{ book.stock }}</td>
+                            <td class="{'text-error': book.stock === 0}">{{ book.stock }}</td>
                             <td><span class="badge" :class="book.statusBadgeClass">{{ book.statusText }}</span></td>
-                            <td class="td-right">
+                            <td>
                                 <div class="action-btns">
                                     <button class="action-btn material-symbols-outlined" @click="openBookDetail(book)">visibility</button>
-                                    <button class="action-btn material-symbols-outlined">edit</button>
+                                    <button class="action-btn edit material-symbols-outlined">edit</button>
                                     <button class="action-btn delete material-symbols-outlined">delete</button>
                                 </div>
                             </td>
@@ -62,12 +72,10 @@
                     </tbody>
                 </table>
             </div>
-            <div class="punched-hole-center punched-hole"></div>
         </div>
 
         <!-- Pagination -->
         <div class="pagination-container">
-            <span class="pagination-info">Hiển thị 1-3 của 128 đầu sách</span>
             <div class="pagination-controls">
                 <button class="page-btn"><span class="material-symbols-outlined">chevron_left</span></button>
                 <button class="page-btn active">1</button>
@@ -94,7 +102,7 @@ const selectedBook = ref(null)
 const books = ref([
     {
         id: 'book-1',
-        code: 'VN-1234',
+        code: 'S001',
         title: 'Sử Việt: Những cuộc hành trình',
         publisher: 'NXB Trẻ',
         author: 'Trần Trọng Kim',
@@ -113,7 +121,7 @@ const books = ref([
     },
     {
         id: 'book-2',
-        code: 'VN-5432',
+        code: 'S002',
         title: 'Triết học Nhập môn',
         publisher: 'NXB Tri Thức',
         author: 'Phan Ngọc',
@@ -132,7 +140,7 @@ const books = ref([
     },
     {
         id: 'book-3',
-        code: 'VN-9876',
+        code: 'S003',
         title: 'Truyện Kiều (Bản hiệu đính)',
         publisher: 'NXB Văn Học',
         author: 'Nguyễn Du',
@@ -140,7 +148,7 @@ const books = ref([
         genreBadgeClass: 'badge-literature',
         stock: 5,
         stockText: '5 cuốn',
-        statusText: 'Đang mượn',
+        statusText: 'Sẵn có',
         statusBadgeClass: 'badge-borrowed',
         isbn: '978-604-98765-4',
         status: 'Sắp hết',
@@ -153,24 +161,19 @@ const books = ref([
 
 const openBookDetail = (book) => {
     selectedBook.value = { ...book }
-    // override stock to match original detailed view data if needed
     selectedBook.value.stock = book.stockText
     isViewModalOpen.value = true
 }
 </script>
 
 <style scoped>
-/* Page Layout */
+/* Page Header */
 .page-header {
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    gap: 22px;
     border-bottom: 2px solid rgba(39, 19, 16, 0.2);
     padding-bottom: 16px;
     margin-bottom: var(--gutter);
-}
-@media (min-width: 768px) {
-    .page-header { flex-direction: row; justify-content: space-between; align-items: flex-end; }
 }
 
 .page-title {
@@ -180,53 +183,98 @@ const openBookDetail = (book) => {
     color: var(--color-primary);
     margin-top: 4px;
 }
-.page-subtitle {
+
+.search-section, .filter-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-wrapper {
+    display: none;
+    align-items: center;
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+@media (min-width: 768px) { .search-wrapper { display: flex; } }
+
+.search-input {
+    width: 256px;
+    font-size: 16px;
+    padding: 0 8px;
+    color: var(--color-on-surface);
+}
+
+.search-input::placeholder {
     font-size: 14px;
-    font-weight: 700;
-    color: var(--color-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+}
+
+.search-icon { 
+    color: var(--color-outline); 
+}
+
+@media (min-width: 768px) {
+    .page-header { 
+        flex-direction: column; 
+        justify-content: space-between; 
+        /* align-items: flex-end;  */
+    }
 }
 
 .header-actions {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     flex-wrap: wrap;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: 600;
 }
 .filter-select {
-    background-color: var(--color-surface);
     border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
     padding: 8px 16px;
+    font-family: var(--font-merriweather);
     font-size: 14px;
-    font-weight: 700;
     color: var(--color-on-surface-variant);
     transition: border-color 0.2s;
 }
-.filter-select:focus { border-color: var(--color-secondary); }
 
 .btn-add {
     background-color: var(--color-primary);
     color: var(--color-on-primary);
-    padding: 8px 24px;
+    border-radius: 5px;
+    padding: 8px 22px;
     font-size: 14px;
     font-weight: 700;
     transition: transform 0.2s;
+    display: flex;
+    gap: 5px;
+    margin-left: 4.7rem;
 }
-.btn-add:hover { transform: translateY(-2px); }
 
-/* Books Table */
+.btn-add:hover { 
+    transform: translateY(-2px); 
+}
+
+/* BookManager Table */
 .table-container {
     background-color: var(--color-surface-container-lowest);
     border: 1px solid rgba(211, 195, 192, 0.3);
+    border-radius: 5px;
     position: relative;
     overflow: hidden;
     margin-bottom: 32px;
 }
-.table-wrapper { overflow-x: auto; }
+.table-wrapper { 
+    overflow-x: auto; 
+}
 
 .data-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
     text-align: left;
 }
 .data-table th {
@@ -235,75 +283,93 @@ const openBookDetail = (book) => {
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 16px;
+    padding: 9px;
+    text-align: center;
     border-bottom: 1px solid rgba(62, 39, 35, 0.1);
 }
 .data-table td {
-    padding: 16px;
-    border-bottom: 1px solid rgba(211, 195, 192, 0.2);
+    padding: 10px;
+    border-bottom: 1px solid rgba(211, 195, 192, 0.3);
+    border-right: 1px solid rgba(211, 195, 192, 0.2);
     transition: background-color 0.2s;
 }
-.data-table tr { transition: background-color 0.2s; }
-.data-table tr:hover td { background-color: var(--color-surface-container-low); }
+.data-table tr { 
+    transition: background-color 0.2s; 
+}
+.data-table tr:hover td { 
+    background-color: var(--color-surface-container-low); 
+}
 
-.th-center, .td-center { text-align: center; }
-.th-right, .td-right { text-align: right; }
+tbody {
+    text-align: center;
+    font-size: 14px;
+}
 
-.book-title {
-    font-family: var(--font-playfair);
-    font-size: 16px;
-    font-weight: 600;
+.book-title, .book-author, .book-publisher {
+    text-align: left;
 }
 
 .badge {
     display: inline-block;
     padding: 2px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-size: 14px;
     border-radius: 2px;
 }
-.badge-history { background-color: var(--tertiary-fixed); color: var(--on-tertiary-fixed-variant); border: 1px solid rgba(14, 27, 14, 0.2); }
-.badge-philosophy { background-color: var(--secondary-fixed); color: var(--on-secondary-fixed-variant); border: 1px solid rgba(131, 84, 37, 0.2); }
-.badge-literature { background-color: var(--tertiary-fixed); color: var(--on-tertiary-fixed-variant); border: 1px solid rgba(14, 27, 14, 0.2); }
 
-.badge-available { background-color: var(--tertiary-fixed); color: var(--on-tertiary-fixed-variant); border: 1px solid rgba(14, 27, 14, 0.2); }
-.badge-borrowed { background-color: var(--secondary-container); color: var(--on-secondary-container); border: 1px solid rgba(131, 84, 37, 0.2); }
-.badge-outofstock { background-color: var(--color-error-container); color: var(--color-on-error-container); border: 1px solid rgba(186, 26, 26, 0.2); }
+.text-error { 
+    color: var(--color-error); 
+}
+.sticker-shadow { 
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15); 
+}
 
-.action-btns { display: flex; justify-content: flex-end; gap: 8px; }
-.action-btn { color: var(--color-secondary); transition: color 0.2s; }
+.badge-available { 
+    background-color: var(--tertiary-fixed); 
+    color: var(--on-tertiary-fixed-variant); 
+    border: 1px solid rgba(14, 27, 14, 0.2); 
+}
+.badge-borrowed { 
+    background-color: var(--secondary-container); 
+    color: var(--on-secondary-container); 
+    border: 1px solid rgba(131, 84, 37, 0.2); 
+}
+.badge-outofstock { 
+    background-color: var(--color-error-container); 
+    color: var(--color-on-error-container); 
+    border: 1px solid rgba(186, 26, 26, 0.2); 
+}
+
+.action-btns { 
+    display: flex; 
+    justify-content: center; 
+    gap: 4px; 
+}
+.action-btn { 
+    color: var(--color-secondary); 
+    transition: color 0.2s; 
+    font-size: 21px;
+}
 .action-btn:hover { color: var(--color-primary); }
+.action-btn.edit { color: rgba(0, 0, 255, 0.668);}
+.action-btn.edit:hover { color: var(--color-primary); }
 .action-btn.delete { color: var(--color-error); }
-.action-btn.delete:hover { color: #b91c1c; }
-
-.punched-hole-center {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.punched-hole {
-    width: 12px;
-    height: 12px;
-    background-color: var(--color-surface);
-    border-radius: 50%;
-    border: 1px solid rgba(62, 39, 35, 0.15);
-    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
-}
+.action-btn.delete:hover { color: var(--color-primary); }
 
 /* Pagination */
 .pagination-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0 16px;
 }
-.pagination-info { color: var(--color-on-surface-variant); }
-.pagination-controls { display: flex; gap: 8px; }
+
+.pagination-controls { 
+    display: flex; 
+    gap: 8px; 
+}
 .page-btn {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,11 +384,4 @@ const openBookDetail = (book) => {
     box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
     border-color: transparent;
 }
-
-.text-error { color: var(--color-error); }
-.text-secondary { color: var(--color-secondary); }
-.text-on-surface-variant { color: var(--color-on-surface-variant); }
-.bold { font-weight: 700; }
-.italic { font-style: italic; }
-.sticker-shadow { box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15); }
 </style>

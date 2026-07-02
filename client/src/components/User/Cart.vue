@@ -8,7 +8,8 @@
         <!-- Header -->
         <div class="drawer-header">
             <div>
-                <h2 class="drawer-title">Giỏ hàng mượn</h2>
+                <h2 class="drawer-title">Borrowing Request</h2>
+                <p class="drawer-subtitle">Review the items selected for your reading room session.</p>
             </div>
             <button class="btn-close" aria-label="Close drawer" @click="$emit('close')">
                 <span class="material-symbols-outlined">close</span>
@@ -77,7 +78,7 @@
                 <input class="input-date" id="date-input" placeholder="Proposed Date of Visit" type="text">
             </div>
             <button class="btn-submit" @click="submitRequest">
-                Gửi yêu cầu mượn
+                Submit Request
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
             </button>
         </div>

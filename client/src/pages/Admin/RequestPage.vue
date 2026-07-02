@@ -4,7 +4,23 @@
         <div class="page-header">
             <div>
                 <h2 class="page-title">Quản Lý Yêu Cầu</h2>
-                <p class="page-subtitle">Duyệt và xử lý các đơn mượn sách từ Học giả</p>
+                <div class="header-section">
+                    <div class="search-section">
+                        <span>Tìm kiếm yêu cầu</span>
+                        <div class="search-wrapper">
+                            <span class="material-symbols-outlined search-icon">search</span>
+                            <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <span>Trạng thái</span>
+                        <select class="filter-select">
+                            <option>Sẵn có</option>
+                            <option>Đang mượn</option>
+                            <option>Hết hàng</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="status-summary">
                 <span class="status-label">TỔNG ĐANG CHỜ</span>
@@ -193,6 +209,12 @@ const selectedRow = ref(1)
     margin-bottom: 32px;
 }
 
+.page-header > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 @media (min-width: 768px) {
     .page-header {
         flex-direction: row;
@@ -203,17 +225,67 @@ const selectedRow = ref(1)
 
 .page-title {
     font-family: var(--font-playfair);
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 700;
     color: var(--color-primary);
     line-height: 1.1;
 }
 
-.page-subtitle {
-    font-size: 18px;
+/*Header Section*/ 
+.header-section {
+    display: flex;
+    gap: 35px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.search-section, .filter-section  {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-wrapper {
+    display: none;
+    align-items: center;
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+@media (min-width: 768px) { .search-wrapper { display: flex; } }
+
+.search-input {
+    width: 256px;
+    font-size: 16px;
+    padding: 0 8px;
+    color: var(--color-on-surface);
+}
+
+.search-input::placeholder {
+    font-size: 14px;
+}
+
+.search-icon { 
+    color: var(--color-outline); 
+}
+
+.filter-select {
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-family: var(--font-merriweather);
+    font-size: 14px;
     color: var(--color-on-surface-variant);
-    margin-top: 8px;
-    font-style: italic;
+    transition: border-color 0.2s;
+}
+
+.filter-select:focus { 
+    border-color: var(--color-secondary); 
 }
 
 .status-summary {
@@ -221,18 +293,21 @@ const selectedRow = ref(1)
 }
 
 @media (min-width: 768px) {
-    .status-summary { text-align: right; }
+    .status-summary { 
+        text-align: right; 
+    }
 }
 
 .status-label {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--color-secondary);
     display: block;
+    margin: 0;
 }
 
 .status-value {
-    font-family: var(--font-playfair);
+    font-family: var(--font-merriweather);
     font-size: 40px;
     font-weight: 700;
     color: var(--color-primary);

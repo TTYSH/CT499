@@ -5,7 +5,6 @@
             <button class="modal-close material-symbols-outlined" @click="closeModal">close</button>
             <div class="add-book-header">
                 <h2 class="add-book-title">Thêm Sách Mới</h2>
-                <p class="add-book-subtitle">Ghi chép vào sổ lưu trữ</p>
             </div>
             
             <form @submit.prevent="submitForm" style="overflow-y: auto;">
@@ -56,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <button class="btn-save sticker-shadow" type="button" @click="closeModal">Lưu vào sổ cái</button>
+                    <button class="btn-save sticker-shadow" type="button" @click="closeModal">Lưu sách</button>
                 </div>
             </form>
         </div>
@@ -104,6 +103,7 @@ const submitForm = () => {
     background-color: var(--color-surface);
     background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
     border: 1px solid rgba(39, 19, 16, 0.3);
+    border-radius: 5px;
     box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
     width: 100%;
     max-height: 90vh;
@@ -136,32 +136,34 @@ const submitForm = () => {
     font-weight: 700;
     color: var(--color-primary);
 }
-.add-book-subtitle {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
 
 .form-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
 }
-@media (min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px) { 
+    .form-grid { 
+        grid-template-columns: 1fr 1fr; 
+    } 
+}
 .col-span-2 { grid-column: 1 / -1; }
 
-.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; 
+}
 .form-label {
     font-size: 12px;
     font-weight: 700;
-    color: rgba(80, 68, 66, 0.7);
+    color: var(--color-secondary);
     text-transform: uppercase;
 }
 .form-control {
     background-color: var(--color-surface-container-lowest);
     border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 3px;
     padding: 8px 16px;
     font-size: 16px;
     transition: border-color 0.2s;
@@ -195,6 +197,7 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .btn-save {
     background-color: var(--color-primary);
     color: var(--color-on-primary);
+    border-radius: 5px;
     padding: 12px 32px;
     font-size: 14px;
     font-weight: 700;

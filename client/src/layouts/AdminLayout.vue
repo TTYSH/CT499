@@ -3,7 +3,6 @@
         <AdminSidebar />
         
         <div class="main-wrapper">
-            <AdminHeader />
             
             <main class="page-content">
                 <RouterView />
@@ -14,7 +13,6 @@
 
 <script setup>
 import AdminSidebar from '../components/Admin/Book/AdminSidebar.vue'
-import AdminHeader from '../components/Admin/Book/AdminHeader.vue'
 </script>
 
 <style scoped>
@@ -27,13 +25,15 @@ import AdminHeader from '../components/Admin/Book/AdminHeader.vue'
 }
 
 .page-content {
-    padding: var(--margin-mobile);
+    padding: 16px;
     max-width: var(--max-width);
     margin: 0 auto;
     width: 100%;
     padding-bottom: 80px; /* Space for mobile nav */
 }
 @media (min-width: 768px) {
-    .page-content { padding: var(--margin-desktop); padding-bottom: var(--margin-desktop); }
+    .page-content { 
+        padding: 24px; 
+    }
 }
 </style>

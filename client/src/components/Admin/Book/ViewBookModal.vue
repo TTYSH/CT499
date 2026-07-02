@@ -100,6 +100,7 @@ const closeModal = () => {
     background-color: var(--color-surface);
     background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
     border: 1px solid rgba(39, 19, 16, 0.3);
+    border-radius: 5px;
     box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
     width: 100%;
     max-height: 90vh;
