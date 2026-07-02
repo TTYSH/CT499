@@ -49,7 +49,7 @@
                 <div class="book-card">
                     <div class="book-cover-wrapper">
                         <img alt="Zarathustra đã nói như thế" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUYXbwXEw9hb0CTm0HKyFpciCl53mGOqDxHJ29xlak27WcMFPRD2GNhHl5SdHQESOSKLz3NqAT7vpGyj_j5OJURYFM_VOFX9dGtB2O5gdu4368XNvR45XQzgytctAZCGfYtGQz4BwFgwHMMrBmg1ZHLCKvHq8rUwiId3tXNwbUGWBXTXTOtpwh49z52vd745bK0uUTonNQJ2-1mXvaVkovzKD6lfdbRpRm8hQl1mIC7v9OvxLWIHn0NbEcXjYMI9bqpW76i7zOqWk">
-                        <span class="status-badge available">Sẵn có</span>
+                   
                     </div>
                     <div class="book-info">
                         <h3 class="book-title">Zarathustra đã nói như thế</h3>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="book-actions">
                         <button class="btn-action primary">Yêu cầu mượn</button>
-                        <div class="card-ornament"><div class="card-ornament-inner"></div></div>
+                        
                     </div>
                 </div>
                 
@@ -65,7 +65,7 @@
                 <div class="book-card">
                     <div class="book-cover-wrapper">
                         <img alt="Bên kia thiện ác" class="book-cover borrowed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhGR05EHrSNsElpiyMgdEnJFuDU_S3Bg2T6S6GI20fZxRwzRooHlLpYwHZSFGcUYa9yyB7_cR--9jxn7sUjII5mtX8UZtBn8beg6WFu3O57pfls_IbMxGFn27WxZI5jKq2-xjUdA0ekNyMB1IJzGqY33S1bYLF-PaCkSOCeUQatMq3g_vxFeGmRq7234JoYIqFoLzSpP0Hb0KKAJcsURVLlHLNid65wu5JzJyCC7UjKP00kq7XN-wIj5eA6C_6cNdk3dSIhQG1ZPA">
-                        <span class="status-badge borrowed">Đang mượn</span>
+           
                     </div>
                     <div class="book-info">
                         <h3 class="book-title">Bên kia thiện ác</h3>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="book-actions">
                         <button class="btn-action disabled" disabled>Hết lượt</button>
-                        <div class="card-ornament"><div class="card-ornament-inner"></div></div>
+                        
                     </div>
                 </div>
                 
@@ -81,7 +81,7 @@
                 <div class="book-card">
                     <div class="book-cover-wrapper">
                         <img alt="Phả hệ đạo đức" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAglrhRzyq9yU4JxDKNHV02Qsmv4bvXyjXlk2K1m7hFddESlgfKem6avHlb8oWP_JWq2FHaa3I9FBOANqEjkFP4FwO-0_tkYosmndKqp7lB6Bw_y8c68_m8v33epK5-2NA2mt27z9xls4nMuwdFH57OqGGoOvXHXCkYnjEC-6TKSCwS6yKiy1mY_gbk-umT8WL4ly1CO0w5DJ_6l-pU0zJd4GTn3pVdsxfhs5B_Ld68VPY13B8h0xzDqkptxUplskQ5a3PvCaF6Ym8">
-                        <span class="status-badge available">Sẵn có</span>
+                     
                     </div>
                     <div class="book-info">
                         <h3 class="book-title">Phả hệ đạo đức</h3>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="book-actions">
                         <button class="btn-action primary">Yêu cầu mượn</button>
-                        <div class="card-ornament"><div class="card-ornament-inner"></div></div>
+                        
                     </div>
                 </div>
             </div>

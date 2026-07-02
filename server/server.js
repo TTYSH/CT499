@@ -1,6 +1,6 @@
 const app = require("./app");
-const config = require("./config/index");
-const MongoDB = require("./utils/mongodb.util");
+const config = require("./src/config/index");
+const MongoDB = require("./src/utils/mongodb.util");
 
 async function startServer() {
     try {

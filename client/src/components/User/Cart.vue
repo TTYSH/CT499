@@ -8,8 +8,7 @@
         <!-- Header -->
         <div class="drawer-header">
             <div>
-                <h2 class="drawer-title">Borrowing Request</h2>
-                <p class="drawer-subtitle">Review the items selected for your reading room session.</p>
+                <h2 class="drawer-title">Giỏ hàng</h2>
             </div>
             <button class="btn-close" aria-label="Close drawer" @click="$emit('close')">
                 <span class="material-symbols-outlined">close</span>
@@ -28,7 +27,11 @@
                     <div class="item-details">
                         <h3 class="item-title">The Architecture of Happiness</h3>
                         <p class="item-author">Alain de Botton</p>
-                        <div class="item-badge">Available in Reading Room A</div>
+                        <div class="item-quantity">
+                            <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
+                            <span class="qty-value">1</span>
+                            <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
+                        </div>
                     </div>
                     <button class="btn-remove" aria-label="Remove item">
                         <span class="material-symbols-outlined" style="font-size: 14px;">remove</span>
@@ -43,7 +46,11 @@
                     <div class="item-details">
                         <h3 class="item-title">In Praise of Shadows</h3>
                         <p class="item-author">Jun'ichirō Tanizaki</p>
-                        <div class="item-badge">Available in Reading Room B</div>
+                        <div class="item-quantity">
+                            <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
+                            <span class="qty-value">1</span>
+                            <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
+                        </div>
                     </div>
                     <button class="btn-remove" aria-label="Remove item">
                         <span class="material-symbols-outlined" style="font-size: 14px;">remove</span>
@@ -58,7 +65,11 @@
                     <div class="item-details">
                         <h3 class="item-title">A Pattern Language</h3>
                         <p class="item-author">Christopher Alexander</p>
-                        <div class="item-badge">Restricted Access</div>
+                        <div class="item-quantity">
+                            <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
+                            <span class="qty-value">1</span>
+                            <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
+                        </div>
                     </div>
                     <button class="btn-remove" aria-label="Remove item">
                         <span class="material-symbols-outlined" style="font-size: 14px;">remove</span>
@@ -70,15 +81,14 @@
         <!-- Footer / CTA -->
         <div class="drawer-footer">
             <div class="footer-total">
-                <span class="total-label">Total Volumes</span>
+                <span class="total-label">Tổng số lượng</span>
                 <span class="total-value">3</span>
             </div>
             <div class="footer-input-group">
-                <label class="input-label" for="date-input">Session Date</label>
-                <input class="input-date" id="date-input" placeholder="Proposed Date of Visit" type="text">
+    
             </div>
             <button class="btn-submit" @click="submitRequest">
-                Submit Request
+                Yêu Cầu Mượn
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
             </button>
         </div>
@@ -254,15 +264,37 @@ const submitRequest = () => {
     color: #46464b;
     margin: 0 0 12px 0;
 }
-.item-badge {
+.item-quantity {
     display: inline-flex;
     align-items: center;
-    padding: 4px 8px;
-    border: 1px solid #6e5c37;
-    color: #6e5c37;
-    font-size: 12px;
+    gap: 8px;
+}
+.qty-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #c7c6cb;
+    background-color: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #46464b;
+    transition: all 0.2s;
+}
+.qty-btn:hover {
+    background-color: #eae8e3;
+    color: #171920;
+}
+.qty-btn .material-symbols-outlined {
+    font-size: 14px;
+}
+.qty-value {
+    font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    color: #171920;
+    min-width: 20px;
+    text-align: center;
 }
 
 .btn-remove {
