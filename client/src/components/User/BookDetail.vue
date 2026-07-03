@@ -32,32 +32,32 @@
             <!-- Right: Detailed Metadata & Synopsis -->
             <div class="library-card book-details sticker-shadow">
                 <header style="margin-bottom: 40px;">
-                    <p class="record-no">mã sách: 9842-XL</p>
+                    <p class="record-no">Record No. 9842-XL</p>
                     <h1 class="book-title">The Midnight Library</h1>
                     <p class="book-author">by Matt Haig</p>
                 </header>
                 
                 <div class="meta-grid">
                     <div class="meta-item">
-                        <span class="meta-label">Đơn Giá</span>
+                        <span class="meta-label">ISBN</span>
                         <span class="meta-value">978-0525559474</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Năm Sản Xuất</span>
+                        <span class="meta-label">Year</span>
                         <span class="meta-value">2020</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Thể Loại</span>
+                        <span class="meta-label">Category</span>
                         <span class="meta-value">Fantasy / Phil.</span>
                     </div>
                     <div class="meta-item">
-                        <span class="meta-label">Nhà Xuất Bản</span>
+                        <span class="meta-label">Pages</span>
                         <span class="meta-value">304 pp.</span>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="synopsis-title">Tóm tắt nội dung</h3>
+                    <h3 class="synopsis-title">Archival Synopsis</h3>
                     <div class="synopsis-content">
                         <p>Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived. To see how things would be if you had made other choices . . . Would you have done anything different, if you had the chance to undo your regrets?</p>
                         <p>A dazzling novel about all the choices that go into a life well lived, from the internationally bestselling author of Reasons to Stay Alive and How To Stop Time. Somewhere out beyond the edge of the universe there is a library that contains an infinite number of books, each one the story of another reality. One tells the story of your life as it is, along with another book for the other life you could have lived if you had made a different choice at any point in your life.</p>

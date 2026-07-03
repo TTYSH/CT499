@@ -54,10 +54,10 @@
                         <img alt="The Theory of Everything" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWAdw_8fmsZYxMFFN6M3dRxhPUGhjp35vNUmZ--NX6CN2q76bxewRGbd_Wd6yzSf-qKOVcpsxh8xg_OKfxXn7E0__iR_hKrnaBLHGJCtKASfSU4_aqk60MVxR55FxtAH4H1Je60-hcH5W0RlEdDCSsT5abHHfgU6Sucp8Mze29oji_ibKFgNst9xKy56UpnEfVGszViR_ym_GxMH2Kj5tZVuWqJCXjKYuXxc5w9KdzeGQmgYN5fritD1qvdZm2ZlwhZ2NSETho1yQ">
                     </div>
                     <div class="book-info">
-                        <!-- <div class="book-meta">
+                        <div class="book-meta">
                             <span class="book-ref">Ref: ARCH-102</span>
                             <span class="book-status">Available</span>
-                        </div> -->
+                        </div>
                         <h3 class="book-title">The Theory of Everything</h3>
                         <p class="book-author">by S. Hawking</p>
                     </div>
@@ -69,10 +69,10 @@
                         <img alt="Cartography of Dreams" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN8ZXljofEy_88ytQD-Z_Dq4QO9AeaBEuR4WAM4FnCD5JQmuy2VS3Ol3T6z0fjxOmQf-hovPythAOSzgbLqCk-i78rY4D4C8YjA5svUlHzV4G_WNif083hjLPELG_tvGDZKB1-1BrpS26l-wwIxAa-Ftgr8xDPnhmiCcQtQjMZVoHN67P6sYyqD1mbTtSEmSJPqZq66hSMpsDXvI79ikUPlz5DkeQTjqIUanVMtXMxYbzF5U9NpXsJT_G_8u3yazW0UpzgpX0Pies">
                     </div>
                     <div class="book-info">
-                        <!-- <div class="book-meta">
+                        <div class="book-meta">
                             <span class="book-ref">Ref: ARCH-449</span>
                             <span class="book-status reserved">Reserved</span>
-                        </div> -->
+                        </div>
                         <h3 class="book-title">Cartography of Dreams</h3>
                         <p class="book-author">by Helena Vance</p>
                     </div>
@@ -84,10 +84,10 @@
                         <img alt="Botanical Spirits" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwJx2xa9WAUFAFFVCju7Cy0nwYS-g0E61Mwj21PfnUlzdASNqv8jo_nzc2SEDcd-NV_XR5mxbE-s1Cu6VN0t7_5SqpPXn8VaAzQcnLOUws726iuJvqQTFEALVZunqXwFJypse5Oo27zNEd-L77gvWOVg6Bea_dAdDVusfn6DI0wBBfDPTw3GuAiYsUCKdGVj0RSGCCUIwerre92uJ8w1leWvLdBdLw0aPPnDpwqC5pyquxs_cuoMN8sVBuAKGXIU9RYscY-VEIdgE">
                     </div>
                     <div class="book-info">
-                        <!-- <div class="book-meta">
+                        <div class="book-meta">
                             <span class="book-ref">Ref: ARCH-882</span>
                             <span class="book-status">Available</span>
-                        </div> -->
+                        </div>
                         <h3 class="book-title">Botanical Spirits</h3>
                         <p class="book-author">by Julian Thorne</p>
                     </div>
@@ -99,10 +99,10 @@
                         <img alt="The Silent Archive" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkKXzqYWWArt_ozwecvp5R_ExoUwME207p0gyV7yOrIiXEEEm7BFc4dxS4cpeDvHXmcA5J1ynOPU0PEZt3y6EwKilEH_H1nIceCpKA84ExgGwAzGOyeds85WZSd13gL9LB0AaAV36nG63piNjPSrTlW0ZkFGARxzHJVsKCFrAh12kkXKivBEg35X00Kv361b_TCeVIHohl3fn1b5d23OMuhUO_T5OPt5BsUbh65s-AFP3_m_TxR18L1A4h99sTM3Y8tc5uuEptFOI">
                     </div>
                     <div class="book-info">
-                        <!-- <div class="book-meta">
+                        <div class="book-meta">
                             <span class="book-ref">Ref: ARCH-201</span>
                             <span class="book-status">Available</span>
-                        </div> -->
+                        </div>
                         <h3 class="book-title">The Silent Archive</h3>
                         <p class="book-author">by Miriam Gray</p>
                     </div>
@@ -111,7 +111,48 @@
         </div>
     </section>
 
-
+    <!-- Bento Featured Section -->
+    <!-- <section class="bento-section">
+        <div class="container">
+            <div class="bento-grid">
+    
+                <div class="bento-large paper-card">
+                    <img alt="Archival Process" class="bento-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb0PR5bqFtPbsdbzhcmvrrQYo7PrVNOKmTaQ6ciw-Bd80Cni3xis-DsuAQoJ4FtFZ7Si1dIhHBslyL9-nS5dELSJ5Iaaw7PPL6coYE_1trdATp7Na7FoHCTY_FRdoEpK_qT8ZGkErQE-ZMbzCyBVzBHIumtY9WUvpne5k0X2VXrJQWfFnhlXj8hfTpfLm-hm-bd8UUhQJ2UWaN0KJPoLMijxu9a4kebzfz8QN4R3jSnczcvYomxHVPFGyV5k7DuX8kDBGigYrH9to">
+                    <div class="bento-content">
+                        <h3 class="bento-title">Preservation is an Art of Patience</h3>
+                        <p class="bento-desc">
+                            Our curators spend thousands of hours ensuring every leaf of parchment is treated with historical accuracy. Learn about our meticulous restoration processes.
+                        </p>
+                        <button class="btn-solid">The Archival Ledger</button>
+                    </div>
+                </div>
+   
+                <div class="bento-side">
+      
+                    <div class="bento-mini top paper-card">
+                        <div class="icon-circle">
+                            <span class="material-symbols-outlined">history_edu</span>
+                        </div>
+                        <div>
+                            <h4 class="mini-title">Membership Registry</h4>
+                            <p class="mini-desc">Apply for your archival credentials.</p>
+                        </div>
+                    </div>
+                    
+        
+                    <div class="bento-mini bottom paper-card">
+                        <div class="icon-circle">
+                            <span class="material-symbols-outlined">inventory_2</span>
+                        </div>
+                        <div>
+                            <h4 class="mini-title">Special Collections</h4>
+                            <p class="mini-desc">Restricted access manuscripts and artifacts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
   </div>
 </template>
 

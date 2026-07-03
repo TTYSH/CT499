@@ -13,15 +13,14 @@ const updateIndicator = () => {
   if (activeTab.value === 'signin') {
     if (tabSignInRef.value) {
       indicatorStyle.value = {
-        left: '0px',
+        left: `${tabSignInRef.value.offsetLeft}px`,
         width: `${tabSignInRef.value.offsetWidth}px`
       }
     }
   } else {
-    if (tabSignInRef.value && tabRegisterRef.value) {
-      // Gap is 2rem = 32px
+    if (tabRegisterRef.value) {
       indicatorStyle.value = {
-        left: `${tabSignInRef.value.offsetWidth + 32}px`,
+        left: `${tabRegisterRef.value.offsetLeft}px`,
         width: `${tabRegisterRef.value.offsetWidth}px`
       }
     }
@@ -43,42 +42,32 @@ onMounted(() => {
   <div class="login-wrapper">
     <!-- Main Container -->
     <main class="main-container">
-        <!-- Left Side: Atmospheric Image -->
+        <!-- Left Side -->
         <div class="left-side">
             <div class="bg-image" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxXaeAnEO6oWuAmoQYYUywwfHi0bqn6WS3SSXMB9gvjGch3c6mkPafYxeQ5gch9xZsHyVAu9lGQoHgfrJDwcqoeaMnF2EuDDDCKiTvnkAp5CH1KvQar9VK9n5UVSZ6tIw1OIwo2lxs8sfRtaBDXix1XvFR_xd3qVOz8ZsYpklccwAH3zb3mKHIDjuSlqsoBtaaIRV-YdOpb0ItxLDvdh23d_LmJcmS8z4Rw9bMiDjFRDMOCaP407AxkMKfc3Q7Bk4DAkVhZDrkuIWl');">
             </div>
             <!-- Overlay Text/Logo -->
             <div class="overlay-card">
                 <span class="material-symbols-outlined overlay-icon">menu_book</span>
-                <h1 class="font-display-lg italic overlay-title">The Archive</h1>
+                <h1 class="font-display-lg overlay-title">BookWorm</h1>
                 <p class="font-body-md text-on-surface-variant">Một bộ sưu tập tri thức được tuyển chọn, lưu giữ cho những tâm hồn thích suy ngẫm.</p>
             </div>
         </div>
         
-        <!-- Right Side: The Ledger Card -->
+        <!-- Right Side -->
         <div class="right-side">
-            <!-- Mobile Header (Hidden on Desktop) -->
+            <!-- Mobile Header -->
             <div class="mobile-header">
                 <span class="material-symbols-outlined mobile-icon">menu_book</span>
-                <h1 class="font-display-lg-mobile italic text-primary">The Archive</h1>
+                <h1 class="font-display-lg-mobile text-primary">BookWorm</h1>
             </div>
             
             <!-- Tab Navigation -->
             <div class="tab-nav">
-                <button 
-                  ref="tabSignInRef"
-                  class="tab-btn font-headline-sm"
-                  :class="activeTab === 'signin' ? 'text-primary' : 'text-on-surface-variant'" 
-                  @click="switchTab('signin')"
-                >
+                <button ref="tabSignInRef" class="tab-btn font-headline-sm" :class="activeTab === 'signin' ? 'text-primary' : 'text-on-surface-variant'" @click="switchTab('signin')">
                   Đăng nhập
                 </button>
-                <button 
-                  ref="tabRegisterRef"
-                  class="tab-btn font-headline-sm" 
-                  :class="activeTab === 'register' ? 'text-primary' : 'text-on-surface-variant'"
-                  @click="switchTab('register')"
-                >
+                <button ref="tabRegisterRef" class="tab-btn font-headline-sm" :class="activeTab === 'register' ? 'text-primary' : 'text-on-surface-variant'" @click="switchTab('register')">
                   Đăng ký
                 </button>
                 <!-- Active Indicator Line -->
@@ -88,19 +77,20 @@ onMounted(() => {
             <!-- Form Container -->
             <div class="form-container">
                 <!-- Sign In Form -->
-                <form 
-                  class="form-panel" 
-                  :class="activeTab === 'signin' ? 'form-active' : 'form-inactive-left'"
-                  @submit.prevent
-                >
+                <form class="form-panel" :class="activeTab === 'signin' ? 'form-active' : 'form-inactive-left'"@submit.prevent>
                     <div class="form-group-container">
                         <div>
                             <label class="form-label font-label-md text-on-surface-variant">Email</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Nhập địa chỉ email của bạn" required type="email"/>
+                            <input class="ledger-input font-body-md text-primary" placeholder="Email" required type="email"/>
                         </div>
                         <div>
                             <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Nhập mật khẩu của bạn" required type="password"/>
+                            <div class="password-wrapper">
+                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Mật khẩu" required type="password"/>
+                                <button type="button" class="eye-slash">
+                                    <span class="material-symbols-outlined"> visibility_off </span>
+                                </button>
+                            </div>
                             <div class="forgot-link-container">
                                 <a class="forgot-link font-label-sm" href="#">Quên mật khẩu?</a>
                             </div>
@@ -110,23 +100,33 @@ onMounted(() => {
                 </form>
                 
                 <!-- Register Form -->
-                <form 
-                  class="form-panel" 
-                  :class="activeTab === 'register' ? 'form-active' : 'form-inactive-right'"
-                  @submit.prevent
-                >
-                    <div class="form-group-container-sm">
+                <form class="form-panel" :class="activeTab === 'register' ? 'form-active' : 'form-inactive-right'" @submit.prevent>
+                    <div class="form-group-container-register">
                         <div>
                             <label class="form-label font-label-md text-on-surface-variant">Họ và tên</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Tên đầy đủ của bạn" required type="text"/>
+                            <input class="ledger-input font-body-md text-primary" placeholder="Họ và tên" required type="text"/>
                         </div>
                         <div>
                             <label class="form-label font-label-md text-on-surface-variant">Email</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Email dùng để liên lạc" required type="email"/>
+                            <input class="ledger-input font-body-md text-primary" placeholder="Email" required type="email"/>
                         </div>
                         <div>
                             <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Tạo một mật khẩu an toàn" required type="password"/>
+                            <div class="password-wrapper">
+                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Mật khẩu" required type="password"/>
+                                <button type="button" class="eye-slash">
+                                    <span class="material-symbols-outlined"> visibility_off </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label font-label-md text-on-surface-variant">Xác nhận mật khẩu</label>
+                            <div class="password-wrapper">
+                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Mật khẩu" required type="password"/>
+                                <button type="button" class="eye-slash">
+                                    <span class="material-symbols-outlined"> visibility_off </span>
+                                </button>
+                            </div>
                         </div>
                         <button class="btn-secondary font-label-md" type="submit">Đăng ký thành viên</button>
                     </div>
@@ -176,11 +176,12 @@ onMounted(() => {
     font-family: var(--font-playfair);
     font-size: 36px;
     line-height: 1.2;
-    font-weight: 500;
+    font-style: italic;
+    font-weight: bolder;
 }
 .font-headline-sm {
-    font-family: var(--font-playfair);
-    font-size: 24px;
+    font-family: var(--font-merriweather);
+    font-size: 22px;
     line-height: 1.4;
     font-weight: 500;
 }
@@ -192,7 +193,7 @@ onMounted(() => {
 }
 .font-label-md {
     font-family: var(--font-merriweather);
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.2;
     letter-spacing: 0.05em;
     font-weight: 600;
@@ -204,9 +205,12 @@ onMounted(() => {
     letter-spacing: 0.03em;
     font-weight: 500;
 }
-.italic { font-style: italic; }
-.text-primary { color: var(--color-primary); }
-.text-on-surface-variant { color: var(--color-on-surface-variant); }
+.text-primary { 
+    color: var(--color-primary);
+}
+.text-on-surface-variant { 
+    color: var(--color-on-surface-variant); 
+}
 
 /* Layout */
 .main-container {
@@ -216,6 +220,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     background-color: var(--color-surface);
+    border-radius: 10px;
 }
 
 /* Left Side */
@@ -233,7 +238,7 @@ onMounted(() => {
     position: relative;
 }
 
-/* Desktop Media Query */
+/* Desktop Responsive */
 @media (min-width: 768px) {
     .login-wrapper {
         padding: 0;
@@ -264,13 +269,15 @@ onMounted(() => {
     }
 }
 
-/* Components inside Left Side */
+/* Components Left Side */
 .bg-image {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     background-size: cover;
     background-position: center;
     opacity: 0.8;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     mix-blend-mode: multiply;
 }
 .overlay-card {
@@ -282,6 +289,7 @@ onMounted(() => {
     background-color: rgba(251, 249, 244, 0.8);
     backdrop-filter: blur(4px);
     border: 1px solid var(--color-outline-variant);
+    border-radius: 10px;
     margin: 2rem;
     max-width: 24rem;
 }
@@ -290,7 +298,11 @@ onMounted(() => {
     line-height: 2.5rem;
     margin-bottom: 1rem;
 }
-.overlay-title { margin-bottom: 1rem; }
+.overlay-title { 
+    margin-bottom: 1rem; 
+    font-weight: bolder;
+    font-style: italic;
+}
 
 /* Mobile Header */
 .mobile-header {
@@ -308,6 +320,7 @@ onMounted(() => {
 .tab-nav {
     display: flex;
     gap: 2rem;
+    justify-content: center;
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--color-outline-variant);
     padding-bottom: 0.5rem;
@@ -328,7 +341,7 @@ onMounted(() => {
     height: 2px;
     background-color: var(--color-primary);
     transition: all 0.3s;
-    width: 70px; /* Default fallback */
+    width: 70px;
 }
 
 /* Forms Area */
@@ -340,7 +353,9 @@ onMounted(() => {
 }
 .form-panel {
     position: absolute;
-    top: 0; left: 0; width: 100%;
+    top: 0; 
+    left: 0; 
+    width: 100%;
     transition: transform 0.5s, opacity 0.5s;
 }
 .form-active {
@@ -359,8 +374,16 @@ onMounted(() => {
     pointer-events: none;
 }
 
-.form-group-container { display: flex; flex-direction: column; gap: 2rem; }
-.form-group-container-sm { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-group-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 2rem; 
+}
+.form-group-container-register { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
 
 .form-label {
     display: block;
@@ -370,10 +393,10 @@ onMounted(() => {
 
 /* Inputs */
 .ledger-input {
-    border: none;
-    border-bottom: 1px solid var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
     background: transparent;
-    padding: 8px 0;
+    padding: 8px;
     width: 100%;
     transition: border-color 0.3s ease;
     font-family: inherit;
@@ -381,12 +404,10 @@ onMounted(() => {
 .ledger-input:focus {
     outline: none;
     box-shadow: none;
-    border-bottom-width: 2px;
-    border-bottom-color: var(--color-secondary);
 }
 .ledger-input::placeholder {
     color: var(--color-outline-variant);
-    font-style: italic;
+    font-size: 14px;
 }
 
 .forgot-link-container {
@@ -405,6 +426,35 @@ onMounted(() => {
     color: var(--color-primary);
 }
 
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.eye-slash {
+    padding-right: 2.5rem;
+    position: absolute;
+    right: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye-slash > span {
+    color: var(--color-on-surface-variant);
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.eye-slash:hover > span {
+    color: var(--color-primary);
+}
 /* Buttons */
 .btn-primary {
     width: 100%;
@@ -415,7 +465,7 @@ onMounted(() => {
     letter-spacing: 0.1em;
     margin-top: 1rem;
     transition: background-color 0.3s;
-    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 .btn-primary:hover {
@@ -423,9 +473,9 @@ onMounted(() => {
 }
 .btn-secondary {
     width: 100%;
-    background-color: var(--color-surface);
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: 4px;
     padding: 0.75rem 0;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -434,7 +484,7 @@ onMounted(() => {
     cursor: pointer;
 }
 .btn-secondary:hover {
-    background-color: var(--color-surface-variant);
+    background-color: var(--color-primary-container);
 }
 
 /* Footer */

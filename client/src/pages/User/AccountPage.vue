@@ -97,7 +97,7 @@
                     <div class="tab-header history-header">
                         <div>
                             <h2 class="tab-title">Lịch sử đơn mượn</h2>
-                      
+                            <p class="tab-subtitle">Academic Archival Tracking System</p>
                         </div>
                         <div class="history-stats">
                             <span>Số đơn đang mượn: 2</span>
@@ -221,6 +221,19 @@ input { cursor: text; }
     box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.15);
     border: 1px solid rgba(130, 116, 114, 0.2);
     position: relative;
+}
+.paper-card::after {
+    content: "";
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #efeeea;
+    border-radius: 50%;
+    border: 1px solid rgba(130, 116, 114, 0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .page-header {
