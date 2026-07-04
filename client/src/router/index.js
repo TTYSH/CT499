@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import UserLayout from '../layouts/UserLayout.vue'
 import homePage from '../pages/User/HomePage.vue'
-import IntroductionPage from '../pages/User/IntroductionPage.vue'
+import ContactPage from '@/pages/User/ContactPage.vue'
 import CollectionPage from '../pages/User/CollectionPage.vue'
 import AccountPage from '../pages/User/AccountPage.vue'
 import BookDetail from '../components/User/BookDetail.vue'
@@ -32,9 +32,9 @@ const router = createRouter({
           component: homePage,
         },
         {
-          path: 'introduction',
-          name: 'introduction',
-          component: IntroductionPage,
+          path: 'contact',
+          name: 'contact',
+          component: ContactPage,
         },
         {
           path: 'collection',

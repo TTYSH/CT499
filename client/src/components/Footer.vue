@@ -1,15 +1,55 @@
 <template>
     <footer class="site-footer">
         <div class="footer-container">
-            <div class="footer-info">
-                <div class="footer-brand">Librarian's Registry</div>
-                <div class="footer-copy">© 1954 Librarian's Registry - Academic Archival System</div>
+            <div class="footer-brand-section">
+                <div class="footer-brand">
+                    <span class="material-symbols-outlined" style="color: var(--color-secondary);">menu_book</span>
+                    BookWorm
+                </div>
+                <div class="footer-desc">Mỗi cuốn sách là một cánh cửa mở ra những miền ký ức và tri thức.
+                    Đăng ký mượn sách trực tuyến thật dễ dàng, nhanh chóng và tiện lợi.
+                    Bắt đầu hành trình đọc của bạn ngay hôm nay để mỗi trang sách
+                    trở thành một hành trình đáng nhớ.
+                </div>
             </div>
-            <nav class="footer-nav">
-                <a class="footer-link" href="#">Catalog Rules</a>
-                <a class="footer-link" href="#">Terms of Access</a>
-                <a class="footer-link" href="#">Privacy Ledger</a>
-            </nav>
+            
+            <div class="footer-center-section">
+                <div class="footer-center-content">
+                    <h2 class="footer-center-title">Danh mục</h2>
+                    <ul>
+                        <li>Trang chủ</li>
+                        <li>Tủ sách</li>
+                        <li>Liên hệ</li>
+                        <li>Tài khoản</li>
+                    </ul>
+                </div>
+                <div class="footer-center-content">
+                    <h2 class="footer-center-title">Chính sách</h2>
+                    <ul>
+                        <li>Chính sách bảo mật</li>
+                        <li>Điều khoản sử dụng</li>
+                        <li>Chính sách mượn trả</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-contact-section">
+                <a class="contact-item" title="Gửi Email">
+                    <span class="material-symbols-outlined">mail</span>
+                    <span>bookworm@gmail.com</span>
+                </a>
+                <a href="https://github.com/minhthu2404/BookWorm" target="_blank" class="contact-item" title="GitHub">
+                    <span class="material-symbols-outlined">phone_enabled</span>
+                    <span>(0292) 3453467</span>
+                </a>
+                <div class="contact-item">
+                    <span class="material-symbols-outlined">location_on</span>
+                    <span>Khu II, Đại học Cần Thơ, Đường 3/2, Ninh Kiều, Cần Thơ</span>
+                </div>
+                <div class="contact-item">
+                    <span>© 2026 BookWorm. All Rights Reserved.</span>
+                </div>
+            </div>
         </div>
     </footer>
 </template>
@@ -23,40 +63,109 @@
 .footer-container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 32px var(--margin-mobile);
+    padding: 20px var(--margin-mobile);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 24px;
+    align-items: flex-start;
+    gap: 40px;
 }
 @media (min-width: 768px) {
     .footer-container {
         flex-direction: row;
-        justify-content: space-between;
-        padding: 32px var(--margin-desktop);
-        gap: 0;
+        padding: 30px var(--margin-desktop);
+        gap: 6rem;
     }
 }
 
-.footer-info { text-align: center; }
-@media (min-width: 768px) { .footer-info { text-align: left; } }
-
+/* Brand Section (Left) */
+.footer-brand-section { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center; 
+    flex: 1;
+}
+@media (min-width: 768px) { 
+    .footer-brand-section { 
+        text-align: left; 
+    } 
+}
 .footer-brand {
     font-family: var(--font-playfair);
     font-size: 24px;
     font-weight: 600;
     color: var(--color-primary);
-    margin-bottom: 8px;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.footer-copy { font-size: 16px; color: var(--color-on-surface-variant); }
+.footer-desc { 
+    font-size: 15px; 
+    color: var(--color-on-surface-variant); 
+}
 
-.footer-nav { display: flex; gap: 24px; align-items: center; }
-.footer-link {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-on-surface-variant);
-    text-decoration: underline;
-    transition: color 0.2s;
+/* Center Section */
+.footer-center-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+    gap: 3rem;
 }
-.footer-link:hover { color: var(--color-primary); }
+
+.footer-center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-center-title {
+    font-size: 18px;
+    color: var(--color-secondary);
+}
+
+.footer-center-content>ul>li {
+    list-style-type: none;
+    text-align: center;
+    font-size: 14px;
+    line-height: 2rem;
+    color: var(--color-on-surface-variant);
+    cursor: pointer;
+}
+
+.footer-center-content>ul>li:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+/* Contact Section (Right) */
+.footer-contact-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    flex: 1;
+}
+@media (min-width: 768px) {
+    .footer-contact-section {
+        align-items: flex-start;
+    }
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-on-surface-variant);
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+}
 </style>

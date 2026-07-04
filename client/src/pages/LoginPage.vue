@@ -122,7 +122,7 @@ onMounted(() => {
                         <div>
                             <label class="form-label font-label-md text-on-surface-variant">Xác nhận mật khẩu</label>
                             <div class="password-wrapper">
-                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Mật khẩu" required type="password"/>
+                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Xác nhận mật khẩu" required type="password"/>
                                 <button type="button" class="eye-slash">
                                     <span class="material-symbols-outlined"> visibility_off </span>
                                 </button>
@@ -265,7 +265,7 @@ onMounted(() => {
         display: none;
     }
     .footer-note {
-        text-align: left;
+        text-align: center;
     }
 }
 
@@ -416,7 +416,7 @@ onMounted(() => {
     margin-top: 0.5rem;
 }
 .forgot-link, .footer-link {
-    text-decoration: underline;
+    font-weight: bold;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
     color: var(--color-on-surface-variant);
@@ -424,6 +424,7 @@ onMounted(() => {
 }
 .forgot-link:hover, .footer-link:hover {
     color: var(--color-primary);
+    text-decoration: underline;
 }
 
 .password-wrapper {
@@ -494,7 +495,7 @@ onMounted(() => {
 }
 @media (min-width: 768px) {
     .footer-note {
-        text-align: left;
+        text-align: center;
     }
 }
 </style>
