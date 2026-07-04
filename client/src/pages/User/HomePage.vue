@@ -80,6 +80,46 @@
         </div>
     </section>
 
+    <!-- Quotes Section -->
+    <section class="quotes-section">
+        <div class="container">
+            <div class="quotes-wrapper">
+                <div class="quote-block">
+                    <div class="quote-item">
+                        
+                        <span class="quote-mark open-mark">❝</span>
+                        <p class="quote-text">Là người đi trước, hãy biết đưa tay lại phía sau.</p>
+                        <div class="quote-footer">
+                            <span class="quote-mark close-mark">❞</span>
+                        </div>
+                         <p class="quote-author">Nguyễn Chiến Thắng</p>
+                    </div>
+                </div>
+                <div class="quote-block">
+                    <div class="quote-item">
+                       
+                        <span class="quote-mark open-mark">❝</span>
+                        <p class="quote-text">Sách là ngọn đèn sáng bất diệt của trí tuệ con người.</p>
+                        <div class="quote-footer">
+                            <span class="quote-mark close-mark">❞</span>
+                        </div>
+                         <p class="quote-author">A. Upit</p>
+                    </div>
+                </div>
+                <div class="quote-block">
+                    <div class="quote-item">
+                        
+                        <span class="quote-mark open-mark">❝</span>
+                        <p class="quote-text">Một người biết đọc nhưng không đọc sách cũng chẳng hơn gì người không biết đọc.</p>
+                        <div class="quote-footer">
+                            <span class="quote-mark close-mark">❞</span>
+                        </div>
+                        <p class="quote-author">Mark Twain</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
   </div>
 </template>
@@ -303,5 +343,73 @@ const handleHorizontalScroll = (evt) => {
 .book-author {
     font-size: 14px;
     color: var(--color-on-surface-variant);
+}
+
+/* Quotes Section */
+.quotes-section {
+    padding-bottom: 96px;
+}
+.quotes-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.quote-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.quote-author {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+    align-self: flex-end;
+}
+.quote-item {
+    padding: 24px;
+    background-color: var(--color-surface-container-low, #fcfaf8);
+    border-radius: 12px;
+    border-left: 5px solid var(--color-secondary, #835425);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.quote-mark {
+    font-size: 28px;
+    color: var(--color-secondary, #835425);
+    line-height: 1;
+}
+.open-mark {
+    align-self: flex-start;
+}
+.close-mark {
+    align-self: flex-end;
+}
+.quote-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+.quote-text {
+    font-family: var(--font-merriweather, serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--color-on-surface);
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+}
+
+/* 2nd Frame (Even) - Mirrored */
+.quotes-wrapper .quote-block:nth-child(even) .quote-item {
+    border-left: none;
+    border-right: 5px solid var(--color-secondary, #835425);
 }
 </style>
