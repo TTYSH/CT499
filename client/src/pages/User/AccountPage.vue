@@ -77,57 +77,47 @@
                             <h2 class="tab-title">Lịch sử đơn mượn</h2>
                         </div>
                         <div class="history-stats">
-                            <span>Tổng đơn mượn: 2</span>
+                            <span>Tổng đơn mượn: {{ orders.length }}</span>
                         </div>
                     </div>
                     
-                    <div class="history-table-wrapper">
-                        <table class="history-table">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên Sách</th>
-                                    <th>Ngày Mượn</th>
-                                    <th>Ngày Trả</th>
-                                    <th>Số Lượng</th>
-                                    <th>Trạng Thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="ledger-row">
-                                    <td>1</td>
-                                    <td class="left">The Great Gatsby (First Edition Ref)</td>
-                                    <td>05/11/1954</td>
-                                    <td>19/11/1954</td>
-                                    <td>34</td>
-                                    <td class="center"><span class="ink-stamp text-secondary">Borrowed</span></td>
-                                </tr>
-                                <tr class="ledger-row">
-                                    <td>2</td>
-                                    <td class="left">Principles of Political Economy</td>
-                                    <td>02/11/1954</td>
-                                    <td>16/11/1954</td>
-                                    <td>24</td>
-                                    <td class="center"><span class="ink-stamp text-tertiary-container">Returned</span></td>
-                                </tr>
-                                <tr class="ledger-row">
-                                    <td>3</td>
-                                    <td class="left">The Odyssey - Manuscript Study</td>
-                                    <td>25/10/1954</td>
-                                    <td>08/11/1954</td>
-                                    <td>0</td>
-                                    <td class="center"><span class="ink-stamp text-error">Overdue</span></td>
-                                </tr>
-                                <tr class="ledger-row">
-                                    <td>4</td>
-                                    <td class="left">Introduction to Archival Science</td>
-                                    <td>10/10/1954</td>
-                                    <td>24/10/1954</td>
-                                    <td>3</td>
-                                    <td class="center"><span class="ink-stamp text-tertiary-container">Returned</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="order-list">
+                        <div v-for="order in orders" :key="order.id" class="order-card">
+                            <div class="order-header" @click="toggleOrder(order.id)">
+                                <div class="order-header-left">
+                                    <span class="expand-icon" :class="{ 'expanded': expandedOrderId === order.id }">
+                                        ▶
+                                    </span>
+                                    <div class="order-title-group">
+                                        <h3 class="order-title">Đơn mượn</h3>
+                                        <div class="order-meta-group">
+                                            <span class="order-code">Mã: {{ order.code }}</span>
+                                            <span class="order-total-books">Tổng: {{ getTotalBooks(order) }} quyển</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-header-right">
+                                    <span :class="['status-badge', order.statusClass]">{{ order.status }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="order-content" v-if="expandedOrderId === order.id">
+                                <div class="order-meta">
+                                    <div class="meta-item"><strong>Ngày mượn:</strong> {{ order.borrowDate }}</div>
+                                    <span class="material-symbols-outlined date-arrow">arrow_right_alt</span>
+                                    <div class="meta-item"><strong>Ngày trả:</strong> {{ order.returnDate }}</div>
+                                </div>
+                                <div class="book-list">
+                                    <div v-for="book in order.books" :key="book.id" class="book-item">
+                                        <img :src="book.image" alt="Book Cover" class="book-cover-mini" />
+                                        <div class="book-info">
+                                            <div class="book-name">{{ book.name }}</div>
+                                            <div class="book-quantity">Số lượng: {{ book.quantity }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Pagination -->
@@ -153,6 +143,68 @@ const activeTab = ref('profile')
 
 function switchTab(tab) {
     activeTab.value = tab
+}
+
+function getTotalBooks(order) {
+    return order.books.reduce((sum, book) => sum + book.quantity, 0)
+}
+
+const orders = ref([
+    {
+        id: 1,
+        code: '692302bb28c90cdb80fe4187',
+        borrowDate: '05/11/1954',
+        returnDate: '19/11/1954',
+        status: 'Đang mượn',
+        statusClass: 'status-borrowed',
+        books: [
+            { id: 101, name: 'Đại gia Gatsby', quantity: 2, image: '/images/Sach/104_dai_gia_gatsby.png' }
+        ]
+    },
+    {
+        id: 2,
+        code: '692302bb28c90cdb80fe4188',
+        borrowDate: '02/11/1954',
+        returnDate: '16/11/1954',
+        status: 'Đã trả',
+        statusClass: 'status-returned',
+        books: [
+            { id: 102, name: 'Số Đỏ', quantity: 1, image: '/images/Sach/101_SoDo.png' },
+            { id: 105, name: 'Mắt Biếc', quantity: 1, image: '/images/Sach/102_mat_biec.png' }
+        ]
+    },
+    {
+        id: 3,
+        code: '692302bb28c90cdb80fe4189',
+        borrowDate: '25/10/1954',
+        returnDate: '08/11/1954',
+        status: 'Quá hạn',
+        statusClass: 'status-overdue',
+        books: [
+            { id: 103, name: 'Đắc Nhân Tâm', quantity: 1, image: '/images/Sach/201_dac_nhan_tam.png' }
+        ]
+    },
+    {
+        id: 4,
+        code: '692302bb28c90cdb80fe4190',
+        borrowDate: '10/10/1954',
+        returnDate: '24/10/1954',
+        status: 'Đã trả',
+        statusClass: 'status-returned',
+        books: [
+            { id: 104, name: 'Giết con chim nhại', quantity: 3, image: '/images/Sach/103_giet_con_chim_nhai.png' }
+        ]
+    }
+])
+
+const expandedOrderId = ref(null)
+
+function toggleOrder(id) {
+    if (expandedOrderId.value === id) {
+        expandedOrderId.value = null
+    } else {
+        expandedOrderId.value = id
+    }
 }
 </script>
 
@@ -418,48 +470,165 @@ input { cursor: text; }
     font-weight: 700;
 }
 
-.history-table-wrapper {
-    overflow-x: auto;
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
 }
 
-.history-table {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
+.order-card {
+    background: #fff;
+    border: 1px solid rgba(211, 195, 192, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.history-table th {
-    padding: 12px 11px;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
+.order-header {
+    background-color: #f5eedc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.order-header:hover {
+    background-color: var(--color-surface-container);
+}
+
+.order-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.expand-icon {
+    transition: transform 0.3s ease;
     color: var(--color-on-surface-variant);
-    border-bottom: 2px solid var(--color-secondary);
-    text-align: center;
+    font-size: 15px !important;
 }
 
-.history-table td {
-    padding: 12px 10px;
-    border-bottom: 1px solid rgba(211, 195, 192, 0.2);
+.expand-icon.expanded {
+    transform: rotate(90deg);
 }
 
-.history-table td.left {
-    text-align: left;
-    margin-left: 2rem;
+.order-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.history-table td.center {
-    text-align: center;
+.order-title {
+    margin: 0;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    color: #8c5b35;
 }
 
-.ledger-row>td {
-    text-align: center;
+.order-code {
+    font-size: 12px;
+    color: var(--color-on-surface-variant);
+}
+
+.order-meta-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-total-books {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8c5b35;
+    background-color: #fbf5ee;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #e6d3c0;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid currentColor;
+    background-color: #fff;
+}
+
+.status-borrowed {
+    color: #1e8e3e;
+}
+.status-returned {
+    color: #5f6368;
+}
+.status-overdue {
+    color: #d93025;
+}
+
+.order-content {
+    padding: 16px;
+    border-top: 1px solid rgba(211, 195, 192, 0.2);
+    background-color: var(--color-surface-container-low);
+}
+
+.order-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
     font-size: 14px;
+    color: var(--color-on-surface);
 }
 
-.text-secondary { color: var(--color-secondary); }
-.text-tertiary-container { color: #889885; }
-.text-error { color: #ba1a1a; }
+.date-arrow {
+    color: var(--color-on-surface-variant);
+    font-size: 20px !important;
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.book-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid rgba(211, 195, 192, 0.3);
+}
+
+.book-cover-mini {
+    width: 96px;
+    height: 144px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(130, 116, 114, 0.2);
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.book-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-on-surface);
+}
+
+.book-quantity {
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
+}
 
 /* Pagination */
 .pagination-container {
