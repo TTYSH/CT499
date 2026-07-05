@@ -1,34 +1,33 @@
 <template>
     <div class="contact-page">
-        <h1 class="page-title">Liên hệ & Góp ý</h1>
+        <h1 class="page-title">Liên hệ</h1>
         
         <div class="contact-layout">
-            <!-- Cột trái: Thông tin và Bản đồ -->
+            <!-- LeftSide: Infomation and Map-->
             <div class="contact-info-section">
                 <div class="info-card">
-                    <h2 class="section-title">Thông tin liên lạc</h2>
-                    <p class="section-desc">Chúng tôi luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của bạn.</p>
+                    <h2 class="section-title">Thông tin liên hệ</h2>
                     
                     <ul class="info-list">
                         <li>
                             <span class="material-symbols-outlined icon">location_on</span>
                             <div>
                                 <strong>Địa chỉ:</strong>
-                                <p>123 Đường Sách, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
+                                <p>Khu II, Đại học Cần Thơ, Đường 3/2, Ninh Kiều, Cần Thơ</p>
                             </div>
                         </li>
                         <li>
                             <span class="material-symbols-outlined icon">call</span>
                             <div>
                                 <strong>Điện thoại:</strong>
-                                <p>(0123) 456 789 - (0987) 654 321</p>
+                                <p>(0292) 3453467</p>
                             </div>
                         </li>
                         <li>
                             <span class="material-symbols-outlined icon">mail</span>
                             <div>
                                 <strong>Email:</strong>
-                                <p>contact@bookworm.com</p>
+                                <p>bookworm@gmail.com</p>
                             </div>
                         </li>
                         <li>
@@ -44,24 +43,23 @@
                 <div class="map-card">
                     <h2 class="section-title">Bản đồ</h2>
                     <div class="map-container">
-                        <!-- Nhúng Google Map -->
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3919.3175402636253!2d106.69758091533405!3d10.779269392318712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f48a3b04c83%3A0x705c742c0587271!2zRHXhu51uZyBTw6FjaCBUUC5IQ00!5e0!3m2!1svi!2s!4v1689564875631!5m2!1svi!2s" 
-                            width="100%" 
-                            height="100%" 
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3928.8473407875617!2d105.767587!3d10.0294536!
+                            3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0895a51d60719%3A0x9d76b0035f6d53d0!2zxJDhuqFpIGjhu41jIEPhuqduIFRoxqE!5e0!3m2!1
+                            svi!2s!4v1783178041817!5m2!1svi!2s" 
+                            width="600"
+                            height="450" 
                             style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
+                            referrerpolicy="strict-origin-when-cross-origin">
                         </iframe>
                     </div>
                 </div>
             </div>
 
-            <!-- Cột phải: Form đánh giá -->
+            <!-- RightSide: Feedback Form-->
             <div class="feedback-section">
-                <h2 class="section-title">Gửi đánh giá / Góp ý</h2>
-                <p class="section-desc">Ý kiến của bạn giúp BookWorm ngày càng hoàn thiện hơn.</p>
+                <h2 class="section-title">Ý kiến phản hồi</h2>
                 
                 <form class="feedback-form" @submit.prevent="submitFeedback">
                     <div class="form-group">
@@ -121,7 +119,6 @@ const isSubmitting = ref(false);
 const submitFeedback = () => {
     isSubmitting.value = true;
     successMsg.value = '';
-    // Giả lập gửi form
     setTimeout(() => {
         isSubmitting.value = false;
         successMsg.value = 'Cảm ơn bạn đã gửi đánh giá! Chúng tôi sẽ ghi nhận và phản hồi sớm nhất có thể.';
@@ -141,12 +138,6 @@ const submitFeedback = () => {
 <style scoped>
 .contact-page {
     padding: 24px 0;
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .page-title {
@@ -156,7 +147,7 @@ const submitFeedback = () => {
     margin-bottom: 32px;
     border-bottom: 2px solid var(--color-surface-container);
     padding-bottom: 12px;
-    text-align: center;
+    text-align: left;
 }
 
 .contact-layout {
@@ -188,19 +179,13 @@ const submitFeedback = () => {
     margin-bottom: 8px;
 }
 
-.section-desc {
-    color: var(--color-on-surface-variant);
-    margin-bottom: 24px;
-    font-size: 15px;
-}
-
 /* Cột thông tin */
 .info-card, .map-card, .feedback-section {
     background-color: var(--color-surface);
-    border: 1px solid rgba(211, 195, 192, 0.4);
-    border-radius: 12px;
+    border: 2px solid rgba(211, 195, 192, 0.4);
+    border-radius: 5px;
     padding: 24px;
-    box-shadow: 4px 4px 0px 0px rgba(62, 39, 35, 0.05);
+    /* box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.15); */
     margin-bottom: 24px;
 }
 
@@ -232,12 +217,6 @@ const submitFeedback = () => {
     transition: transform 0.3s ease;
 }
 
-.info-list li:hover .icon {
-    transform: scale(1.1);
-    background-color: var(--color-secondary);
-    color: white;
-}
-
 .info-list strong {
     display: block;
     color: var(--color-on-surface);
@@ -256,7 +235,7 @@ const submitFeedback = () => {
 .map-container {
     width: 100%;
     height: 320px;
-    border-radius: 8px;
+    border-radius: 5px;
     overflow: hidden;
     background-color: #f0f0f0;
 }
@@ -285,7 +264,7 @@ const submitFeedback = () => {
 .form-group textarea {
     padding: 12px 16px;
     border: 1px solid var(--color-outline);
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 15px;
     font-family: inherit;
     background-color: var(--color-surface);
@@ -310,7 +289,7 @@ const submitFeedback = () => {
     color: white;
     border: none;
     padding: 14px 24px;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -319,7 +298,7 @@ const submitFeedback = () => {
 }
 
 .submit-btn:hover:not(:disabled) {
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary-container);
 }
 
 .submit-btn:active:not(:disabled) {

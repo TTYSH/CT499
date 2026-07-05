@@ -349,6 +349,7 @@ const handleHorizontalScroll = (evt) => {
 .quotes-section {
     padding-bottom: 96px;
 }
+
 .quotes-wrapper {
     display: flex;
     flex-direction: column;
@@ -371,7 +372,7 @@ const handleHorizontalScroll = (evt) => {
 .quote-item {
     padding: 24px;
     background-color: var(--color-surface-container-low, #fcfaf8);
-    border-radius: 12px;
+    border-radius: 10px;
     border-left: 5px solid var(--color-secondary, #835425);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     display: flex;

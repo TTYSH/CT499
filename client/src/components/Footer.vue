@@ -17,10 +17,10 @@
                 <div class="footer-center-content">
                     <h2 class="footer-center-title">Danh mục</h2>
                     <ul>
-                        <li>Trang chủ</li>
-                        <li>Tủ sách</li>
-                        <li>Liên hệ</li>
-                        <li>Tài khoản</li>
+                        <li><RouterLink exact-active-class="active" to="/">Trang chủ</RouterLink></li>
+                        <li><RouterLink active-class="active" to="/collection">Tủ Sách</RouterLink></li>
+                        <li><RouterLink active-class="active" to="/contact">Liên hệ</RouterLink></li>
+                        <li><RouterLink active-class="active" to="/account">Tài khoản</RouterLink></li>
                     </ul>
                 </div>
                 <div class="footer-center-content">

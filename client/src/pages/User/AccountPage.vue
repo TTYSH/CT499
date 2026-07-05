@@ -5,23 +5,15 @@
             <h1 class="page-title">Thông tin tài khoản</h1>
         </div>
 
-        <!-- Tabbed Interface -->
+        <!-- Account Section -->
         <div class="layout-container">
             <!-- Sidebar Navigation -->
             <aside class="tab-nav">
-                <button 
-                    class="tab-btn" 
-                    :class="{ active: activeTab === 'profile' }" 
-                    @click="switchTab('profile')"
-                >
+                <button class="tab-btn" :class="{ active: activeTab === 'profile' }" @click="switchTab('profile')">
                     <span class="material-symbols-outlined">person</span>
                     <span>Thông tin cá nhân</span>
                 </button>
-                <button 
-                    class="tab-btn" 
-                    :class="{ active: activeTab === 'history' }" 
-                    @click="switchTab('history')"
-                >
+                <button class="tab-btn" :class="{ active: activeTab === 'history' }" @click="switchTab('history')">
                     <span class="material-symbols-outlined">menu_book</span>
                     <span>Lịch sử đơn mượn</span>
                 </button>
@@ -31,7 +23,7 @@
                 </button>
             </aside>
 
-            <!-- Content Canvas -->
+            <!-- Content Section -->
             <div class="tab-content">
                 <!-- Tab 1: Profile -->
                 <section class="paper-card tab-pane" :class="{ active: activeTab === 'profile' }">
@@ -45,7 +37,7 @@
                         <div class="avatar-section">
                             <div class="avatar-wrapper">
                                 <div class="avatar-img-container">
-                                    <img src="https://lh3.googleusercontent.com/aida-public/AI_m6-rV8-Q4O6f6-4YtY-QY7f-8U-4r-6S-4e-9V-2t-1Y-3U-5I-7O-9P-2K-4M-1N-0B-8V-2C-7X-4Z-1Q-9W-8E-7R-6T-5Y-4U-3I-2O-1P=s1024-p-k-no" class="avatar-img" alt="Profile Avatar">
+                                    <img src="/images/user_icon.jpg" class="avatar-img" alt="Profile Avatar">
                                 </div>
                                 <button type="button" class="avatar-btn">
                                     <span class="material-symbols-outlined" style="font-size: 16px;">photo_camera</span>
@@ -72,20 +64,6 @@
                             </div>
                         </div>
 
-                        <!-- <div class="preferences-section">
-                            <h3 class="preferences-title">Reading Preferences</h3>
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input class="checkbox-input" type="checkbox" checked>
-                                    <span>Notify me of new arrivals in Classical Literature</span>
-                                </label>
-                                <label class="checkbox-label">
-                                    <input class="checkbox-input" type="checkbox" checked>
-                                    <span>Monthly physical catalog mailing</span>
-                                </label>
-                            </div>
-                        </div> -->
-
                         <div class="form-actions">
                             <button class="btn-submit" type="button">Cập nhật</button>
                         </div>
@@ -97,10 +75,9 @@
                     <div class="tab-header history-header">
                         <div>
                             <h2 class="tab-title">Lịch sử đơn mượn</h2>
-                            <p class="tab-subtitle">Academic Archival Tracking System</p>
                         </div>
                         <div class="history-stats">
-                            <span>Số đơn đang mượn: 2</span>
+                            <span>Tổng đơn mượn: 2</span>
                         </div>
                     </div>
                     
@@ -108,46 +85,59 @@
                         <table class="history-table">
                             <thead>
                                 <tr>
-                                    <th>Catalog Title</th>
-                                    <th>Issue Date</th>
-                                    <th>Due Date</th>
-                                    <th class="center">Status</th>
+                                    <th>STT</th>
+                                    <th>Tên Sách</th>
+                                    <th>Ngày Mượn</th>
+                                    <th>Ngày Trả</th>
+                                    <th>Số Lượng</th>
+                                    <th>Trạng Thái</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="ledger-row">
-                                    <td class="bold">The Great Gatsby (First Edition Ref)</td>
+                                    <td>1</td>
+                                    <td class="left">The Great Gatsby (First Edition Ref)</td>
                                     <td>05/11/1954</td>
                                     <td>19/11/1954</td>
+                                    <td>34</td>
                                     <td class="center"><span class="ink-stamp text-secondary">Borrowed</span></td>
                                 </tr>
                                 <tr class="ledger-row">
-                                    <td class="bold">Principles of Political Economy</td>
+                                    <td>2</td>
+                                    <td class="left">Principles of Political Economy</td>
                                     <td>02/11/1954</td>
                                     <td>16/11/1954</td>
+                                    <td>24</td>
                                     <td class="center"><span class="ink-stamp text-tertiary-container">Returned</span></td>
                                 </tr>
                                 <tr class="ledger-row">
-                                    <td class="bold">The Odyssey - Manuscript Study</td>
+                                    <td>3</td>
+                                    <td class="left">The Odyssey - Manuscript Study</td>
                                     <td>25/10/1954</td>
-                                    <td class="text-error">08/11/1954</td>
+                                    <td>08/11/1954</td>
+                                    <td>0</td>
                                     <td class="center"><span class="ink-stamp text-error">Overdue</span></td>
                                 </tr>
                                 <tr class="ledger-row">
-                                    <td class="bold">Introduction to Archival Science</td>
+                                    <td>4</td>
+                                    <td class="left">Introduction to Archival Science</td>
                                     <td>10/10/1954</td>
                                     <td>24/10/1954</td>
+                                    <td>3</td>
                                     <td class="center"><span class="ink-stamp text-tertiary-container">Returned</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="pagination">
-                        <span class="pagination-info"></span>
+                    <!-- Pagination -->
+                    <div class="pagination-container">
                         <div class="pagination-controls">
-                            <button class="page-btn"><span class="material-symbols-outlined" style="font-size: 16px;">chevron_left</span></button>
-                            <button class="page-btn"><span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span></button>
+                            <button class="page-btn"><span class="material-symbols-outlined">chevron_left</span></button>
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn"><span class="material-symbols-outlined">chevron_right</span></button>
                         </div>
                     </div>
                 </section>
@@ -167,34 +157,6 @@ function switchTab(tab) {
 </script>
 
 <style scoped>
-/* CSS Variables directly injected to ensure component styles are isolated but complete */
-.account-page {
-    --color-surface: #fbf9f5;
-    --color-inverse-surface: #30312e;
-    --color-on-surface: #1b1c1a;
-    --color-surface-container-high: #eae8e4;
-    --color-primary: #271310;
-    --color-surface-tint: #745853;
-    --color-on-tertiary-container: #889885;
-    --color-error-container: #ffdad6;
-    --color-primary-container: #3e2723;
-    --color-secondary: #835425;
-    --color-outline: #827472;
-    --color-on-secondary: #ffffff;
-    --color-on-surface-variant: #504442;
-    --color-outline-variant: #d3c3c0;
-    --color-secondary-container: #ffbf87;
-    --color-surface-container: #efeeea;
-    --color-surface-container-low: #f5f3ef;
-    --color-on-secondary-container: #7a4b1e;
-    
-    --font-playfair: 'Playfair Display', serif;
-    --font-merriweather: 'Merriweather', serif;
-
-    font-family: var(--font-merriweather);
-    color: var(--color-on-surface);
-    width: 100%;
-}
 
 ul {
     list-style: none;
@@ -216,25 +178,13 @@ input { cursor: text; }
     vertical-align: middle;
 }
 
-/* Common Utils */
 .paper-card {
     box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.15);
     border: 1px solid rgba(130, 116, 114, 0.2);
+    border-radius: 5px;
     position: relative;
 }
-.paper-card::after {
-    content: "";
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 12px;
-    height: 12px;
-    background: #efeeea;
-    border-radius: 50%;
-    border: 1px solid rgba(130, 116, 114, 0.3);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
+
 
 .page-header {
     margin-bottom: 48px;
@@ -246,21 +196,11 @@ input { cursor: text; }
 
 .page-title {
     font-family: var(--font-playfair);
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: 8px;
     line-height: 1.1;
-}
-
-.page-description {
-    font-size: 18px;
-    color: var(--color-on-surface-variant);
-    max-width: 672px;
-    margin: 0 auto;
-}
-@media (min-width: 768px) {
-    .page-description { margin: 0; }
 }
 
 /* Tab Layout */
@@ -343,14 +283,9 @@ input { cursor: text; }
     color: var(--color-primary);
 }
 
-.tab-subtitle {
-    font-size: 12px;
-    color: var(--color-on-surface-variant);
-    font-style: italic;
-}
-
 .form-container {
     max-width: 672px;
+    margin-left: 2rem;
 }
 
 .avatar-section {
@@ -372,7 +307,7 @@ input { cursor: text; }
     height: 96px;
     border-radius: 50%;
     border: 2px solid var(--color-secondary);
-    padding: 4px;
+    padding: 3px;
     background-color: var(--color-surface-container-low);
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     overflow: hidden;
@@ -383,7 +318,6 @@ input { cursor: text; }
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    filter: grayscale(100%);
     transition: filter 0.3s;
 }
 
@@ -433,9 +367,9 @@ input { cursor: text; }
 
 .form-input {
     background-color: var(--color-surface-container-low);
-    border: none;
-    border-bottom: 1px solid var(--color-outline-variant);
-    padding: 8px 0;
+    border: 1px solid var(--color-secondary);
+    border-radius: 5px;
+    padding: 6px 8px;
     font-family: var(--font-merriweather);
     font-size: 16px;
     width: 100%;
@@ -445,39 +379,6 @@ input { cursor: text; }
 .form-input:focus {
     outline: none;
     border-bottom-color: var(--color-secondary);
-}
-
-.preferences-section {
-    padding-top: 16px;
-    border-top: 1px solid rgba(211, 195, 192, 0.3);
-    margin-top: 24px;
-}
-
-.preferences-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 16px;
-}
-
-.checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.checkbox-input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--color-secondary);
 }
 
 .form-actions {
@@ -496,6 +397,7 @@ input { cursor: text; }
     text-transform: uppercase;
     letter-spacing: 0.05em;
     box-shadow: 2px 2px 0px 0px rgba(131, 84, 37, 0.3);
+    border-radius: 5px;
     transition: transform 0.2s;
 }
 
@@ -527,118 +429,68 @@ input { cursor: text; }
 }
 
 .history-table th {
-    padding: 12px 16px;
+    padding: 12px 11px;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--color-on-surface-variant);
-    border-bottom: 2px solid var(--color-primary);
-}
-
-.history-table th.center {
+    border-bottom: 2px solid var(--color-secondary);
     text-align: center;
 }
 
 .history-table td {
-    padding: 16px;
+    padding: 12px 10px;
     border-bottom: 1px solid rgba(211, 195, 192, 0.2);
 }
 
-.history-table td.bold {
-    font-weight: 700;
+.history-table td.left {
+    text-align: left;
+    margin-left: 2rem;
 }
 
 .history-table td.center {
     text-align: center;
 }
 
+.ledger-row>td {
+    text-align: center;
+    font-size: 14px;
+}
+
 .text-secondary { color: var(--color-secondary); }
 .text-tertiary-container { color: #889885; }
 .text-error { color: #ba1a1a; }
 
-.pagination {
-    margin-top: 32px;
+/* Pagination */
+.pagination-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    background-color: var(--color-surface-container);
-    padding: 16px;
-    border-radius: 2px;
-    border: 1px solid rgba(211, 195, 192, 0.3);
+    padding: 20px 10px 0;
 }
 
-.pagination-info {
-    font-size: 12px;
+.pagination-controls { 
+    display: flex; 
+    gap: 8px; 
 }
-
-.pagination-controls {
-    display: flex;
-    gap: 8px;
-}
-
 .page-btn {
-    padding: 4px 8px;
-    border: 1px solid var(--color-outline-variant);
-    transition: background-color 0.2s;
-}
-
-.page-btn:hover {
-    background-color: var(--color-surface-container-high);
-}
-
-/* Decorative Elements */
-.decorative-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 32px;
-    margin-top: 48px;
-    opacity: 0.8;
-}
-@media (min-width: 768px) {
-    .decorative-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.deco-card {
-    background-color: var(--color-surface-container);
-    padding: 24px;
+    width: 25px;
+    height: 25px;
     display: flex;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(211, 195, 192, 0.5);
+    border-radius: 5px;
+    transition: all 0.2s;
 }
-
-.deco-icon {
-    color: var(--color-secondary);
-    font-size: 32px;
+.page-btn:hover { 
+    background-color: var(--color-surface-container-high); 
 }
-
-.deco-title {
-    font-size: 14px;
+.page-btn.active {
+    background-color: var(--color-secondary);
+    color: var(--color-on-secondary);
     font-weight: 700;
-    color: var(--color-primary);
-}
-
-.deco-desc {
-    font-size: 12px;
-    margin-top: 4px;
-}
-
-.deco-image-card {
-    height: 128px;
-    position: relative;
-    overflow: hidden;
-}
-
-.deco-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) brightness(75%) contrast(125%);
-}
-
-.deco-overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(131, 84, 37, 0.1);
-    pointer-events: none;
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
+    border-color: transparent;
 }
 </style>
