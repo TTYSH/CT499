@@ -3,14 +3,6 @@
     <!-- Sidebar: Filters -->
     <aside class="sidebar">
         <div class="sidebar-inner">
-            <section class="filter-section" v-if="activeAuthor">
-                <h3 style="margin-bottom: 16px;">Đang lọc theo</h3>
-                <div class="active-filter">
-                    <span class="material-symbols-outlined icon" style="color: var(--color-secondary);">person</span>
-                    <span class="text" style="font-size: 16px; font-weight: 700; color: var(--color-primary);">{{ activeAuthor }}</span>
-                    <button class="material-symbols-outlined close-btn" @click="clearAuthorFilter" style="margin-left: auto; color: var(--color-on-surface-variant); cursor: pointer; border: none; background: none;">close</button>
-                </div>
-            </section>
             <section class="filter-section">
                 <div class="search-wrapper">
                     <span class="material-symbols-outlined search-icon">search</span>
@@ -73,16 +65,19 @@
 
     <!-- Book Collection Grid -->
     <div class="content-area">
-        <template v-if="activeAuthor">
-            <AuthorCollection v-if="!showFullProfile" @show-profile="showFullProfile = true" />
-            <AuthorProfile v-else @back="showFullProfile = false" />
+        <template v-if="activeAuthor && showFullProfile">
+            <AuthorProfile @back="showFullProfile = false" />
         </template>
 
         <template v-else>
-        <header class="page-header">
-            <div>
+        
+        
+
+        <header class="page-header" :style="activeAuthor ? 'background: none; border: none; box-shadow: none; padding: 0 0 16px 0; margin-bottom: 0;' : ''">
+            <div v-if="!activeAuthor">
                 <h1 class="page-title">Tủ sách thư viện</h1>
             </div>
+            <div v-else></div>
             <div class="sort-control">
                 <span>Sắp xếp theo:</span>
                 <select class="sort-select">
@@ -92,7 +87,7 @@
                 </select>
             </div>
         </header>
-
+            <AuthorCollection v-if="activeAuthor" @show-profile="showFullProfile = true" />
         <div class="book-grid">
             <!-- Card 1 -->
             <div class="book-card" @click="goToBookDetail">
@@ -106,6 +101,7 @@
                     <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Sean Covey</p>
                 </div>
                  <p class="book-price">105.000đ</p>
+                <button class="add-btn" @click="handleRequest">Thêm vào giỏ hàng</button>
                 <button class="add-btn" @click="handleRequest">Thêm vào giỏ hàng</button>
             </div>
 
@@ -186,7 +182,7 @@ const showFullProfile = ref(false);
 
 const filterByAuthor = (authorName) => {
     activeAuthor.value = authorName;
-    showFullProfile.value = false;
+    showFullProfile.value = true;
 };
 
 const clearAuthorFilter = () => {
@@ -241,15 +237,7 @@ const handleRequest = (event) => {
 }
 
 /* Sidebar Sections */
-.active-filter {
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    background-color: rgba(255, 191, 135, 0.3); 
-    padding: 12px; 
-    border: 1px solid rgba(131, 84, 37, 0.2);
-    border-radius: 5px;
-}
+
 .filter-section h3 {
     font-family: var(--font-playfair);
     font-size: 22px;
