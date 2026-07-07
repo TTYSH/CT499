@@ -142,7 +142,7 @@ const submitFeedback = () => {
 
 .page-title {
     font-family: var(--font-playfair);
-    font-size: 36px;
+    font-size: 40px;
     color: var(--color-primary);
     margin-bottom: 32px;
     border-bottom: 2px solid var(--color-surface-container);
@@ -179,7 +179,7 @@ const submitFeedback = () => {
     margin-bottom: 8px;
 }
 
-/* Cột thông tin */
+/* Information Section */
 .info-card, .map-card, .feedback-section {
     background-color: var(--color-surface);
     border: 2px solid rgba(211, 195, 192, 0.4);

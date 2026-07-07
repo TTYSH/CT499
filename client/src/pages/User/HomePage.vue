@@ -15,7 +15,15 @@
                    lắng nghe những câu chuyện được viết từ nhiều thế hệ. Đắm mình trong không 
                    gian đọc sách yên bình, nơi thời gian dường như trôi chậm lại.
                 </p>
-                <button class="search-btn">Khám phá ngay</button>
+                <div class="search-section">
+                    <div class="search-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input class="search-input" placeholder="Bạn muốn tìm sách gì?" type="text">
+                    </div>
+                    <button class="search-btn">
+                        <RouterLink active-class="active" to="/collection">Khám phá ngay</RouterLink>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -88,22 +96,23 @@
                     <div class="quote-item">
                         
                         <span class="quote-mark open-mark">❝</span>
-                        <p class="quote-text">Là người đi trước, hãy biết đưa tay lại phía sau.</p>
+                        <p class="quote-text">Đọc sách là một cuộc trò chuyện. Tất cả các cuốn sách đều nói. 
+                            Nhưng một cuốn sách hay cũng biết lắng nghe.</p>
                         <div class="quote-footer">
                             <span class="quote-mark close-mark">❞</span>
                         </div>
-                         <p class="quote-author">Nguyễn Chiến Thắng</p>
+                         <p class="quote-author">Mark Haddon</p>
                     </div>
                 </div>
                 <div class="quote-block">
                     <div class="quote-item">
                        
                         <span class="quote-mark open-mark">❝</span>
-                        <p class="quote-text">Sách là ngọn đèn sáng bất diệt của trí tuệ con người.</p>
+                        <p class="quote-text">Sách vở đầy bốn vách, có mấy cũng không vừa.</p>
                         <div class="quote-footer">
                             <span class="quote-mark close-mark">❞</span>
                         </div>
-                         <p class="quote-author">A. Upit</p>
+                         <p class="quote-author">Nguyễn Du</p>
                     </div>
                 </div>
                 <div class="quote-block">
@@ -210,10 +219,34 @@ const handleHorizontalScroll = (evt) => {
     opacity: 0.9;
 }
 
+/* Search Section */
+.search-section {
+    display: flex;
+    gap: 7px;
+}
+.search-wrapper {
+    align-items: center;
+    background-color: var(--color-surface-container-lowest);
+    border: 2px solid var(--color-secondary);
+    border-radius: 5px;
+    padding: 5px 12px;
+}
+.search-input {
+    width: 256px;
+    font-size: 15px;
+    padding: 0 8px;
+    color: var(--color-on-surface);
+}
+.search-input::placeholder {
+    font-size: 15px;
+}
+.search-icon {
+    color: var(--color-outline); 
+}
 .search-btn {
     background-color: var(--color-secondary);
     color: #ffffff;
-    padding: 16px 32px;
+    padding: 8px 22px;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;

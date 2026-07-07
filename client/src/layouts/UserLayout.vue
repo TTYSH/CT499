@@ -33,5 +33,5 @@ const isCartOpen = ref(false);
     padding: 48px var(--margin-mobile);
     width: 100%;
 }
-@media (min-width: 768px) { .main-content { padding: 80px var(--margin-desktop); } }
+@media (min-width: 768px) { .main-content { padding: 40px var(--margin-desktop); } }
 </style>

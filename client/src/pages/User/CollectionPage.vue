@@ -5,15 +5,49 @@
         <div class="sidebar-inner">
             <section class="filter-section" v-if="activeAuthor">
                 <h3 style="margin-bottom: 16px;">Đang lọc theo</h3>
-                <div class="active-filter" style="display: flex; align-items: center; gap: 8px; background-color: rgba(255, 191, 135, 0.3); padding: 12px; border: 1px solid rgba(131, 84, 37, 0.2);">
+                <div class="active-filter">
                     <span class="material-symbols-outlined icon" style="color: var(--color-secondary);">person</span>
-                    <span class="text" style="font-size: 14px; font-weight: 700; color: var(--color-primary);">{{ activeAuthor }}</span>
+                    <span class="text" style="font-size: 16px; font-weight: 700; color: var(--color-primary);">{{ activeAuthor }}</span>
                     <button class="material-symbols-outlined close-btn" @click="clearAuthorFilter" style="margin-left: auto; color: var(--color-on-surface-variant); cursor: pointer; border: none; background: none;">close</button>
                 </div>
             </section>
             <section class="filter-section">
-                <h3>Danh mục</h3>
+                <div class="search-wrapper">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                </div>
+                <h3>Thể loại</h3>
                 <ul class="category-list">
+                    <li>
+                        <label class="category-item">
+                            <input class="category-checkbox" type="checkbox">
+                            <span class="category-label">Văn học/Tiểu thuyết</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="category-item">
+                            <input class="category-checkbox" type="checkbox">
+                            <span class="category-label">Kỹ năng sống/Phát triển bản thân</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="category-item">
+                            <input class="category-checkbox" type="checkbox">
+                            <span class="category-label">Tâm lý học</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="category-item">
+                            <input class="category-checkbox" type="checkbox">
+                            <span class="category-label">Kinh dị/Giật gân</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="category-item">
+                            <input class="category-checkbox" type="checkbox">
+                            <span class="category-label">Khoa học viễn tưởng</span>
+                        </label>
+                    </li>
                     <li>
                         <label class="category-item">
                             <input class="category-checkbox" type="checkbox">
@@ -23,37 +57,17 @@
                     <li>
                         <label class="category-item">
                             <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Triết học</span>
+                            <span class="category-label">Kinh doanh/Tài chính</span>
                         </label>
                     </li>
                     <li>
                         <label class="category-item">
                             <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Văn học</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Khoa học</span>
+                            <span class="category-label">Thiếu nhi</span>
                         </label>
                     </li>
                 </ul>
             </section>
-
-            <section class="filter-section">
-                <h3>Thể loại</h3>
-                <div class="tags-container">
-                    <button class="tag-btn">Kinh điển</button>
-                    <!-- <button class="tag-btn active">Hiện đại</button> -->
-                    <button class="tag-btn ">Hiện đại</button>
-                    <button class="tag-btn">Tiểu luận</button>
-                    <button class="tag-btn">Thơ ca</button>
-                    <button class="tag-btn">Hồi ký</button>
-                </div>
-            </section>
-
-       
         </div>
     </aside>
 
@@ -67,8 +81,7 @@
         <template v-else>
         <header class="page-header">
             <div>
-                <h1 class="page-title">Tủ sách Thư viện</h1>
-                <p class="page-subtitle">Khám phá các bản thảo cổ và tác phẩm trí tuệ vượt thời gian.</p>
+                <h1 class="page-title">Tủ sách thư viện</h1>
             </div>
             <div class="sort-control">
                 <span>Sắp xếp theo:</span>
@@ -85,34 +98,30 @@
             <div class="book-card" @click="goToBookDetail">
                 <div class="card-image-wrapper">
                     <img class="card-image"
-                        data-alt="A weathered vintage book cover for a philosophy text titled 'The Republic' by Plato. The book rests on an aged oak desk in a dusty, sun-drenched library. The aesthetic is academic and nostalgic with warm amber lighting and sharp detail of the paper texture. The atmosphere evokes a deep sense of historical intellectualism."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Kg3vt96yw8n--nt_9T3Xlq58Qz9a0Rl5H-uuIP9H5PrMxh9H4M9MEBzkGPpJG97gDw_bOtxSNM3uDPFiDptbNsETLcIGjUdlHZvzYVrhjx9-YwO2ZeT77wXSp74LBjGsVb9tFW5GzObelyZBYcycFE2r4Uvgamo7GAWXXy-RpBcwiCYMbR4YeJ-BRS04CwuR3MQST-f4mFUsBU1odf-P0dqj8jRtYiPfTRHXWUtZFGzDvhfTZb636U64cbH2vH_-aUdNtlf9xiE">
+                        src="/images/Sach/204_7_thoi_quen_cua_ban_tre_thanh_dat.png">
         
                 </div>
                 <div class="card-content">
-                    <h2 class="book-title">Cộng Hòa (The Republic)</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer; text-decoration: underline;">Plato</p>
-                    <p class="book-description">Một tác phẩm kinh điển thảo luận về công lý, trật tự và nhân cách
-                        của nhà nước lý tưởng và con người chính trực.</p>
+                    <h2 class="book-title">7 Thói Quen Của Bạn Trẻ Thành Đạt</h2>
+                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Sean Covey</p>
                 </div>
-                <button class="add-btn" @click="handleRequest">Add to Request</button>
+                 <p class="book-price">105.000đ</p>
+                <button class="add-btn" @click="handleRequest">Thêm vào giỏ hàng</button>
             </div>
 
             <!-- Card 2 -->
             <div class="book-card" @click="goToBookDetail">
                 <div class="card-image-wrapper">
                     <img class="card-image"
-                        data-alt="A beautiful leather-bound book with gold filigree on the spine titled 'Meditations' by Marcus Aurelius. The book is placed upright in a collection of other ancient volumes within a dark mahogany shelf. The lighting is low and moody, highlighting the rich textures of the leather and the dusty environment of an old-world archive."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9JmVW2MPRCD-doNKvbvMjrnBHbq9skRPHcwlEzX6jEZMRRqZyvSIm3aFlYkLpucooPqAxIaeX8E-B-8HuAIXNUKzVDsEQyZmQ3p_TqtIfdE3Tvgfg-aADCy8Px0lDhwVi7VsspygJ0kaB5R8dvah_PlEjLNxhfPAMVw5Wkumlu8tLavIy0gA8o2p2p9EGYTrc30F6WlS9Mt-XDaYJz-wF_dSlngfxUxh3lqVE0eG64loP9GxQp9mG6yGXChwbPO6P_gVfy0TEqL8">
+                        src="/images/Sach/402_ga_he_ma_quai.png">
             
                 </div>
                 <div class="card-content">
-                    <h2 class="book-title">Suy Tưởng (Meditations)</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer; text-decoration: underline;">Marcus Aurelius</p>
-                    <p class="book-description">Những ghi chép cá nhân của vị hoàng đế La Mã về chủ nghĩa khắc kỷ,
-                        trách nhiệm và bản chất của con người.</p>
-                </div>
-                <button class="add-btn" @click="handleRequest">Add to Request</button>
+                    <h2 class="book-title">IT - Gã Hề Ma Quái</h2>
+                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Stephen King</p>
+                </div>                    
+                <p class="book-price">280.000đ</p>
+                <button class="add-btn" @click="handleRequest">Thêm vào giỏ hàng</button>
             </div>
 
             <!-- Card 3 -->
@@ -125,11 +134,10 @@
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Tội Ác và Hình Phạt</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer; text-decoration: underline;">Fyodor Dostoevsky</p>
-                    <p class="book-description">Khám phá tâm lý tội phạm và sự chuộc lỗi qua hành trình của
-                        Raskolnikov trong một xã hội đầy áp bức.</p>
+                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Fyodor Dostoevsky</p>
                 </div>
-                <button class="add-btn" @click="handleRequest">Add to Request</button>
+                <p class="book-price">250.000đ</p>
+                <button class="add-btn" @click="handleRequest">Thêm vào giỏ hàng</button>
             </div>
 
             <!-- Card 4 -->
@@ -142,11 +150,10 @@
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Principia Mathematica</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer; text-decoration: underline;">Isaac Newton</p>
-                    <p class="book-description">Nền tảng của cơ học cổ điển và quy luật vạn vật hấp dẫn, một trong
-                        những công trình quan trọng nhất lịch sử khoa học.</p>
+                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Isaac Newton</p>
                 </div>
-                <button class="add-btn" @click="handleRequest">Add to Request</button>
+                <p class="book-price">250.000đ</p>
+                <button class="add-btn" @click="handleRequest">Thêm vào giỏ hàng</button>
             </div>
         </div>
 
@@ -158,8 +165,6 @@
             <button class="page-item active">1</button>
             <button class="page-item">2</button>
             <button class="page-item">3</button>
-            <span class="page-dots">...</span>
-            <button class="page-item">12</button>
             <button class="page-item">
                 <span class="material-symbols-outlined">chevron_right</span>
             </button>
@@ -196,9 +201,9 @@ const goToBookDetail = () => {
 const handleRequest = (event) => {
     event.stopPropagation();
     const button = event.currentTarget;
-    if (button.textContent.trim() === 'Add to Request') {
+    if (button.textContent.trim() === 'Thêm vào giỏ hàng') {
         const originalText = button.textContent;
-        button.textContent = 'Requested ✓';
+        button.textContent = 'Đã thêm vào giỏ hàng ✓';
         button.style.backgroundColor = '#223021';
         button.style.color = '#889885';
         setTimeout(() => {
@@ -236,14 +241,48 @@ const handleRequest = (event) => {
 }
 
 /* Sidebar Sections */
+.active-filter {
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    background-color: rgba(255, 191, 135, 0.3); 
+    padding: 12px; 
+    border: 1px solid rgba(131, 84, 37, 0.2);
+    border-radius: 5px;
+}
 .filter-section h3 {
     font-family: var(--font-playfair);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
     color: var(--color-primary);
     margin-bottom: 24px;
     border-bottom: 1px solid rgba(131, 84, 37, 0.2);
     padding-bottom: 8px;
+}
+
+/* Search Bar */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-surface-container-lowest);
+    border-bottom: 2px solid var(--color-secondary);
+    padding: 4px 8px;
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    width: 260px;
+    font-size: 14px;
+    padding: 0 8px;
+    color: var(--color-on-surface);
+}
+
+.search-input::placeholder {
+    font-size: 14px;
+}
+
+.search-icon { 
+    color: var(--color-secondary); 
 }
 
 .category-list {
@@ -284,70 +323,9 @@ const handleRequest = (event) => {
     font-weight: bold;
 }
 
-.tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.tag-btn {
-    padding: 4px 12px;
-    background-color: var(--color-surface-container-high);
-    border: 1px solid var(--color-outline-variant);
-    font-size: 12px;
-    font-weight: 700;
-    border-radius: 999px;
-    transition: background-color 0.2s;
-    color: var(--color-on-surface);
-}
-
-.tag-btn:hover {
-    background-color: var(--color-secondary-container);
-}
-
-.tag-btn.active {
-    background-color: var(--color-secondary);
-    color: var(--color-on-secondary);
-    border-color: var(--color-secondary);
-}
-
-.quote-box {
-    padding: 24px;
-    background-color: #efeeea;
-    border: 1px solid rgba(211, 195, 192, 0.5);
-    position: relative;
-    overflow: hidden;
-    margin-top: 32px;
-}
-
-.quote-content {
-    position: relative;
-    z-index: 10;
-}
-
-.quote-text {
-    color: var(--color-primary);
-    font-style: italic;
-    margin-bottom: 16px;
-}
-
-.quote-author {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-secondary);
-}
-
-.quote-icon {
-    position: absolute;
-    bottom: -16px;
-    right: -16px;
-    font-size: 96px;
-    color: rgba(130, 116, 114, 0.2);
-}
-
 /* Content Header */
 .page-header {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -355,16 +333,11 @@ const handleRequest = (event) => {
 
 .page-title {
     font-family: var(--font-playfair);
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: 8px;
     letter-spacing: -0.02em;
-}
-
-.page-subtitle {
-    font-size: 18px;
-    color: var(--color-on-surface-variant);
 }
 
 .sort-control {
@@ -378,9 +351,9 @@ const handleRequest = (event) => {
 
 .sort-select {
     background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--color-outline-variant);
-    padding: 4px 0;
+    border: 1px solid var(--color-secondary);
+    border-radius: 5px;
+    padding: 5px;
     cursor: pointer;
     color: inherit;
 }
@@ -394,7 +367,7 @@ const handleRequest = (event) => {
 .book-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 32px;
+    gap: 15px;
 }
 
 @media (min-width: 640px) {
@@ -413,30 +386,30 @@ const handleRequest = (event) => {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    gap: 5px;
     background-color: var(--color-surface);
-    border: 1px solid rgba(211, 195, 192, 0.4);
-    padding: 20px;
-    box-shadow: 4px 4px 0px 0px rgba(131, 84, 37, 0.1);
+    border: 1px solid rgba(130, 116, 114, 0.3);
+    padding: 12px;
+    box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.15);
     transition: all 0.3s;
     min-height: 500px;
     position: relative;
-    border-radius: 16px;
+    border-radius: 5px;
 }
 
 .book-card:hover {
     transform: translateY(-4px);
-    box-shadow: 6px 6px 0px 0px rgba(131, 84, 37, 0.15);
 }
 
 
 .card-image-wrapper {
-    height: 256px;
-    margin-bottom: 24px;
+    aspect-ratio: 3 / 5;
+    width: 100%;
+    margin-bottom: 10px;
     overflow: hidden;
     position: relative;
     background-color: var(--color-surface-container-high);
-    border: 1px solid rgba(211, 195, 192, 0.2);
-    border-radius: 8px;
+    border: 1px solid rgba(130, 116, 114, 0.3);
 }
 
 .card-image {
@@ -451,60 +424,43 @@ const handleRequest = (event) => {
     filter: grayscale(0%);
 }
 
-.status-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 4px 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.status-reserved {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
-}
-
-.status-available {
-    background-color: #223021;
-    color: #889885;
-}
-
 .card-content {
     flex-grow: 1;
-    padding-bottom: 32px;
 }
 
 .book-title {
-    font-family: var(--font-playfair);
-    font-size: 24px;
+    font-family: var(--font-merriweather);
+    font-size: 20px;
     font-weight: 600;
     color: var(--color-primary);
     margin-bottom: 8px;
     transition: color 0.2s;
 }
 
-.book-card:hover .book-title {
+.book-author {
+    color: var(--color-on-surface-variant);
+    border-left: 3px solid rgba(131, 84, 37, 0.3);
+    padding-left: 10px;
+}
+
+.book-title:hover, .book-author:hover  {
     color: var(--color-secondary);
 }
 
-.book-author {
-    font-style: italic;
-    color: var(--color-on-surface-variant);
-    margin-bottom: 16px;
-    border-left: 2px solid rgba(131, 84, 37, 0.3);
-    padding-left: 12px;
+.book-price {
+    width: 6rem;
+    font-size: 16px;
+    margin: 8px 0;
+    padding: 2px;
+    border-radius: 8px;
+    background-color: var(--color-error-container);
+    color: crimson;
+    text-align: center;
+    overflow: hidden;
 }
 
-.book-description {
-    font-size: 12px;
-    color: var(--color-on-surface-variant);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.book-price:hover {
+    text-decoration: underline;
 }
 
 .add-btn {
@@ -522,7 +478,7 @@ const handleRequest = (event) => {
     margin-top: auto;
     position: relative;
     z-index: 2;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .add-btn:hover {
@@ -539,16 +495,17 @@ const handleRequest = (event) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
 }
 
 .page-item {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--color-outline-variant);
+    border-radius: 5px;
     color: var(--color-on-surface-variant);
     font-size: 14px;
     font-weight: 700;

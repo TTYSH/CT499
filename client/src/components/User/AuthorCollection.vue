@@ -20,7 +20,7 @@
                 <div class="card-image-wrapper">
                     <img class="card-image" alt="Zarathustra đã nói như thế"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmYV_nfHLV_SBcRE96ZnlQPaStD-9Gy-05LQLYpOl4KxKtpgE4yXzsG2SkbG2ntG20ooMHRxoRQtYQzskMh3idpSM74Hn3pJgBB5rn4XH6wTnxeKsyV1syw_9Um3_hCPpVKKNLknPAZDt_BtdQC79o30v3PzsHDQfHm4OXiOUM0HidP5tyc2kHB-kV4gdkpZNv0zfWkIk6ABT7YEpHkU_egzLpLq7d3rXtQ78gmQm52FMpaphO-WaTZ8UPmacNa9aJsy2tlvps33I">
-                    <span class="status-badge status-available">Available</span>
+                
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Zarathustra đã nói như thế</h2>
@@ -35,7 +35,7 @@
                 <div class="card-image-wrapper">
                     <img class="card-image" alt="Bên kia thiện ác"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG0WFk5zhDL5EgaXb8CZReXNEdua-3KwRhOMR09KmRSAYV4xRGbt7FYqnm32OOolUZmzMt-jqgC1DMMYVcBNeCUI8QnTgby831riDc56UNuO4GQq-ThkfAn9SGg5ySLPCL51cLvucy5Gw4f13t7IJGo3C57JNC1atdDRNWqJieKMUQWTo9LaGMXxODEpGcqCUmiL1t09FyKq3zexDsT-4Q6x4zma6j1GLbMbzoHhLeMkfzalGBPE07SBpnjV5rguKa-AO68yDgX9Q">
-                    <span class="status-badge status-reserved">Reserved</span>
+            
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Bên kia thiện ác</h2>
@@ -50,7 +50,7 @@
                 <div class="card-image-wrapper">
                     <img class="card-image" alt="Phả hệ đạo đức"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBomS1sOx8wajXT05U8RMpnu_wRDAWU6zsZJXEiQ_KMR99jxnIDeNJ6CwY5XisS3K4PTH_GkHkjbGD5SVdZ_9Wfpsu2-9uZPcro8s7Pl7-DGZLkTMxOW74fWKgHXAwRFSb5eADzEON9IPN7Z_xKYQudJhdv9tnwV_VqRFqifqFmOFYUNT7EBpdSy3KnmokH4ZOY3JzrjWVYLk-Xf_vCG3GZDh6xOoRYA90v3azZt8EgcBXq-xMG9HpRTp5Ykla988xjhIsHs2c_AYg">
-                    <span class="status-badge status-available">Available</span>
+                   
                 </div>
                 <div class="card-content">
                     <h2 class="book-title">Phả hệ đạo đức</h2>
@@ -177,7 +177,7 @@ const handleRequest = (event) => {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border-radius: 9999px;
+    border-radius: 10px;
     transition: all 0.2s;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     cursor: pointer;

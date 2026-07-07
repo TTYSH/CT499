@@ -480,13 +480,13 @@ input { cursor: text; }
 .order-card {
     background: #fff;
     border: 1px solid rgba(211, 195, 192, 0.4);
-    border-radius: 8px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .order-header {
-    background-color: #f5eedc;
+    background-color: var(--color-surface-container);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -496,7 +496,7 @@ input { cursor: text; }
 }
 
 .order-header:hover {
-    background-color: var(--color-surface-container);
+    background-color: #f5eedc;
 }
 
 .order-header-left {
