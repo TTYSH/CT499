@@ -19,9 +19,8 @@
                     <button class="btn-primary buy-now" @click="handleBuyNow">         
                         Mượn ngay
                     </button>
-                    <button class="btn-primary add-cart">
+                    <button class="btn-primary add-cart" @click="handleRequest" title="Thêm vào giỏ hàng">
                         <span class="material-symbols-outlined">shopping_cart</span>
-                        Thêm vào giỏ hàng
                     </button>
                 </div>
             </div>
@@ -148,6 +147,23 @@ const closeBuyModal = () => {
     isBuyModalOpen.value = false;
 };
 
+const handleRequest = (event) => {
+    event.stopPropagation();
+    const button = event.currentTarget;
+    const icon = button.querySelector('.material-symbols-outlined');
+    if (icon && icon.textContent.trim() === 'shopping_cart') {
+        button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
+        button.style.borderColor = '#4caf50';
+        button.style.backgroundColor = '#e8f5e9';
+        
+        setTimeout(() => {
+            button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
+            button.style.borderColor = '';
+            button.style.backgroundColor = 'transparent';
+        }, 2000);
+    }
+};
+
 const confirmBuy = (book) => {
     alert(`Đã đặt mượn sách: ${book.title}`);
     isBuyModalOpen.value = false;
@@ -254,6 +270,8 @@ button { border: none; background: none; font-family: inherit; cursor: pointer; 
 }
 
 .btn-primary.add-cart {
+    flex: 0 0 100px;
+    padding: 0;
     background-color: transparent;
     color: var(--color-primary);
 }

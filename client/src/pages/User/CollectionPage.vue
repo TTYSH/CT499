@@ -70,9 +70,6 @@
         </template>
 
         <template v-else>
-        
-        
-
         <header class="page-header" :style="activeAuthor ? 'background: none; border: none; box-shadow: none; padding: 0 0 16px 0; margin-bottom: 0;' : ''">
             <div v-if="!activeAuthor">
                 <h1 class="page-title">Tủ sách thư viện</h1>
@@ -103,7 +100,9 @@
                  <p class="book-price">105.000đ</p>
                 <div class="card-actions">
                     <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest">Thêm vào giỏ hàng</button>
+                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                    </button>
                 </div>
             </div>
 
@@ -121,7 +120,9 @@
                 <p class="book-price">280.000đ</p>
                 <div class="card-actions">
                     <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest">Thêm vào giỏ hàng</button>
+                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                    </button>
                 </div>
             </div>
 
@@ -140,7 +141,9 @@
                 <p class="book-price">250.000đ</p>
                 <div class="card-actions">
                     <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest">Thêm vào giỏ hàng</button>
+                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                    </button>
                 </div>
             </div>
 
@@ -159,7 +162,9 @@
                 <p class="book-price">250.000đ</p>
                 <div class="card-actions">
                     <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest">Thêm vào giỏ hàng</button>
+                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -217,15 +222,16 @@ const goToBookDetail = () => {
 const handleRequest = (event) => {
     event.stopPropagation();
     const button = event.currentTarget;
-    if (button.textContent.trim() === 'Thêm vào giỏ hàng') {
-        const originalText = button.textContent;
-        button.textContent = 'Đã thêm vào giỏ hàng ✓';
-        button.style.backgroundColor = '#223021';
-        button.style.color = '#889885';
+    const icon = button.querySelector('.material-symbols-outlined');
+    if (icon && icon.textContent.trim() === 'shopping_cart') {
+        button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
+        button.style.borderColor = '#4caf50';
+        button.style.backgroundColor = '#e8f5e9';
+        
         setTimeout(() => {
-            button.textContent = originalText;
-            button.style.backgroundColor = '';
-            button.style.color = '';
+            button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
+            button.style.borderColor = '';
+            button.style.backgroundColor = 'transparent';
         }, 2000);
     }
 };
@@ -506,6 +512,7 @@ const confirmBuy = (book) => {
 }
 
 .card-actions {
+    height: 40px;
     display: flex;
     gap: 8px;
     margin-top: auto;
@@ -540,15 +547,14 @@ const confirmBuy = (book) => {
 }
 
 .add-btn {
-    flex: 1;
-    padding: 10px 4px;
+    flex: 0 0 23%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     background-color: transparent;
     color: var(--color-primary);
     border: 1px solid var(--color-primary);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
     transition: all 0.2s;
     border-radius: 5px;
     cursor: pointer;
