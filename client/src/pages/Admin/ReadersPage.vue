@@ -31,20 +31,20 @@
                             <th>Mã độc giả</th>
                             <th>Tên độc giả</th>
                             <th>Email</th>
-                            <th>Loại TK</th>
+                            <th>Loại Tài Khoản</th>
                             <th>Địa chỉ</th>
                             <th>SDT</th>
-                            <th style="text-align: right;">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr @click="openProfile('N-0142', 'Nguyễn Văn An', 'nguyen.an@archive.org', 'Nghiên cứu viên', 'Đại học Quốc gia Hà Nội', '0912 345 678')">
-                            <td class="col-id">01</td>
+                            <td class="col-id">1</td>
                             <td class="col-id">N-0142</td>
                             <td class="col-name">Nguyễn Văn An</td>
                             <td class="col-email">nguyen.an@archive.org</td>
-                            <td><span class="type-badge">Nghiên cứu viên</span></td>
-                            <td class="col-id">Đại học Quốc gia Hà Nội</td>
+                            <td><span>Độc giả</span></td>
+                            <td class="col-address">Đại học Quốc gia Hà Nội</td>
                             <td class="col-phone">0912 345 678</td>
                             <td>
                                 <div class="action-btns">
@@ -54,12 +54,12 @@
                             </td>
                         </tr>
                         <tr @click="openProfile('N-0143', 'Lê Thị Bình', 'le.thi.binh@archive.org', 'Quản trị viên', 'Thư viện Trung ương', '0988 777 666')">
-                            <td class="col-id">02</td>
+                            <td class="col-id">2</td>
                             <td class="col-id">N-0143</td>
                             <td class="col-name">Lê Thị Bình</td>
                             <td class="col-email">le.thi.binh@archive.org</td>
                             <td><span class="type-badge">Quản trị viên</span></td>
-                            <td class="col-id">Thư viện Trung ương</td>
+                            <td class="col-address">Thư viện Trung ương</td>
                             <td class="col-phone">0988 777 666</td>
                             <td>
                                 <div class="action-btns">
@@ -69,12 +69,12 @@
                             </td>
                         </tr>
                         <tr @click="openProfile('N-0144', 'Trần Minh Đức', 'tran.minh.duc@archive.org', 'Độc giả Phổ thông', 'Học viện Khoa học Xã hội', '0905 111 222')">
-                            <td class="col-id">03</td>
+                            <td class="col-id">3</td>
                             <td class="col-id">N-0144</td>
                             <td class="col-name">Trần Minh Đức</td>
                             <td class="col-email">tran.minh.duc@archive.org</td>
-                            <td><span class="type-badge">Độc giả Phổ thông</span></td>
-                            <td class="col-id">Học viện Khoa học Xã hội</td>
+                            <td><span>Độc giả</span></td>
+                            <td class="col-address">Học viện Khoa học Xã hội</td>
                             <td class="col-phone">0905 111 222</td>
                             <td>
                                 <div class="action-btns">
@@ -112,32 +112,34 @@
                         <div class="profile-avatar-wrapper">
                             <img class="profile-avatar" alt="Reader Avatar" :src="selectedProfile.avatar" />
                         </div>
-                        <div class="profile-grid">
-                            <div class="profile-item">
-                                <span class="profile-label">MaND</span>
-                                <span class="profile-val-id">{{ selectedProfile.id }}</span>
-                            </div>
-                            <div class="profile-item">
-                                <span class="profile-label">Họ Tên</span>
-                                <span class="profile-val-name">{{ selectedProfile.name }}</span>
-                            </div>
-                            <div class="profile-item">
-                                <span class="profile-label">Email</span>
-                                <span class="profile-val-email">{{ selectedProfile.email }}</span>
-                            </div>
-                            <div class="profile-item">
-                                <span class="profile-label">Số điện thoại</span>
-                                <span class="profile-val-text">{{ selectedProfile.phone }}</span>
-                            </div>
-                            <div class="profile-item full-width">
-                                <span class="profile-label">Địa chỉ</span>
-                                <span class="profile-val-text">{{ selectedProfile.address }}</span>
-                            </div>
-                            <div class="profile-item">
-                                <span class="profile-label">Loại tài khoản</span>
-                                <span class="profile-type-badge">{{ selectedProfile.type }}</span>
-                            </div>
-                        </div>
+                        <table class="profile-table">
+                            <tbody>
+                                <tr>
+                                    <td class="profile-label">MaND</td>
+                                    <td class="profile-val-id">{{ selectedProfile.id }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile-label">Họ Tên</td>
+                                    <td class="profile-val-name">{{ selectedProfile.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile-label">Email</td>
+                                    <td class="profile-val-email">{{ selectedProfile.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile-label">Số điện thoại</td>
+                                    <td class="profile-val-text">{{ selectedProfile.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile-label">Địa chỉ</td>
+                                    <td class="profile-val-text">{{ selectedProfile.address }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="profile-label">Loại tài khoản</td>
+                                    <td><span class="profile-type-badge">{{ selectedProfile.type }}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -265,48 +267,74 @@ function closeProfile() {
 .table-container {
     background-color: var(--color-surface-container-lowest);
     border: 1px solid rgba(211, 195, 192, 0.3);
-    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.1);
+    border-radius: 5px;
+    position: relative;
     overflow: hidden;
-    width: 100%;
+    margin-bottom: 32px;
 }
 
-.table-wrapper { overflow-x: auto; }
+.table-wrapper { 
+    overflow-x: auto; 
+}
 
-.data-table { width: 100%; border-collapse: collapse; text-align: left; }
+.data-table { 
+    width: 100%;
+    border-collapse: separate;
+    text-align: center; 
+    font-size: 14px;
+}
 .data-table th {
     background-color: var(--color-surface-container-high);
-    color: var(--color-on-surface-variant);
+    color: rgba(39, 19, 16, 0.8);
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 16px;
-    border-bottom: 1px solid var(--color-outline-variant);
+    padding: 9px;
+    text-align: center;
+    border-bottom: 1px solid rgba(62, 39, 35, 0.1);
 }
 
 .data-table td {
-    padding: 24px 16px;
-    border-bottom: 1px solid rgba(211, 195, 192, 0.2);
-    font-size: 16px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(211, 195, 192, 0.3);
+    border-right: 1px solid rgba(211, 195, 192, 0.2);
+    transition: background-color 0.2s;
 }
-.data-table tr { transition: background-color 0.2s; cursor: pointer; }
-.data-table tr:hover { background-color: rgba(239, 238, 234, 0.5); }
-
-.col-id, .col-phone { color: var(--color-on-surface); }
-.col-name { font-weight: 700; color: var(--color-primary); font-size: 14px; }
-.col-email { font-size: 12px; font-style: italic; }
+.data-table tr { 
+    transition: background-color 0.2s; 
+}
+.data-table tr:hover td { 
+    background-color: var(--color-surface-container-low); 
+}
+.col-name { 
+    text-align: left;
+}
+.col-email { 
+    font-style: italic; 
+    text-align: left;
+}
+.col-address {
+    text-align: left;
+}
 
 .type-badge {
-    font-size: 12px;
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(131, 84, 37, 0.4);
     color: var(--color-secondary);
+    font-weight: bold;
 }
 
-.action-btns { display: flex; justify-content: flex-end; gap: 16px; }
-.action-btn { color: var(--color-on-surface-variant); transition: color 0.2s; }
+.action-btns { 
+    display: flex; 
+    justify-content: center; 
+    gap: 4px; 
+}
+.action-btn { 
+    color: var(--color-secondary); 
+    transition: color 0.2s; 
+    font-size: 21px; 
+}
+.action-btn.delete { color: var(--color-error);}
+.action-btn.edit { color: rgba(0, 0, 255, 0.668);}
 .action-btn:hover { color: var(--color-primary); }
-.action-btn.delete:hover { color: var(--color-error); }
 
 /* Pagination */
 .pagination-container {
@@ -400,17 +428,26 @@ function closeProfile() {
 }
 .profile-avatar { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
 
-.profile-grid {
+.profile-table {
     flex: 1;
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 24px;
-    column-gap: 16px;
+    width: 100%;
+    border-collapse: collapse;
 }
-@media (min-width: 640px) { .profile-grid { grid-template-columns: 1fr 1fr; } }
 
-.profile-item { display: flex; flex-direction: column; gap: 4px; }
-.profile-item.full-width { grid-column: 1 / -1; }
+.profile-table td {
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(211, 195, 192, 0.4);
+    vertical-align: middle;
+}
+
+.profile-table tr:last-child td {
+    border-bottom: none;
+}
+
+.profile-table .profile-label {
+    width: 35%;
+    padding-right: 16px;
+}
 
 .profile-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-on-surface-variant); font-weight: 700; }
 

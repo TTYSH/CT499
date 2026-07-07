@@ -40,16 +40,16 @@
                             <th>Mượn</th>
                             <th>Trả</th>
                             <th>Trạng thái</th>
-                            <th class="th-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Entry 1 -->
                         <tr>
                             <td class="col-id">1</td>
-                            <td class="bold">LIB-4492</td>
-                            <td>Victor Hugo</td>
-                            <td class="italic">v.hugo@archive.edu</td>
+                            <td>N-0140</td>
+                            <td class="left">Victor Hugo</td>
+                            <td class="italic left">v.hugo@archive.edu</td>
                             <td>12/10/2024</td>
                             <td>19/10/2024</td>
                             <td><span class="status-badge status-returned">Đã trả</span></td>
@@ -62,9 +62,9 @@
                         <!-- Entry 2 -->
                         <tr>
                             <td class="col-id">2</td>
-                            <td class="bold">LIB-2104</td>
-                            <td>Mary Shelley</td>
-                            <td class="italic">m.shelley@archive.edu</td>
+                            <td>N-0141</td>
+                            <td class="left">Mary Shelley</td>
+                            <td class="italic left">m.shelley@archive.edu</td>
                             <td>15/10/2024</td>
                             <td>22/10/2024</td>
                             <td><span class="status-badge status-borrowed">Đang mượn</span></td>
@@ -75,11 +75,11 @@
                             </td>
                         </tr>
                         <!-- Entry 3 -->
-                        <tr class="row-error">
+                        <tr>
                             <td class="col-id">3</td>
-                            <td class="bold">LIB-9912</td>
-                            <td>Edgar Allan Poe</td>
-                            <td class="italic">e.poe@archive.edu</td>
+                            <td>N-0142</td>
+                            <td class="left">Edgar Allan Poe</td>
+                            <td class="italic left">e.poe@archive.edu</td>
                             <td>05/10/2024</td>
                             <td>12/10/2024</td>
                             <td><span class="status-badge status-overdue">Quá hạn</span></td>
@@ -92,9 +92,9 @@
                         <!-- Entry 4 -->
                         <tr>
                             <td class="col-id">4</td>
-                            <td class="bold">LIB-5521</td>
-                            <td>Jane Austen</td>
-                            <td class="italic">j.austen@archive.edu</td>
+                            <td>N-0143</td>
+                            <td class="left">Jane Austen</td>
+                            <td class="italic left">j.austen@archive.edu</td>
                             <td>18/10/2024</td>
                             <td>25/10/2024</td>
                             <td><span class="status-badge status-borrowed">Đang mượn</span></td>
@@ -106,10 +106,10 @@
                         </tr>
                         <!-- Entry 5 -->
                         <tr>
-                            <td class="col-id">05</td>
-                            <td class="bold">LIB-7703</td>
-                            <td>Charles Dickens</td>
-                            <td class="italic">c.dickens@archive.edu</td>
+                            <td class="col-id">5</td>
+                            <td>N-0144</td>
+                            <td class="left">Charles Dickens</td>
+                            <td class="italic left">c.dickens@archive.edu</td>
                             <td>20/10/2024</td>
                             <td>27/10/2024</td>
                             <td><span class="status-badge status-borrowed">Đang mượn</span></td>
@@ -322,7 +322,8 @@ function closeModal() {
 .data-table { 
     width: 100%; 
     border-collapse: separate; 
-    text-align: left; 
+    text-align: center; 
+    font-size: 14px;
 }
 .data-table th {
     background-color: var(--color-surface-container-high);
@@ -334,46 +335,39 @@ function closeModal() {
     text-align: center;
     border-bottom: 1px solid rgba(62, 39, 35, 0.1);
 }
-.data-table th:last-child { 
-    border-right: none; 
-    text-align: center; 
-}
 
 .data-table td {
-    padding: 20px 24px;
+    padding: 8px;
     border-bottom: 1px solid rgba(211, 195, 192, 0.3);
     border-right: 1px solid rgba(211, 195, 192, 0.2);
     transition: background-color 0.2s;
 }
-.data-table td:last-child { border-right: none; text-align: center; }
-.data-table tr { transition: background-color 0.2s; }
-.data-table tr:hover { background-color: var(--color-surface-container-low); }
-.data-table tr.row-error { background-color: rgba(186, 26, 26, 0.05); }
+.data-table tr { 
+    transition: background-color 0.2s; 
+}
+.data-table tr:hover { 
+    background-color: var(--color-surface-container-low); 
+}
 
-.col-id { color: var(--color-on-surface-variant); width: 64px; }
+.col-id { 
+    color: var(--color-on-surface-variant); 
+}
 
 .status-badge {
     display: inline-block;
     padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
+    border-radius: 2px;
+    font-size: 14px;
     letter-spacing: -0.05em;
 }
 .status-returned { 
-    background-color: var(--tertiary-fixed); 
-    color: var(--on-tertiary-fixed); 
-    border: 1px solid rgba(60, 75, 58, 0.2); 
+    color: var(--color-secondary); 
 }
 .status-borrowed { 
-    background-color: var(--secondary-fixed); 
-    color: var(--on-secondary-fixed); 
-    border: 1px solid rgba(104, 61, 15, 0.2); 
+    color: rgb(9, 170, 9); 
 }
 .status-overdue { 
-    background-color: var(--color-error-container); 
-    color: var(--color-on-error-container); 
-    border: 1px solid rgba(186, 26, 26, 0.2); 
+    color: var(--color-error); 
 }
 
 .action-link {
@@ -384,8 +378,6 @@ function closeModal() {
 }
 .action-link:hover {
     color: var(--color-primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
 }
 
 .table-footer {
@@ -515,7 +507,7 @@ function closeModal() {
     box-shadow: 0px 0px 0px 0px rgba(62, 39, 35, 0.1);
 }
 .italic { font-style: italic; }
-.bold { font-weight: 700; }
+.left { text-align: left;}
 
 .custom-scrollbar::-webkit-scrollbar { width: 6px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: #f5f3ef; }

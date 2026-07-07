@@ -25,8 +25,11 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Ảnh</th>
-                            <th>Tên</th>
+                            <th>Mã Tác Giả</th>
+                            <th>Ảnh Tác Giả</th>
+                            <th>Tên Tác Giả</th>
+                            <th>Quốc Gia</th>
+                            <th>Số tác phẩm</th>
                             <th>Mô tả</th>
                             <th>Hành động</th>
                         </tr>
@@ -34,34 +37,52 @@
                     <tbody>
                         <!-- Author 1 -->
                         <tr @click="openViewModal">
-                            <td class="col-id">01</td>
+                            <td class="col-id">1</td>
+                            <td class="col-code">TG01</td>
                             <td class="col-avatar">
-                                <img alt="Victor Hugo" class="author-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeGpCfL0bkb0TsC9fJfNGp7yL3RO1k9gVJkjEzU1NO93AYCvDfLe1O9DiFsWZ7hMG8bfSGTCWR6guKXKQSDntCD4r-OVh29Dsvu93WJZgYT9X9LsJsMzFXoxudge2WyOrlvpxTfUpR_MJicYfTyxz2MxMwAaXqj1uE2v3wTsHmuKgO8mx0vfDN-7wNsP3WzY1RMR8jkHcfGnrZdddii8x_ZKAOWachwlWazfqCYt9rZG9oHCEwmZt8zsRgSeBEnHXctv9GNxsWffg">
+                                <img alt="Nguyen Nhat Anh" class="author-img" 
+                                src="/images/TacGia/2_nguyen_nhat_anh.jpg">
                             </td>
                             <td class="author-name">Victor Hugo</td>
-                            <td class="author-desc">French poet, novelist, and dramatist of the Romantic movement.</td>
+                            <td class="author-nation">Hàn Quốc</td>
+                            <td class="book-quantity">56</td>
+                            <td class="author-desc">Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
+                                soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
+                                thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
+                                với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
+                                tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
+                                đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
+                                Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.</td>
                             <td>
                                 <div class="action-btns">
                                     <button class="action-btn material-symbols-outlined" @click.stop="openViewModal" style="font-size: 20px;">visibility</button>
-                                    <button class="action-btn material-symbols-outlined" @click.stop style="font-size: 20px;">edit</button>
+                                    <button class="action-btn edit material-symbols-outlined" @click.stop style="font-size: 20px;">edit</button>
                                     <button class="action-btn delete material-symbols-outlined" @click.stop style="font-size: 20px;">delete</button>
                                 </div>
                             </td>
                         </tr>
                         <!-- Author 2 -->
                         <tr @click="openViewModal">
-                            <td class="col-id">02</td>
+                            <td class="col-id">2</td>
+                            <td class="col-code">TG01</td>
                             <td class="col-avatar">
-                                <div class="author-img-placeholder">
-                                    <span class="material-symbols-outlined">person</span>
-                                </div>
+                                <img alt="Victor Hugo" class="author-img" src="/images/TacGia/2_nguyen_nhat_anh.jpg">
                             </td>
                             <td class="author-name">Mary Shelley</td>
-                            <td class="author-desc">English novelist who wrote the Gothic novel Frankenstein.</td>
+                            <td class="author-nation">Nhật Bản</td>
+                            <td class="book-quantity">56</td>
+                            <td class="author-desc">Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
+                                soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
+                                thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
+                                với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
+                                tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
+                                đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
+                                Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.
+                            </td>
                             <td>
                                 <div class="action-btns">
                                     <button class="action-btn material-symbols-outlined" @click.stop="openViewModal" style="font-size: 20px;">visibility</button>
-                                    <button class="action-btn material-symbols-outlined" @click.stop style="font-size: 20px;">edit</button>
+                                    <button class="action-btn edit material-symbols-outlined" @click.stop style="font-size: 20px;">edit</button>
                                     <button class="action-btn delete material-symbols-outlined" @click.stop style="font-size: 20px;">delete</button>
                                 </div>
                             </td>
@@ -207,25 +228,81 @@ function closeViewModal() {
 .page-subtitle { font-size: 16px; color: var(--color-on-surface-variant); margin-top: 4px; font-style: italic; }
 
 /* Table Area */
-.table-container { background-color: var(--color-surface); border: 1px solid rgba(211, 195, 192, 0.8); box-shadow: 4px 4px 0px 0px rgba(62, 39, 35, 0.05); overflow: hidden; width: 100%; }
-.data-table { width: 100%; border-collapse: collapse; text-align: left; }
-.data-table th { background-color: var(--color-surface-container); color: var(--color-primary); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 16px 24px; border-bottom: 1px solid var(--color-outline); border-right: 1px solid rgba(211, 195, 192, 0.3); }
-.data-table th:last-child { border-right: none; text-align: center; }
-.data-table td { padding: 20px 24px; border-bottom: 1px solid rgba(211, 195, 192, 0.3); border-right: 1px solid rgba(211, 195, 192, 0.2); transition: background-color 0.2s; }
-.data-table td:last-child { border-right: none; text-align: center; }
-.data-table tr { transition: background-color 0.2s; }
-.data-table tr:hover { background-color: var(--color-surface-container-low); cursor: pointer; }
-.col-id { color: var(--color-on-surface-variant); width: 64px; }
-.col-avatar { width: 96px; }
-.author-img { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(211, 195, 192, 0.5); object-fit: cover; }
-.author-img-placeholder { width: 48px; height: 48px; border-radius: 50%; background-color: var(--color-surface-container-high); border: 1px solid rgba(211, 195, 192, 0.5); display: flex; align-items: center; justify-content: center; color: var(--color-on-surface-variant); }
-.author-name { font-weight: 700; }
-.author-desc { font-style: italic; color: var(--color-on-surface-variant); }
-.action-btns { display: flex; justify-content: center; gap: 12px; }
-.action-btn { color: var(--color-secondary); transition: color 0.2s; background: none; border: none; cursor: pointer; }
-.action-btn:hover { color: var(--color-primary); }
+.table-container { 
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(211, 195, 192, 0.3);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px; 
+}
+.data-table { 
+    width: 100%;
+    border-collapse: separate;
+    text-align: center; 
+    font-size: 15px; 
+}
+.data-table th { 
+    background-color: var(--color-surface-container-high);
+    color: rgba(39, 19, 16, 0.8);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 9px;
+    text-align: center;
+    border-bottom: 1px solid rgba(62, 39, 35, 0.1); 
+}
+.data-table td { 
+    padding: 10px;
+    border-bottom: 1px solid rgba(211, 195, 192, 0.3);
+    border-right: 1px solid rgba(211, 195, 192, 0.2);
+    transition: background-color 0.2s; 
+}
+.data-table tr { 
+    transition: background-color 0.2s; 
+}
+.data-table tr:hover { 
+    background-color: var(--color-surface-container-low); 
+    cursor: pointer; 
+}
+/* .col-id { width: 60px; } */
+/* .col-code { width: 120px; } */
+/* .col-avatar { width: 200px; } */
+/* .book-quantity { width: 120px;} */
+.author-img { 
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    border: 1px solid rgba(211, 195, 192, 0.5); 
+    object-fit: cover; 
+}
+
+.author-desc {
+    width: 350px;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.action-btns { 
+    display: flex; 
+    justify-content: center; 
+    gap: 4px; 
+}
+.action-btn { 
+    color: var(--color-secondary); 
+    transition: color 0.2s; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+}
 .action-btn.delete { color: var(--color-error); }
-.action-btn.delete:hover { color: var(--color-on-error-container); }
+.action-btn.edit { color: rgba(0, 0, 255, 0.668);}
+.action-btn:hover { 
+    color: var(--color-primary); 
+}
 
 /* Pagination */
 .pagination-container {

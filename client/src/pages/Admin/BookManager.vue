@@ -149,7 +149,7 @@ const books = ref([
         stock: 5,
         stockText: '5 cuốn',
         statusText: 'Sẵn có',
-        statusBadgeClass: 'badge-borrowed',
+        statusBadgeClass: 'badge-available',
         isbn: '978-604-98765-4',
         status: 'Sắp hết',
         bgColor: 'var(--color-secondary-container)',
@@ -275,7 +275,8 @@ const openBookDetail = (book) => {
 .data-table {
     width: 100%;
     border-collapse: separate;
-    text-align: left;
+    text-align: center;
+    font-size: 14px;
 }
 .data-table th {
     background-color: var(--color-surface-container-high);
@@ -300,11 +301,6 @@ const openBookDetail = (book) => {
     background-color: var(--color-surface-container-low); 
 }
 
-tbody {
-    text-align: center;
-    font-size: 14px;
-}
-
 .book-title, .book-author, .book-publisher {
     text-align: left;
 }
@@ -324,19 +320,10 @@ tbody {
 }
 
 .badge-available { 
-    background-color: var(--tertiary-fixed); 
-    color: var(--on-tertiary-fixed-variant); 
-    border: 1px solid rgba(14, 27, 14, 0.2); 
-}
-.badge-borrowed { 
-    background-color: var(--secondary-container); 
-    color: var(--on-secondary-container); 
-    border: 1px solid rgba(131, 84, 37, 0.2); 
+    color: rgb(9, 170, 9); 
 }
 .badge-outofstock { 
-    background-color: var(--color-error-container); 
-    color: var(--color-on-error-container); 
-    border: 1px solid rgba(186, 26, 26, 0.2); 
+    color: var(--color-error); 
 }
 
 .action-btns { 
@@ -351,9 +338,7 @@ tbody {
 }
 .action-btn:hover { color: var(--color-primary); }
 .action-btn.edit { color: rgba(0, 0, 255, 0.668);}
-.action-btn.edit:hover { color: var(--color-primary); }
 .action-btn.delete { color: var(--color-error); }
-.action-btn.delete:hover { color: var(--color-primary); }
 
 /* Pagination */
 .pagination-container {
