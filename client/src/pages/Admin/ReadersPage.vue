@@ -470,7 +470,6 @@ function closeProfile() {
     font-size: 24px;
     font-weight: 600;
     color: var(--color-primary);
-    font-style: italic;
 }
 
 .modal-close {

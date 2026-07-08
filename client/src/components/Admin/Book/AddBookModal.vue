@@ -8,52 +8,60 @@
             </div>
             
             <form @submit.prevent="submitForm" style="overflow-y: auto;">
-                <div class="form-grid">
-                    <div class="form-group col-span-2">
-                        <label class="form-label">Tên sách</label>
-                        <input class="form-control" placeholder="Nhập tên sách..." type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Tác giả</label>
-                        <input class="form-control" placeholder="Tên tác giả..." type="text">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Thể loại</label>
-                        <select class="form-control">
-                            <option>Lịch sử</option>
-                            <option>Triết học</option>
-                            <option>Văn học</option>
-                            <option>Khoa học</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Đơn giá (VNĐ)</label>
-                        <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Số lượng</label>
-                        <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Năm sản xuất</label>
-                        <input class="form-control" type="number">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nhà xuất bản</label>
-                        <input class="form-control" type="text">
-                    </div>
-                    <div class="form-group col-span-2">
-                        <label class="form-label">Mô tả</label>
-                        <textarea class="form-control" placeholder="Tóm tắt nội dung..."></textarea>
-                    </div>
-                    <div class="form-group col-span-2">
-                        <label class="form-label">Chọn ảnh bìa</label>
+                <div class="add-book-layout">
+                    <!-- Ảnh bìa (Trái) -->
+                    <div class="cover-upload-section">
+                        <label class="form-label">Ảnh bìa</label>
                         <div class="upload-area">
-                            <span class="material-symbols-outlined upload-icon">upload_file</span>
-                            <span class="upload-text">Nhấp để tải lên hoặc kéo thả ảnh bìa</span>
+                            <span class="material-symbols-outlined upload-icon" style="font-size: 32px;">add_photo_alternate</span>
+                            <span class="upload-text">Tải lên ảnh bìa</span>
+                        </div>
+                    </div>
+
+                    <!-- Form Inputs (Phải) -->
+                    <div class="form-grid">
+                        <div class="form-group col-span-2">
+                            <label class="form-label">Tên sách</label>
+                            <input class="form-control" placeholder="Nhập tên sách..." type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tác giả</label>
+                            <input class="form-control" placeholder="Tên tác giả..." type="text">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Thể loại</label>
+                            <select class="form-control">
+                                <option>Lịch sử</option>
+                                <option>Triết học</option>
+                                <option>Văn học</option>
+                                <option>Khoa học</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Đơn giá (VNĐ)</label>
+                            <input class="form-control" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Số lượng</label>
+                            <input class="form-control" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Năm sản xuất</label>
+                            <input class="form-control" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nhà xuất bản</label>
+                            <input class="form-control" type="text">
                         </div>
                     </div>
                 </div>
+
+                <!-- Mô tả (Full width) -->
+                <div class="form-group" style="margin-top: 24px;">
+                    <label class="form-label">Mô tả</label>
+                    <textarea class="form-control" placeholder="Tóm tắt nội dung..."></textarea>
+                </div>
+                
                 <div class="form-actions">
                     <button class="btn-save sticker-shadow" type="button" @click="closeModal">Lưu sách</button>
                 </div>
@@ -112,7 +120,7 @@ const submitForm = () => {
     overflow: hidden;
     z-index: 10;
 }
-.modal-md { max-width: 672px; }
+.modal-md { max-width: 850px; }
 
 .modal-close {
     position: absolute;
@@ -137,7 +145,28 @@ const submitForm = () => {
     color: var(--color-primary);
 }
 
+.add-book-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .add-book-layout {
+        flex-direction: row;
+        align-items: stretch;
+    }
+}
+
+.cover-upload-section {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .form-grid {
+    flex: 1;
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
@@ -173,6 +202,7 @@ const submitForm = () => {
 textarea.form-control { min-height: 100px; resize: vertical; }
 
 .upload-area {
+    flex: 1;
     border: 2px dashed rgba(211, 195, 192, 0.5);
     padding: 16px;
     text-align: center;
@@ -183,6 +213,7 @@ textarea.form-control { min-height: 100px; resize: vertical; }
     align-items: center;
     justify-content: center;
     gap: 8px;
+    border-radius: 4px;
 }
 .upload-area:hover { background-color: var(--color-surface-container-high); }
 .upload-icon { color: var(--color-outline); }

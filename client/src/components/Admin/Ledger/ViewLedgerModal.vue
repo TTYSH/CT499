@@ -3,7 +3,7 @@
         <div class="modal-backdrop"></div>
         <div class="modal-content custom-scrollbar" @click.stop>
             <div class="modal-header">
-                <h3 class="modal-title">Chi tiết hồ sơ mượn sách</h3>
+                <h3 class="modal-title">Chi tiết đơn mượn</h3>
                 <button class="modal-close material-symbols-outlined" @click="closeModal">close</button>
             </div>
             <div class="modal-body custom-scrollbar">
@@ -158,7 +158,6 @@ function closeModal() {
     font-size: 24px;
     font-weight: 600;
     color: var(--color-primary);
-    font-style: italic;
     margin: 0;
 }
 

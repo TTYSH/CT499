@@ -5,29 +5,29 @@
                 <h2>Chỉnh sửa Profile</h2>
                 <button class="close-btn material-symbols-outlined" @click="close">close</button>
             </div>
-            
+
             <div class="modal-body">
                 <div class="avatar-section">
                     <span class="material-symbols-outlined avatar-icon">account_circle</span>
                     <button class="change-avatar-btn">Thay đổi ảnh đại diện</button>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Họ và tên</label>
                     <input type="text" v-model="profile.name" class="form-input" />
                 </div>
-                
+
                 <div class="form-group">
                     <label>Email</label>
                     <input type="email" v-model="profile.email" class="form-input" />
                 </div>
-                
+
                 <div class="form-group">
                     <label>Mật khẩu mới</label>
                     <input type="password" placeholder="Bỏ trống nếu không đổi" class="form-input" />
                 </div>
             </div>
-            
+
             <div class="modal-footer">
                 <button class="btn-cancel" @click="close">Hủy</button>
                 <button class="btn-save" @click="save">Lưu thay đổi</button>
