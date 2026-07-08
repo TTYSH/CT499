@@ -31,55 +31,64 @@
                             <th>Mã độc giả</th>
                             <th>Tên độc giả</th>
                             <th>Email</th>
-                            <th>Loại Tài Khoản</th>
                             <th>Địa chỉ</th>
                             <th>SDT</th>
+                            <th>Loại Tài Khoản</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr @click="openProfile('N-0142', 'Nguyễn Văn An', 'nguyen.an@archive.org', 'Nghiên cứu viên', 'Đại học Quốc gia Hà Nội', '0912 345 678')">
+                        <tr
+                            @click="openProfile('N-0142', 'Nguyễn Văn An', 'nguyen.an@archive.org', 'Nghiên cứu viên', 'Đại học Quốc gia Hà Nội', '0912 345 678')">
                             <td class="col-id">1</td>
                             <td class="col-id">N-0142</td>
                             <td class="col-name">Nguyễn Văn An</td>
                             <td class="col-email">nguyen.an@archive.org</td>
-                            <td><span>Độc giả</span></td>
                             <td class="col-address">Đại học Quốc gia Hà Nội</td>
                             <td class="col-phone">0912 345 678</td>
+                            <td><span>Độc giả</span></td>
                             <td>
                                 <div class="action-btns">
-                                    <button class="action-btn material-symbols-outlined" title="Xem chi tiết" @click.stop="openProfile('N-0142', 'Nguyễn Văn An', 'nguyen.an@archive.org', 'Nghiên cứu viên', 'Đại học Quốc gia Hà Nội', '0912 345 678')">visibility</button>
-                                    <button class="action-btn delete material-symbols-outlined" title="Xóa hồ sơ" @click.stop>delete</button>
+                                    <button class="action-btn material-symbols-outlined" title="Xem chi tiết"
+                                        @click.stop="openProfile('N-0142', 'Nguyễn Văn An', 'nguyen.an@archive.org', 'Nghiên cứu viên', 'Đại học Quốc gia Hà Nội', '0912 345 678')">visibility</button>
+                                    <button class="action-btn delete material-symbols-outlined" title="Xóa hồ sơ"
+                                        @click.stop>delete</button>
                                 </div>
                             </td>
                         </tr>
-                        <tr @click="openProfile('N-0143', 'Lê Thị Bình', 'le.thi.binh@archive.org', 'Quản trị viên', 'Thư viện Trung ương', '0988 777 666')">
+                        <tr
+                            @click="openProfile('N-0143', 'Lê Thị Bình', 'le.thi.binh@archive.org', 'Quản trị viên', 'Thư viện Trung ương', '0988 777 666')">
                             <td class="col-id">2</td>
                             <td class="col-id">N-0143</td>
                             <td class="col-name">Lê Thị Bình</td>
                             <td class="col-email">le.thi.binh@archive.org</td>
-                            <td><span class="type-badge">Quản trị viên</span></td>
                             <td class="col-address">Thư viện Trung ương</td>
                             <td class="col-phone">0988 777 666</td>
+                            <td><span class="type-badge">Quản trị viên</span></td>
                             <td>
                                 <div class="action-btns">
-                                    <button class="action-btn material-symbols-outlined" title="Xem chi tiết" @click.stop="openProfile('N-0143', 'Lê Thị Bình', 'le.thi.binh@archive.org', 'Quản trị viên', 'Thư viện Trung ương', '0988 777 666')">visibility</button>
-                                    <button class="action-btn delete material-symbols-outlined" title="Xóa hồ sơ" @click.stop>delete</button>
+                                    <button class="action-btn material-symbols-outlined" title="Xem chi tiết"
+                                        @click.stop="openProfile('N-0143', 'Lê Thị Bình', 'le.thi.binh@archive.org', 'Quản trị viên', 'Thư viện Trung ương', '0988 777 666')">visibility</button>
+                                    <button class="action-btn delete material-symbols-outlined" title="Xóa hồ sơ"
+                                        @click.stop>delete</button>
                                 </div>
                             </td>
                         </tr>
-                        <tr @click="openProfile('N-0144', 'Trần Minh Đức', 'tran.minh.duc@archive.org', 'Độc giả Phổ thông', 'Học viện Khoa học Xã hội', '0905 111 222')">
+                        <tr
+                            @click="openProfile('N-0144', 'Trần Minh Đức', 'tran.minh.duc@archive.org', 'Độc giả Phổ thông', 'Học viện Khoa học Xã hội', '0905 111 222')">
                             <td class="col-id">3</td>
                             <td class="col-id">N-0144</td>
                             <td class="col-name">Trần Minh Đức</td>
                             <td class="col-email">tran.minh.duc@archive.org</td>
-                            <td><span>Độc giả</span></td>
                             <td class="col-address">Học viện Khoa học Xã hội</td>
                             <td class="col-phone">0905 111 222</td>
+                            <td><span>Độc giả</span></td>
                             <td>
                                 <div class="action-btns">
-                                    <button class="action-btn material-symbols-outlined" title="Xem chi tiết" @click.stop="openProfile('N-0144', 'Trần Minh Đức', 'tran.minh.duc@archive.org', 'Độc giả Phổ thông', 'Học viện Khoa học Xã hội', '0905 111 222')">visibility</button>
-                                    <button class="action-btn delete material-symbols-outlined" title="Xóa hồ sơ" @click.stop>delete</button>
+                                    <button class="action-btn material-symbols-outlined" title="Xem chi tiết"
+                                        @click.stop="openProfile('N-0144', 'Trần Minh Đức', 'tran.minh.duc@archive.org', 'Độc giả Phổ thông', 'Học viện Khoa học Xã hội', '0905 111 222')">visibility</button>
+                                    <button class="action-btn delete material-symbols-outlined" title="Xóa hồ sơ"
+                                        @click.stop>delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -178,15 +187,26 @@ function closeProfile() {
 </script>
 
 <style scoped>
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding-bottom: 80px;
 }
-@media (min-width: 768px) { .container { padding-bottom: 0; } }
+
+@media (min-width: 768px) {
+    .container {
+        padding-bottom: 0;
+    }
+}
 
 /* Page Header */
 .page-header {
@@ -205,7 +225,8 @@ function closeProfile() {
     margin-top: 4px;
 }
 
-.search-section, .filter-section {
+.search-section,
+.filter-section {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -220,7 +241,11 @@ function closeProfile() {
     padding: 6px 12px;
 }
 
-@media (min-width: 768px) { .search-wrapper { display: flex; } }
+@media (min-width: 768px) {
+    .search-wrapper {
+        display: flex;
+    }
+}
 
 .search-input {
     width: 256px;
@@ -233,14 +258,14 @@ function closeProfile() {
     font-size: 14px;
 }
 
-.search-icon { 
-    color: var(--color-outline); 
+.search-icon {
+    color: var(--color-outline);
 }
 
 @media (min-width: 768px) {
-    .page-header { 
-        flex-direction: column; 
-        justify-content: space-between; 
+    .page-header {
+        flex-direction: column;
+        justify-content: space-between;
         /* align-items: flex-end;  */
     }
 }
@@ -253,6 +278,7 @@ function closeProfile() {
     font-size: 15px;
     font-weight: 600;
 }
+
 .filter-select {
     border: 1px solid rgba(211, 195, 192, 0.5);
     border-radius: 5px;
@@ -273,16 +299,17 @@ function closeProfile() {
     margin-bottom: 32px;
 }
 
-.table-wrapper { 
-    overflow-x: auto; 
+.table-wrapper {
+    overflow-x: auto;
 }
 
-.data-table { 
+.data-table {
     width: 100%;
     border-collapse: separate;
-    text-align: center; 
+    text-align: center;
     font-size: 14px;
 }
+
 .data-table th {
     background-color: var(--color-surface-container-high);
     color: rgba(39, 19, 16, 0.8);
@@ -300,19 +327,24 @@ function closeProfile() {
     border-right: 1px solid rgba(211, 195, 192, 0.2);
     transition: background-color 0.2s;
 }
-.data-table tr { 
-    transition: background-color 0.2s; 
+
+.data-table tr {
+    transition: background-color 0.2s;
 }
-.data-table tr:hover td { 
-    background-color: var(--color-surface-container-low); 
+
+.data-table tr:hover td {
+    background-color: var(--color-surface-container-low);
 }
-.col-name { 
+
+.col-name {
     text-align: left;
 }
-.col-email { 
-    font-style: italic; 
+
+.col-email {
+    font-style: italic;
     text-align: left;
 }
+
 .col-address {
     text-align: left;
 }
@@ -322,19 +354,29 @@ function closeProfile() {
     font-weight: bold;
 }
 
-.action-btns { 
-    display: flex; 
-    justify-content: center; 
-    gap: 4px; 
+.action-btns {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
 }
-.action-btn { 
-    color: var(--color-secondary); 
-    transition: color 0.2s; 
-    font-size: 21px; 
+
+.action-btn {
+    color: var(--color-secondary);
+    transition: color 0.2s;
+    font-size: 21px;
 }
-.action-btn.delete { color: var(--color-error);}
-.action-btn.edit { color: rgba(0, 0, 255, 0.668);}
-.action-btn:hover { color: var(--color-primary); }
+
+.action-btn.delete {
+    color: var(--color-error);
+}
+
+.action-btn.edit {
+    color: rgba(0, 0, 255, 0.668);
+}
+
+.action-btn:hover {
+    color: var(--color-primary);
+}
 
 /* Pagination */
 .pagination-container {
@@ -344,10 +386,11 @@ function closeProfile() {
     padding: 16px;
 }
 
-.pagination-controls { 
-    display: flex; 
-    gap: 8px; 
+.pagination-controls {
+    display: flex;
+    gap: 8px;
 }
+
 .page-btn {
     width: 30px;
     height: 30px;
@@ -357,7 +400,11 @@ function closeProfile() {
     border: 1px solid rgba(211, 195, 192, 0.5);
     transition: all 0.2s;
 }
-.page-btn:hover { background-color: var(--color-surface-container-high); }
+
+.page-btn:hover {
+    background-color: var(--color-surface-container-high);
+}
+
 .page-btn.active {
     background-color: var(--color-secondary);
     color: var(--color-on-secondary);
@@ -369,7 +416,8 @@ function closeProfile() {
 
 /* Detail Modal */
 .modal-overlay {
-    position: fixed; inset: 0;
+    position: fixed;
+    inset: 0;
     background-color: rgba(39, 19, 16, 0.4);
     backdrop-filter: blur(4px);
     z-index: 50;
@@ -378,22 +426,34 @@ function closeProfile() {
     justify-content: center;
     padding: 16px;
 }
-@media (min-width: 640px) { .modal-overlay { padding: 24px; } }
-.modal-overlay.active { display: flex; }
-.modal-backdrop { position: absolute; inset: 0; }
+
+@media (min-width: 640px) {
+    .modal-overlay {
+        padding: 24px;
+    }
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+}
 
 .modal-content {
     position: relative;
     background-color: var(--color-surface);
     background-image: url("https://www.transparenttextures.com/patterns/p6.png");
     border: 1px solid var(--color-outline-variant);
-    box-shadow: 8px 8px 0px 0px rgba(62, 39, 35, 0.1);
     width: 100%;
     max-width: 672px;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-radius: 5px;
 }
 
 .modal-header {
@@ -404,11 +464,29 @@ function closeProfile() {
     justify-content: space-between;
     align-items: center;
 }
-.modal-title { font-family: var(--font-playfair); font-size: 24px; font-weight: 600; color: var(--color-primary); font-style: italic; }
-.modal-close { color: var(--color-on-surface-variant); transition: color 0.2s; }
-.modal-close:hover { color: var(--color-primary); }
 
-.modal-body { padding: 32px; overflow-y: auto; flex: 1; }
+.modal-title {
+    font-family: var(--font-playfair);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-primary);
+    font-style: italic;
+}
+
+.modal-close {
+    color: var(--color-on-surface-variant);
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--color-primary);
+}
+
+.modal-body {
+    padding: 32px;
+    overflow-y: auto;
+    flex: 1;
+}
 
 .profile-layout {
     display: flex;
@@ -416,17 +494,30 @@ function closeProfile() {
     gap: 32px;
     margin-bottom: 32px;
 }
-@media (min-width: 768px) { .profile-layout { flex-direction: row; align-items: flex-start; } }
+
+@media (min-width: 768px) {
+    .profile-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
 
 .profile-avatar-wrapper {
-    width: 128px; height: 160px;
+    width: 128px;
+    height: 160px;
     flex-shrink: 0;
     border: 2px solid rgba(39, 19, 16, 0.2);
     padding: 4px;
     background-color: #ffffff;
-    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.1);
+    border-radius: 5px;
 }
-.profile-avatar { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
 
 .profile-table {
     flex: 1;
@@ -447,14 +538,50 @@ function closeProfile() {
 .profile-table .profile-label {
     width: 35%;
     padding-right: 16px;
+    position: relative;
 }
 
-.profile-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-on-surface-variant); font-weight: 700; }
+.profile-table .profile-label::after {
+    content: ":";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-on-surface-variant);
+    font-size: 16px;
+}
 
-.profile-val-id { font-size: 18px; font-weight: 700; color: var(--color-primary); }
-.profile-val-name { font-family: var(--font-playfair); font-size: 24px; color: var(--color-primary); font-style: italic; }
-.profile-val-email { font-size: 16px; font-style: italic; color: var(--color-secondary); }
-.profile-val-text { font-size: 16px; color: var(--color-on-surface); }
+.profile-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-on-surface-variant);
+    font-weight: 700;
+}
+
+.profile-val-id {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.profile-val-name {
+    font-family: var(--font-playfair);
+    font-size: 24px;
+    color: var(--color-primary);
+
+}
+
+.profile-val-email {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--color-secondary);
+}
+
+.profile-val-text {
+    font-size: 16px;
+    color: var(--color-on-surface);
+}
 
 .profile-type-badge {
     display: inline-block;
@@ -487,7 +614,15 @@ function closeProfile() {
     letter-spacing: 0.05em;
     box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.1);
     transition: all 0.1s;
+    border-radius: 5px;
 }
-.btn-modal-close:hover { background-color: var(--color-primary-container); }
-.btn-modal-close:active { transform: translateY(1px); box-shadow: none; }
+
+.btn-modal-close:hover {
+    background-color: var(--color-primary-container);
+}
+
+.btn-modal-close:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
 </style>

@@ -136,78 +136,13 @@
         </div>
 
         <!-- Detail Modal -->
-        <div class="modal-overlay" :class="{ active: isModalOpen }" @click="closeModal">
-            <div class="modal-backdrop"></div>
-            <div class="modal-content custom-scrollbar" @click.stop>
-                <div class="modal-header">
-                    <h3 class="modal-title">Chi tiết hồ sơ mượn sách</h3>
-                    <button class="modal-close material-symbols-outlined" @click="closeModal">close</button>
-                </div>
-                <div class="modal-body custom-scrollbar">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <span class="detail-label">Mã độc giả</span>
-                            <span class="detail-value">LIB-4492</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Họ tên</span>
-                            <span class="detail-value">Victor Hugo</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Email</span>
-                            <span class="detail-value italic">v.hugo@archive.edu</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Trạng thái</span>
-                            <span class="status-badge status-returned">Đã trả</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Ngày mượn</span>
-                            <span class="detail-value">12/10/2024</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Ngày trả</span>
-                            <span class="detail-value">19/10/2024</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h4 class="section-title">Danh sách sách mượn</h4>
-                        <div class="mini-table-wrapper">
-                            <table class="mini-table">
-                                <thead>
-                                    <tr>
-                                        <th>Tên sách</th>
-                                        <th>Tác giả</th>
-                                        <th class="center">SL</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="bold">Les Misérables</td>
-                                        <td class="italic">Victor Hugo</td>
-                                        <td class="center">01</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">The Hunchback of Notre-Dame</td>
-                                        <td class="italic">Victor Hugo</td>
-                                        <td class="center">01</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn-primary sticker-shadow pressed-state" @click="closeModal">Đóng</button>
-                </div>
-            </div>
-        </div>
+        <ViewLedgerModal :isOpen="isModalOpen" @close="closeModal" />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import ViewLedgerModal from '../../components/Admin/Ledger/ViewLedgerModal.vue';
 
 const isModalOpen = ref(false);
 
@@ -228,7 +163,12 @@ function closeModal() {
     margin: 0 auto;
     padding-bottom: 80px;
 }
-@media (min-width: 768px) { .container { padding-bottom: 0; } }
+
+@media (min-width: 768px) {
+    .container {
+        padding-bottom: 0;
+    }
+}
 
 /* Page Header */
 .page-header {
@@ -247,7 +187,8 @@ function closeModal() {
     margin-top: 4px;
 }
 
-.search-section, .filter-section {
+.search-section,
+.filter-section {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -262,7 +203,11 @@ function closeModal() {
     padding: 6px 12px;
 }
 
-@media (min-width: 768px) { .search-wrapper { display: flex; } }
+@media (min-width: 768px) {
+    .search-wrapper {
+        display: flex;
+    }
+}
 
 .search-input {
     width: 256px;
@@ -280,14 +225,14 @@ function closeModal() {
     color: var(--color-on-surface-variant);
 }
 
-.search-icon { 
-    color: var(--color-outline); 
+.search-icon {
+    color: var(--color-outline);
 }
 
 @media (min-width: 768px) {
-    .page-header { 
-        flex-direction: column; 
-        justify-content: space-between; 
+    .page-header {
+        flex-direction: column;
+        justify-content: space-between;
         /* align-items: flex-end;  */
     }
 }
@@ -300,6 +245,7 @@ function closeModal() {
     font-size: 15px;
     font-weight: 600;
 }
+
 .filter-select {
     border: 1px solid rgba(211, 195, 192, 0.5);
     border-radius: 5px;
@@ -319,12 +265,13 @@ function closeModal() {
     width: 100%;
 }
 
-.data-table { 
-    width: 100%; 
-    border-collapse: separate; 
-    text-align: center; 
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    text-align: center;
     font-size: 14px;
 }
+
 .data-table th {
     background-color: var(--color-surface-container-high);
     color: rgba(39, 19, 16, 0.8);
@@ -342,15 +289,17 @@ function closeModal() {
     border-right: 1px solid rgba(211, 195, 192, 0.2);
     transition: background-color 0.2s;
 }
-.data-table tr { 
-    transition: background-color 0.2s; 
-}
-.data-table tr:hover { 
-    background-color: var(--color-surface-container-low); 
+
+.data-table tr {
+    transition: background-color 0.2s;
 }
 
-.col-id { 
-    color: var(--color-on-surface-variant); 
+.data-table tr:hover {
+    background-color: var(--color-surface-container-low);
+}
+
+.col-id {
+    color: var(--color-on-surface-variant);
 }
 
 .status-badge {
@@ -360,14 +309,17 @@ function closeModal() {
     font-size: 14px;
     letter-spacing: -0.05em;
 }
-.status-returned { 
-    color: var(--color-secondary); 
+
+.status-returned {
+    color: var(--color-secondary);
 }
-.status-borrowed { 
-    color: rgb(9, 170, 9); 
+
+.status-borrowed {
+    color: rgb(9, 170, 9);
 }
-.status-overdue { 
-    color: var(--color-error); 
+
+.status-overdue {
+    color: var(--color-error);
 }
 
 .action-link {
@@ -376,6 +328,7 @@ function closeModal() {
     text-decoration: none;
     display: inline-flex;
 }
+
 .action-link:hover {
     color: var(--color-primary);
 }
@@ -397,10 +350,11 @@ function closeModal() {
     padding: 16px;
 }
 
-.pagination-controls { 
-    display: flex; 
-    gap: 8px; 
+.pagination-controls {
+    display: flex;
+    gap: 8px;
 }
+
 .page-btn {
     width: 30px;
     height: 30px;
@@ -410,7 +364,11 @@ function closeModal() {
     border: 1px solid rgba(211, 195, 192, 0.5);
     transition: all 0.2s;
 }
-.page-btn:hover { background-color: var(--color-surface-container-high); }
+
+.page-btn:hover {
+    background-color: var(--color-surface-container-high);
+}
+
 .page-btn.active {
     background-color: var(--color-secondary);
     color: var(--color-on-secondary);
@@ -419,97 +377,40 @@ function closeModal() {
     border-color: transparent;
 }
 
-/* Detail Modal */
-.modal-overlay {
-    position: fixed; inset: 0;
-    background-color: rgba(39, 19, 16, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 50;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-}
-@media (min-width: 640px) { .modal-overlay { padding: 24px; } }
-.modal-overlay.active { display: flex; }
-.modal-backdrop { position: absolute; inset: 0; }
 
-.modal-content {
-    position: relative;
-    background-color: var(--color-surface);
-    background-image: url("https://www.transparenttextures.com/patterns/p6.png");
-    border: 1px solid var(--color-outline-variant);
-    box-shadow: 8px 8px 0px 0px rgba(62, 39, 35, 0.1);
-    width: 100%;
-    max-width: 672px;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.modal-header {
-    padding: 24px;
-    border-bottom: 1px solid rgba(211, 195, 192, 0.3);
-    background-color: var(--color-surface-container-low);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.modal-title { font-family: var(--font-playfair); font-size: 24px; font-weight: 600; color: var(--color-primary); font-style: italic; margin: 0; }
-.modal-close { color: var(--color-on-surface-variant); transition: color 0.2s; border: none; background: transparent; cursor: pointer; }
-.modal-close:hover { color: var(--color-primary); }
-
-.modal-body { padding: 24px; overflow-y: auto; flex: 1; }
-.modal-footer {
-    padding: 24px;
-    border-top: 1px solid rgba(211, 195, 192, 0.3);
-    background-color: var(--color-surface-container-low);
-    display: flex;
-    justify-content: flex-end;
-}
-
-.detail-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
-@media (min-width: 768px) { .detail-grid { grid-template-columns: 1fr 1fr; } }
-
-.detail-item { display: flex; flex-direction: column; gap: 4px; }
-.detail-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-on-surface-variant); }
-.detail-value { font-weight: 700; color: var(--color-primary); }
-.detail-value.italic { font-style: italic; font-weight: 400; }
-
-.section-title {
-    font-size: 14px; font-weight: 700; color: var(--color-primary);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    border-bottom: 1px solid rgba(211, 195, 192, 0.3);
-    padding-bottom: 8px; margin-bottom: 16px;
-    margin-top: 0;
-}
-
-.mini-table-wrapper { border: 1px solid rgba(211, 195, 192, 0.5); overflow: hidden; }
-.mini-table { width: 100%; border-collapse: collapse; text-align: left;}
-.mini-table th {
-    background-color: var(--color-surface-container-low);
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--color-primary);
-    border-bottom: 1px solid rgba(211, 195, 192, 0.3);
-    padding: 8px 16px; text-align: left;
-}
-.mini-table th.center { text-align: center; width: 80px; }
-.mini-table td { font-size: 14px; padding: 12px 16px; border-bottom: 1px solid rgba(211, 195, 192, 0.2); }
-.mini-table tr:last-child td { border-bottom: none; }
-.mini-table td.center { text-align: center; }
 
 /* Utilities */
-.sticker-shadow { box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.1); }
-.pressed-state { transition: transform 0.1s, box-shadow 0.1s; }
+.sticker-shadow {
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.1);
+}
+
+.pressed-state {
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
 .pressed-state:active {
     transform: translate(1px, 1px);
     box-shadow: 0px 0px 0px 0px rgba(62, 39, 35, 0.1);
 }
-.italic { font-style: italic; }
-.left { text-align: left;}
 
-.custom-scrollbar::-webkit-scrollbar { width: 6px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: #f5f3ef; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3c3c0; border-radius: 10px; }
+.italic {
+    font-style: italic;
+}
+
+.left {
+    text-align: left;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f5f3ef;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #d3c3c0;
+    border-radius: 10px;
+}
 </style>
