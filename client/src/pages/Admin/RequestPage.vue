@@ -115,7 +115,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import RequestDetail from '@/components/Admin/Book/RequestDetail.vue'
+import RequestDetail from '@/components/Admin/Request/RequestDetail.vue'
 
 const selectedRow = ref(null)
 const showDetail = ref(false)

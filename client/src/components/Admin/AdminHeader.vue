@@ -27,7 +27,12 @@
     align-items: center;
     padding: 16px var(--margin-mobile);
 }
-@media (min-width: 768px) { .top-bar { padding: 16px var(--margin-desktop); } }
+
+@media (min-width: 768px) {
+    .top-bar {
+        padding: 16px var(--margin-desktop);
+    }
+}
 
 .top-brand {
     font-family: var(--font-playfair);
@@ -41,6 +46,7 @@
     align-items: center;
     gap: 24px;
 }
+
 .search-wrapper {
     display: none;
     align-items: center;
@@ -49,20 +55,36 @@
     border-radius: 10px;
     padding: 6px 12px;
 }
-@media (min-width: 768px) { .search-wrapper { display: flex; } }
+
+@media (min-width: 768px) {
+    .search-wrapper {
+        display: flex;
+    }
+}
+
 .search-input {
     width: 256px;
     font-size: 16px;
     padding: 0 8px;
     color: var(--color-on-surface);
 }
-.search-icon { color: var(--color-outline); }
 
-.icon-actions { display: flex; gap: 16px; }
+.search-icon {
+    color: var(--color-outline);
+}
+
+.icon-actions {
+    display: flex;
+    gap: 16px;
+}
+
 .icon-btn {
     color: var(--color-primary);
     padding: 8px;
     transition: background-color 0.2s;
 }
-.icon-btn:hover { background-color: var(--color-surface-container-high); }
+
+.icon-btn:hover {
+    background-color: var(--color-surface-container-high);
+}
 </style>
