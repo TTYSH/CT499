@@ -46,13 +46,17 @@
                             <td class="author-name">Victor Hugo</td>
                             <td class="author-nation">Hàn Quốc</td>
                             <td class="book-quantity">56</td>
-                            <td class="author-desc">Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
-                                soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
-                                thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
-                                với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
-                                tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
-                                đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
-                                Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.</td>
+                            <td>
+                                <div class="author-desc">
+                                    Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
+                                    soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
+                                    thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
+                                    với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
+                                    tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
+                                    đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
+                                    Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.
+                                </div>
+                            </td>
                             <td>
                                 <div class="action-btns">
                                     <button class="action-btn material-symbols-outlined" @click.stop="openViewModal" style="font-size: 20px;">visibility</button>
@@ -71,13 +75,16 @@
                             <td class="author-name">Mary Shelley</td>
                             <td class="author-nation">Nhật Bản</td>
                             <td class="book-quantity">56</td>
-                            <td class="author-desc">Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
-                                soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
-                                thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
-                                với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
-                                tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
-                                đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
-                                Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.
+                            <td>
+                                <div class="author-desc">
+                                    Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
+                                    soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
+                                    thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
+                                    với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
+                                    tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
+                                    đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
+                                    Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.
+                                </div>
                             </td>
                             <td>
                                 <div class="action-btns">
