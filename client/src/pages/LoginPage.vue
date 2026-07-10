@@ -1,145 +1,231 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import AuthService from '../services/auth.service'
 
+const router = useRouter()
 const activeTab = ref('signin')
 const tabSignInRef = ref(null)
 const tabRegisterRef = ref(null)
 const indicatorStyle = ref({
-  left: '0px',
-  width: '0px'
+    left: '0px',
+    width: '0px'
 })
 
+const showPassword = ref(false)
+const showRegisterPassword = ref(false)
+const showRegisterConfirmPassword = ref(false)
+
+const loginData = ref({ email: '', password: '' })
+const registerData = ref({ name: '', email: '', password: '', confirmPassword: '' })
+
+const errorMessage = ref('')
+const successMessage = ref('')
+
+const handleLogin = async () => {
+    errorMessage.value = ''
+    successMessage.value = ''
+    try {
+        const user = await AuthService.login(loginData.value)
+        localStorage.setItem('user', JSON.stringify(user))
+
+        // Redirect based on role (nếu sau này có role, hiện tại mình cứ redirect về '/')
+        if (user.role === 'admin') {
+            router.push('/admin')
+        } else {
+            router.push('/')
+        }
+    } catch (error) {
+        errorMessage.value = error.response?.data?.message || 'Đăng nhập thất bại. Vui lòng thử lại.'
+    }
+}
+
+const handleRegister = async () => {
+    errorMessage.value = ''
+    successMessage.value = ''
+    if (registerData.value.password !== registerData.value.confirmPassword) {
+        errorMessage.value = 'Mật khẩu xác nhận không khớp'
+        return
+    }
+
+    try {
+        const payload = {
+            name: registerData.value.name,
+            email: registerData.value.email,
+            password: registerData.value.password
+        }
+        await AuthService.register(payload)
+        successMessage.value = 'Đăng ký thành công! Vui lòng đăng nhập.'
+        switchTab('signin')
+        loginData.value.email = payload.email
+    } catch (error) {
+        errorMessage.value = error.response?.data?.message || 'Đăng ký thất bại. Vui lòng thử lại.'
+    }
+}
+
 const updateIndicator = () => {
-  if (activeTab.value === 'signin') {
-    if (tabSignInRef.value) {
-      indicatorStyle.value = {
-        left: `${tabSignInRef.value.offsetLeft}px`,
-        width: `${tabSignInRef.value.offsetWidth}px`
-      }
+    if (activeTab.value === 'signin') {
+        if (tabSignInRef.value) {
+            indicatorStyle.value = {
+                left: `${tabSignInRef.value.offsetLeft}px`,
+                width: `${tabSignInRef.value.offsetWidth}px`
+            }
+        }
+    } else {
+        if (tabRegisterRef.value) {
+            indicatorStyle.value = {
+                left: `${tabRegisterRef.value.offsetLeft}px`,
+                width: `${tabRegisterRef.value.offsetWidth}px`
+            }
+        }
     }
-  } else {
-    if (tabRegisterRef.value) {
-      indicatorStyle.value = {
-        left: `${tabRegisterRef.value.offsetLeft}px`,
-        width: `${tabRegisterRef.value.offsetWidth}px`
-      }
-    }
-  }
 }
 
 const switchTab = async (tab) => {
-  activeTab.value = tab
-  await nextTick()
-  updateIndicator()
+    activeTab.value = tab
+    errorMessage.value = ''
+    successMessage.value = ''
+    await nextTick()
+    updateIndicator()
 }
 
 onMounted(() => {
-  updateIndicator()
+    updateIndicator()
 })
 </script>
 
 <template>
-  <div class="login-wrapper">
-    <!-- Main Container -->
-    <main class="main-container">
-        <!-- Left Side -->
-        <div class="left-side">
-            <div class="bg-image" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxXaeAnEO6oWuAmoQYYUywwfHi0bqn6WS3SSXMB9gvjGch3c6mkPafYxeQ5gch9xZsHyVAu9lGQoHgfrJDwcqoeaMnF2EuDDDCKiTvnkAp5CH1KvQar9VK9n5UVSZ6tIw1OIwo2lxs8sfRtaBDXix1XvFR_xd3qVOz8ZsYpklccwAH3zb3mKHIDjuSlqsoBtaaIRV-YdOpb0ItxLDvdh23d_LmJcmS8z4Rw9bMiDjFRDMOCaP407AxkMKfc3Q7Bk4DAkVhZDrkuIWl');">
+    <div class="login-wrapper">
+        <!-- Main Container -->
+        <main class="main-container">
+            <!-- Left Side -->
+            <div class="left-side">
+                <div class="bg-image"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxXaeAnEO6oWuAmoQYYUywwfHi0bqn6WS3SSXMB9gvjGch3c6mkPafYxeQ5gch9xZsHyVAu9lGQoHgfrJDwcqoeaMnF2EuDDDCKiTvnkAp5CH1KvQar9VK9n5UVSZ6tIw1OIwo2lxs8sfRtaBDXix1XvFR_xd3qVOz8ZsYpklccwAH3zb3mKHIDjuSlqsoBtaaIRV-YdOpb0ItxLDvdh23d_LmJcmS8z4Rw9bMiDjFRDMOCaP407AxkMKfc3Q7Bk4DAkVhZDrkuIWl');">
+                </div>
+                <!-- Overlay Text/Logo -->
+                <div class="overlay-card">
+                    <span class="material-symbols-outlined overlay-icon">menu_book</span>
+                    <h1 class="font-display-lg overlay-title">BookWorm</h1>
+                    <p class="font-body-md text-on-surface-variant">Một bộ sưu tập tri thức được tuyển chọn, lưu giữ cho
+                        những tâm hồn thích suy ngẫm.</p>
+                </div>
             </div>
-            <!-- Overlay Text/Logo -->
-            <div class="overlay-card">
-                <span class="material-symbols-outlined overlay-icon">menu_book</span>
-                <h1 class="font-display-lg overlay-title">BookWorm</h1>
-                <p class="font-body-md text-on-surface-variant">Một bộ sưu tập tri thức được tuyển chọn, lưu giữ cho những tâm hồn thích suy ngẫm.</p>
-            </div>
-        </div>
-        
-        <!-- Right Side -->
-        <div class="right-side">
-            <!-- Mobile Header -->
-            <div class="mobile-header">
-                <span class="material-symbols-outlined mobile-icon">menu_book</span>
-                <h1 class="font-display-lg-mobile text-primary">BookWorm</h1>
-            </div>
-            
-            <!-- Tab Navigation -->
-            <div class="tab-nav">
-                <button ref="tabSignInRef" class="tab-btn font-headline-sm" :class="activeTab === 'signin' ? 'text-primary' : 'text-on-surface-variant'" @click="switchTab('signin')">
-                  Đăng nhập
-                </button>
-                <button ref="tabRegisterRef" class="tab-btn font-headline-sm" :class="activeTab === 'register' ? 'text-primary' : 'text-on-surface-variant'" @click="switchTab('register')">
-                  Đăng ký
-                </button>
-                <!-- Active Indicator Line -->
-                <div class="tab-indicator" :style="indicatorStyle"></div>
-            </div>
-            
-            <!-- Form Container -->
-            <div class="form-container">
-                <!-- Sign In Form -->
-                <form class="form-panel" :class="activeTab === 'signin' ? 'form-active' : 'form-inactive-left'"@submit.prevent>
-                    <div class="form-group-container">
-                        <div>
-                            <label class="form-label font-label-md text-on-surface-variant">Email</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Email" required type="email"/>
-                        </div>
-                        <div>
-                            <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
-                            <div class="password-wrapper">
-                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Mật khẩu" required type="password"/>
-                                <button type="button" class="eye-slash">
-                                    <span class="material-symbols-outlined"> visibility_off </span>
-                                </button>
+
+            <!-- Right Side -->
+            <div class="right-side">
+                <!-- Mobile Header -->
+                <div class="mobile-header">
+                    <span class="material-symbols-outlined mobile-icon">menu_book</span>
+                    <h1 class="font-display-lg-mobile text-primary">BookWorm</h1>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tab-nav">
+                    <button ref="tabSignInRef" class="tab-btn font-headline-sm"
+                        :class="activeTab === 'signin' ? 'text-primary' : 'text-on-surface-variant'"
+                        @click="switchTab('signin')">
+                        Đăng nhập
+                    </button>
+                    <button ref="tabRegisterRef" class="tab-btn font-headline-sm"
+                        :class="activeTab === 'register' ? 'text-primary' : 'text-on-surface-variant'"
+                        @click="switchTab('register')">
+                        Đăng ký
+                    </button>
+                    <!-- Active Indicator Line -->
+                    <div class="tab-indicator" :style="indicatorStyle"></div>
+                </div>
+
+                <!-- Messages -->
+                <div v-if="errorMessage" style="color: red; text-align: center; margin-bottom: 10px;">{{ errorMessage }}
+                </div>
+                <div v-if="successMessage" style="color: green; text-align: center; margin-bottom: 10px;">{{
+                    successMessage }}</div>
+
+                <!-- Form Container -->
+                <div class="form-container">
+                    <!-- Sign In Form -->
+                    <form class="form-panel" :class="activeTab === 'signin' ? 'form-active' : 'form-inactive-left'"
+                        @submit.prevent="handleLogin">
+                        <div class="form-group-container">
+                            <div>
+                                <label class="form-label font-label-md text-on-surface-variant">Email</label>
+                                <input class="ledger-input font-body-md text-primary" v-model="loginData.email"
+                                    placeholder="Email" required type="email" />
                             </div>
-                            <div class="forgot-link-container">
-                                <a class="forgot-link font-label-sm" href="#">Quên mật khẩu?</a>
+                            <div>
+                                <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
+                                <div class="password-wrapper">
+                                    <input class="ledger-input font-body-md text-primary pr-10"
+                                        v-model="loginData.password" placeholder="Mật khẩu" required
+                                        :type="showPassword ? 'text' : 'password'" />
+                                    <button type="button" class="eye-slash" @click="showPassword = !showPassword">
+                                        <span class="material-symbols-outlined"> {{ showPassword ? 'visibility' :
+                                            'visibility_off' }} </span>
+                                    </button>
+                                </div>
+                                <div class="forgot-link-container">
+                                    <a class="forgot-link font-label-sm" href="#">Quên mật khẩu?</a>
+                                </div>
                             </div>
+                            <button class="btn-primary font-label-md" type="submit">Vào thư viện</button>
                         </div>
-                        <button class="btn-primary font-label-md" type="submit">Vào thư viện</button>
-                    </div>
-                </form>
-                
-                <!-- Register Form -->
-                <form class="form-panel" :class="activeTab === 'register' ? 'form-active' : 'form-inactive-right'" @submit.prevent>
-                    <div class="form-group-container-register">
-                        <div>
-                            <label class="form-label font-label-md text-on-surface-variant">Họ và tên</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Họ và tên" required type="text"/>
-                        </div>
-                        <div>
-                            <label class="form-label font-label-md text-on-surface-variant">Email</label>
-                            <input class="ledger-input font-body-md text-primary" placeholder="Email" required type="email"/>
-                        </div>
-                        <div>
-                            <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
-                            <div class="password-wrapper">
-                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Mật khẩu" required type="password"/>
-                                <button type="button" class="eye-slash">
-                                    <span class="material-symbols-outlined"> visibility_off </span>
-                                </button>
+                    </form>
+
+                    <!-- Register Form -->
+                    <form class="form-panel" :class="activeTab === 'register' ? 'form-active' : 'form-inactive-right'"
+                        @submit.prevent="handleRegister">
+                        <div class="form-group-container-register">
+                            <div>
+                                <label class="form-label font-label-md text-on-surface-variant">Họ và tên</label>
+                                <input class="ledger-input font-body-md text-primary" v-model="registerData.name"
+                                    placeholder="Họ và tên" required type="text" />
                             </div>
-                        </div>
-                        <div>
-                            <label class="form-label font-label-md text-on-surface-variant">Xác nhận mật khẩu</label>
-                            <div class="password-wrapper">
-                                <input class="ledger-input font-body-md text-primary pr-10" placeholder="Xác nhận mật khẩu" required type="password"/>
-                                <button type="button" class="eye-slash">
-                                    <span class="material-symbols-outlined"> visibility_off </span>
-                                </button>
+                            <div>
+                                <label class="form-label font-label-md text-on-surface-variant">Email</label>
+                                <input class="ledger-input font-body-md text-primary" v-model="registerData.email"
+                                    placeholder="Email" required type="email" />
                             </div>
+                            <div>
+                                <label class="form-label font-label-md text-on-surface-variant">Mật khẩu</label>
+                                <div class="password-wrapper">
+                                    <input class="ledger-input font-body-md text-primary pr-10"
+                                        v-model="registerData.password" placeholder="Mật khẩu" required
+                                        :type="showRegisterPassword ? 'text' : 'password'" />
+                                    <button type="button" class="eye-slash"
+                                        @click="showRegisterPassword = !showRegisterPassword">
+                                        <span class="material-symbols-outlined"> {{ showRegisterPassword ? 'visibility'
+                                            : 'visibility_off' }} </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label font-label-md text-on-surface-variant">Xác nhận mật
+                                    khẩu</label>
+                                <div class="password-wrapper">
+                                    <input class="ledger-input font-body-md text-primary pr-10"
+                                        v-model="registerData.confirmPassword" placeholder="Xác nhận mật khẩu" required
+                                        :type="showRegisterConfirmPassword ? 'text' : 'password'" />
+                                    <button type="button" class="eye-slash"
+                                        @click="showRegisterConfirmPassword = !showRegisterConfirmPassword">
+                                        <span class="material-symbols-outlined"> {{ showRegisterConfirmPassword ?
+                                            'visibility' : 'visibility_off' }} </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="btn-secondary font-label-md" type="submit">Đăng ký thành viên</button>
                         </div>
-                        <button class="btn-secondary font-label-md" type="submit">Đăng ký thành viên</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
+
+                <!-- Footer Note -->
+                <div class="footer-note">
+                    <p class="font-label-sm text-on-surface-variant">Bằng việc tiếp tục, bạn đồng ý với <a
+                            class="footer-link" href="#">Nội quy của thư viện</a>.</p>
+                </div>
             </div>
-            
-            <!-- Footer Note -->
-            <div class="footer-note">
-                <p class="font-label-sm text-on-surface-variant">Bằng việc tiếp tục, bạn đồng ý với <a class="footer-link" href="#">Nội quy của thư viện</a>.</p>
-            </div>
-        </div>
-    </main>
-  </div>
+        </main>
+    </div>
 </template>
 
 <style scoped>
@@ -155,7 +241,9 @@ onMounted(() => {
     box-sizing: border-box;
 }
 
-.login-wrapper *, .login-wrapper *::before, .login-wrapper *::after {
+.login-wrapper *,
+.login-wrapper *::before,
+.login-wrapper *::after {
     box-sizing: inherit;
 }
 
@@ -172,6 +260,7 @@ onMounted(() => {
     letter-spacing: -0.02em;
     font-weight: 500;
 }
+
 .font-display-lg-mobile {
     font-family: var(--font-playfair);
     font-size: 36px;
@@ -179,18 +268,21 @@ onMounted(() => {
     font-style: italic;
     font-weight: bolder;
 }
+
 .font-headline-sm {
     font-family: var(--font-merriweather);
     font-size: 22px;
     line-height: 1.4;
     font-weight: 500;
 }
+
 .font-body-md {
     font-family: var(--font-merriweather);
     font-size: 16px;
     line-height: 1.6;
     font-weight: 400;
 }
+
 .font-label-md {
     font-family: var(--font-merriweather);
     font-size: 13px;
@@ -198,6 +290,7 @@ onMounted(() => {
     letter-spacing: 0.05em;
     font-weight: 600;
 }
+
 .font-label-sm {
     font-family: var(--font-merriweather);
     font-size: 12px;
@@ -205,11 +298,13 @@ onMounted(() => {
     letter-spacing: 0.03em;
     font-weight: 500;
 }
-.text-primary { 
+
+.text-primary {
     color: var(--color-primary);
 }
-.text-on-surface-variant { 
-    color: var(--color-on-surface-variant); 
+
+.text-on-surface-variant {
+    color: var(--color-on-surface-variant);
 }
 
 /* Layout */
@@ -243,10 +338,12 @@ onMounted(() => {
     .login-wrapper {
         padding: 0;
     }
+
     .main-container {
         flex-direction: row;
         border: 1px solid var(--color-outline-variant);
     }
+
     .left-side {
         display: flex;
         width: 50%;
@@ -257,13 +354,16 @@ onMounted(() => {
         border-right: 1px solid var(--color-outline-variant);
         overflow: hidden;
     }
+
     .right-side {
         width: 50%;
         padding: 4rem;
     }
+
     .mobile-header {
         display: none;
     }
+
     .footer-note {
         text-align: center;
     }
@@ -272,7 +372,10 @@ onMounted(() => {
 /* Components Left Side */
 .bg-image {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-size: cover;
     background-position: center;
     opacity: 0.8;
@@ -280,6 +383,7 @@ onMounted(() => {
     border-bottom-left-radius: 10px;
     mix-blend-mode: multiply;
 }
+
 .overlay-card {
     position: relative;
     z-index: 10;
@@ -293,13 +397,15 @@ onMounted(() => {
     margin: 2rem;
     max-width: 24rem;
 }
+
 .overlay-icon {
     font-size: 2.25rem;
     line-height: 2.5rem;
     margin-bottom: 1rem;
 }
-.overlay-title { 
-    margin-bottom: 1rem; 
+
+.overlay-title {
+    margin-bottom: 1rem;
     font-weight: bolder;
     font-style: italic;
 }
@@ -309,6 +415,7 @@ onMounted(() => {
     text-align: center;
     margin-bottom: 2.5rem;
 }
+
 .mobile-icon {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -326,6 +433,7 @@ onMounted(() => {
     padding-bottom: 0.5rem;
     position: relative;
 }
+
 .tab-btn {
     background: none;
     border: none;
@@ -333,7 +441,11 @@ onMounted(() => {
     transition: color 0.3s;
     padding: 0;
 }
-.tab-btn:focus { outline: none; }
+
+.tab-btn:focus {
+    outline: none;
+}
+
 .tab-indicator {
     position: absolute;
     bottom: -1px;
@@ -351,38 +463,43 @@ onMounted(() => {
     height: 350px;
     overflow: hidden;
 }
+
 .form-panel {
     position: absolute;
-    top: 0; 
-    left: 0; 
+    top: 0;
+    left: 0;
     width: 100%;
     transition: transform 0.5s, opacity 0.5s;
 }
+
 .form-active {
     transform: translateX(0);
     opacity: 1;
     pointer-events: auto;
 }
+
 .form-inactive-right {
     transform: translateX(100%);
     opacity: 0;
     pointer-events: none;
 }
+
 .form-inactive-left {
     transform: translateX(-100%);
     opacity: 0;
     pointer-events: none;
 }
 
-.form-group-container { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 2rem; 
+.form-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
-.form-group-container-register { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
+
+.form-group-container-register {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .form-label {
@@ -401,10 +518,12 @@ onMounted(() => {
     transition: border-color 0.3s ease;
     font-family: inherit;
 }
+
 .ledger-input:focus {
     outline: none;
     box-shadow: none;
 }
+
 .ledger-input::placeholder {
     color: var(--color-outline-variant);
     font-size: 14px;
@@ -415,14 +534,18 @@ onMounted(() => {
     justify-content: flex-end;
     margin-top: 0.5rem;
 }
-.forgot-link, .footer-link {
+
+.forgot-link,
+.footer-link {
     font-weight: bold;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
     color: var(--color-on-surface-variant);
     transition: color 0.3s;
 }
-.forgot-link:hover, .footer-link:hover {
+
+.forgot-link:hover,
+.footer-link:hover {
     color: var(--color-primary);
     text-decoration: underline;
 }
@@ -447,15 +570,16 @@ onMounted(() => {
     justify-content: center;
 }
 
-.eye-slash > span {
+.eye-slash>span {
     color: var(--color-on-surface-variant);
     font-size: 20px;
     transition: color 0.3s;
 }
 
-.eye-slash:hover > span {
+.eye-slash:hover>span {
     color: var(--color-primary);
 }
+
 /* Buttons */
 .btn-primary {
     width: 100%;
@@ -469,9 +593,11 @@ onMounted(() => {
     border-radius: 4px;
     cursor: pointer;
 }
+
 .btn-primary:hover {
     background-color: var(--color-primary-container);
 }
+
 .btn-secondary {
     width: 100%;
     background-color: var(--color-primary);
@@ -484,6 +610,7 @@ onMounted(() => {
     transition: background-color 0.3s;
     cursor: pointer;
 }
+
 .btn-secondary:hover {
     background-color: var(--color-primary-container);
 }
@@ -493,6 +620,7 @@ onMounted(() => {
     margin-top: 2rem;
     text-align: center;
 }
+
 @media (min-width: 768px) {
     .footer-note {
         text-align: center;

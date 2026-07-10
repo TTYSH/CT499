@@ -45,6 +45,7 @@ const router = createRouter({
           path: 'account',
           name: 'account',
           component: AccountPage,
+          meta: { requiresAuth: true }
         },
         {
           path: 'book',
@@ -56,6 +57,7 @@ const router = createRouter({
     {
       path: '/admin',
       component: AdminLayout,
+      meta: { requiresAuth: true, requiresAdmin: true },
       children: [
         {
           path: 'books',
@@ -90,6 +92,31 @@ const router = createRouter({
       ]
     }
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const loggedInUser = localStorage.getItem('user')
+  const user = loggedInUser ? JSON.parse(loggedInUser) : null
+
+  if (to.meta.requiresAuth && !user) {
+    return next('/login')
+  }
+
+  if (to.meta.requiresAdmin && user && user.role !== 'admin') {
+    // Nếu có role nhưng không phải admin mà vào trang admin -> về trang chủ
+    // Hiện tại do lúc tạo chưa xét role, bạn có thể custom thêm
+    // return next('/')
+  }
+
+  // Nếu user đã đăng nhập mà vào lại trang login, redirect về trang chủ
+  if (to.name === 'login' && user) {
+    if (user.role === 'admin') {
+      return next('/admin')
+    }
+    return next('/')
+  }
+
+  next()
 })
 
 export default router

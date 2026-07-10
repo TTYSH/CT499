@@ -6,9 +6,14 @@ class UserService {
     // Định nghĩa các phương thức xử lý dữ liệu
     async create(payload) {
         const user = {
-            name: payload.name,
-            email: payload.email,
-            address: payload.address,
+            HoTen: payload.name,
+            Email: payload.email,
+            Password: payload.password,
+            DiaChi: payload.address,
+            // Các trường có thể để trống hoặc giá trị mặc định ban đầu
+            SoDienThoai: null,
+            AnhBiaND: null,
+            LoaiTaiKhoan: "Reader" // Mặc định là tài khoản độc giả
         };
         const result = await this.User.insertOne(user);
         return result;
@@ -24,6 +29,10 @@ class UserService {
         return await this.User.findOne({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
+    }
+
+    async findByEmail(email) {
+        return await this.User.findOne({ Email: email });
     }
 }
 
