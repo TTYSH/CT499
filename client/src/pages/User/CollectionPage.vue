@@ -1,209 +1,160 @@
 <template>
-  <div class="collection-page">
-    <!-- Sidebar: Filters -->
-    <aside class="sidebar">
-        <div class="sidebar-inner">
-            <section class="filter-section">
-                <div class="search-wrapper">
-                    <span class="material-symbols-outlined search-icon">search</span>
-                    <input class="search-input" placeholder="Tìm kiếm..." type="text">
+    <div class="collection-page">
+        <!-- Sidebar: Filters -->
+        <aside class="sidebar">
+            <div class="sidebar-inner">
+                <section class="filter-section">
+                    <div class="search-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                    </div>
+                    <h3>Thể loại</h3>
+                    <ul class="category-list">
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Văn học/Tiểu thuyết</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Kỹ năng sống/Phát triển bản thân</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Tâm lý học</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Kinh dị/Giật gân</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Khoa học viễn tưởng</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Lịch sử</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Kinh doanh/Tài chính</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="category-item">
+                                <input class="category-checkbox" type="checkbox">
+                                <span class="category-label">Thiếu nhi</span>
+                            </label>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </aside>
+
+        <!-- Book Collection Grid -->
+        <div class="content-area">
+            <template v-if="activeAuthor && showFullProfile">
+                <AuthorProfile @back="showFullProfile = false" />
+            </template>
+
+            <template v-else>
+                <header class="page-header"
+                    :style="activeAuthor ? 'background: none; border: none; box-shadow: none; padding: 0 0 16px 0; margin-bottom: 0;' : ''">
+                    <div v-if="!activeAuthor">
+                        <h1 class="page-title">Tủ sách thư viện</h1>
+                    </div>
+                    <div v-else></div>
+                    <div class="sort-control">
+                        <span>Sắp xếp theo:</span>
+                        <select class="sort-select">
+                            <option>Mới nhất</option>
+                            <option>Tác giả A-Z</option>
+                            <option>Năm xuất bản</option>
+                        </select>
+                    </div>
+                </header>
+                <AuthorCollection v-if="activeAuthor" @show-profile="showFullProfile = true" />
+                <div class="book-grid">
+                    <div class="book-card" v-for="book in books" :key="book._id" @click="goToBookDetail(book)">
+                        <div class="card-image-wrapper">
+                            <img class="card-image" :src="`/images/Sach/${book.BiaSach}`" :alt="book.TenSach">
+                        </div>
+                        <div class="card-content">
+                            <h2 class="book-title">{{ book.TenSach }}</h2>
+                            <p class="book-author" @click.stop="filterByAuthor(book.TenTG || 'Tác giả')"
+                                style="cursor: pointer;">{{ book.TenTG || 'Tác giả' }}</p>
+                        </div>
+                        <p class="book-price">{{ formatPrice(book.DonGia) }}</p>
+                        <div class="card-actions">
+                            <button class="buy-now-btn" @click.stop="handleBuyNow(book)">Mượn ngay</button>
+                            <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <h3>Thể loại</h3>
-                <ul class="category-list">
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Văn học/Tiểu thuyết</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Kỹ năng sống/Phát triển bản thân</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Tâm lý học</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Kinh dị/Giật gân</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Khoa học viễn tưởng</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Lịch sử</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Kinh doanh/Tài chính</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="category-item">
-                            <input class="category-checkbox" type="checkbox">
-                            <span class="category-label">Thiếu nhi</span>
-                        </label>
-                    </li>
-                </ul>
-            </section>
+
+                <!-- Pagination -->
+                <nav class="pagination">
+                    <button class="page-item">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button class="page-item active">1</button>
+                    <button class="page-item">2</button>
+                    <button class="page-item">3</button>
+                    <button class="page-item">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </nav>
+            </template>
         </div>
-    </aside>
-
-    <!-- Book Collection Grid -->
-    <div class="content-area">
-        <template v-if="activeAuthor && showFullProfile">
-            <AuthorProfile @back="showFullProfile = false" />
-        </template>
-
-        <template v-else>
-        <header class="page-header" :style="activeAuthor ? 'background: none; border: none; box-shadow: none; padding: 0 0 16px 0; margin-bottom: 0;' : ''">
-            <div v-if="!activeAuthor">
-                <h1 class="page-title">Tủ sách thư viện</h1>
-            </div>
-            <div v-else></div>
-            <div class="sort-control">
-                <span>Sắp xếp theo:</span>
-                <select class="sort-select">
-                    <option>Mới nhất</option>
-                    <option>Tác giả A-Z</option>
-                    <option>Năm xuất bản</option>
-                </select>
-            </div>
-        </header>
-            <AuthorCollection v-if="activeAuthor" @show-profile="showFullProfile = true" />
-        <div class="book-grid">
-            <!-- Card 1 -->
-            <div class="book-card" @click="goToBookDetail">
-                <div class="card-image-wrapper">
-                    <img class="card-image"
-                        src="/images/Sach/204_7_thoi_quen_cua_ban_tre_thanh_dat.png">
-        
-                </div>
-                <div class="card-content">
-                    <h2 class="book-title">7 Thói Quen Của Bạn Trẻ Thành Đạt</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Sean Covey</p>
-                </div>
-                 <p class="book-price">105.000đ</p>
-                <div class="card-actions">
-                    <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="book-card" @click="goToBookDetail">
-                <div class="card-image-wrapper">
-                    <img class="card-image"
-                        src="/images/Sach/402_ga_he_ma_quai.png">
-            
-                </div>
-                <div class="card-content">
-                    <h2 class="book-title">IT - Gã Hề Ma Quái</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Stephen King</p>
-                </div>                    
-                <p class="book-price">280.000đ</p>
-                <div class="card-actions">
-                    <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="book-card" @click="goToBookDetail">
-                <div class="card-image-wrapper">
-                    <img class="card-image"
-                        data-alt="A classic literary masterpiece with a simple, cream-colored paper dust jacket featuring elegant serif typography for 'Crime and Punishment' by Fyodor Dostoevsky. The book is set against a backdrop of a parchment paper texture with subtle ink splatters. The mood is serious, scholarly, and deeply grounded in mid-century academic aesthetics."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuJqiHtE7arMrKqxX7UlPAnj3WFEYBmhkzVymDXb4IR91F01L0Qr5mzl130SrtyUdRpfFdxY_uj9qQgoVrpsFbhvO9RMRc85ns6wCMM-265eQ1XEd1mzgCzXN_efR5guYQT8-Zki-n5trHf4YhYcwXZEvvdnnLBLSyfZfBj-UOC7BqnFp_ZboIce1v_yBYeRj5QYp2CF0L8ryDWFIJlDR6udUGHQMTyyzpuKZ9DiJoI0MFtaPtPC2Zc45UUxockFdjkIy_93BO2NU">
-                
-                </div>
-                <div class="card-content">
-                    <h2 class="book-title">Tội Ác và Hình Phạt</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Fyodor Dostoevsky</p>
-                </div>
-                <p class="book-price">250.000đ</p>
-                <div class="card-actions">
-                    <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="book-card" @click="goToBookDetail">
-                <div class="card-image-wrapper">
-                    <img class="card-image"
-                        data-alt="A scientific archival document or book cover featuring diagrams of celestial bodies and elegant calligraphy for 'Principia Mathematica' by Isaac Newton. The paper looks heavily aged, with sepia tones and tactile grain. It is resting on a linen surface under a soft lamp light that creates a focused, scholarly atmosphere."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNKi2v-iZ5P7NH34sEH2fBM2ZGoP6OFZwyjou2cT2rbkCEYQostyEYCcm0McvjBh5gJ2-E8hHbnNEkeKeiPiLHA8XpWS_itbpfA-ErITuOke8-SKFcC-vArSunld8ytQrloi5XkuKsqB80Gn_igw1vmzL_T94Tv_Fu98Mq3lB-Qhm_1AagUoV6wBPe1yoJcZRCgOiL99m_pxalvcTuSEFV9I8ltncHS0DPkynk9TvYXhpkziwbUemJxl7K8V92H6ErJaz9Z3ZIA2Q">
-                 
-                </div>
-                <div class="card-content">
-                    <h2 class="book-title">Principia Mathematica</h2>
-                    <p class="book-author" @click.stop="filterByAuthor($event.target.textContent)" style="cursor: pointer;">Isaac Newton</p>
-                </div>
-                <p class="book-price">250.000đ</p>
-                <div class="card-actions">
-                    <button class="buy-now-btn" @click.stop="handleBuyNow">Mượn ngay</button>
-                    <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pagination -->
-        <nav class="pagination">
-            <button class="page-item">
-                <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            <button class="page-item active">1</button>
-            <button class="page-item">2</button>
-            <button class="page-item">3</button>
-            <button class="page-item">
-                <span class="material-symbols-outlined">chevron_right</span>
-            </button>
-        </nav>
-        </template>
+        <BuyNowModal :is-open="isBuyModalOpen" :book="selectedBookForBuy" @close="closeBuyModal"
+            @confirm="confirmBuy" />
     </div>
-    <BuyNowModal 
-        :is-open="isBuyModalOpen" 
-        :book="selectedBookForBuy" 
-        @close="closeBuyModal" 
-        @confirm="confirmBuy" 
-    />
-  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import AuthorCollection from '@/components/User/AuthorCollection.vue';
 import AuthorProfile from '@/components/User/AuthorProfile.vue';
 import BuyNowModal from '@/components/User/BuyNowModal.vue';
+import bookService from '@/services/book.service';
 
 const router = useRouter();
 const activeAuthor = ref(null);
 const showFullProfile = ref(false);
 const isBuyModalOpen = ref(false);
 const selectedBookForBuy = ref(null);
+const books = ref([]);
+
+const fetchBooks = async () => {
+    try {
+        books.value = await bookService.getAll();
+    } catch (error) {
+        console.error("Lỗi khi tải dữ liệu sách:", error);
+    }
+};
+
+onMounted(() => {
+    fetchBooks();
+});
+
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+};
 
 const filterByAuthor = (authorName) => {
     activeAuthor.value = authorName;
@@ -215,8 +166,8 @@ const clearAuthorFilter = () => {
     showFullProfile.value = false;
 };
 
-const goToBookDetail = () => {
-    router.push({ name: 'book-detail' });
+const goToBookDetail = (book) => {
+    router.push({ name: 'book-detail', params: { id: book._id } });
 };
 
 const handleRequest = (event) => {
@@ -227,7 +178,7 @@ const handleRequest = (event) => {
         button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
         button.style.borderColor = '#4caf50';
         button.style.backgroundColor = '#e8f5e9';
-        
+
         setTimeout(() => {
             button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
             button.style.borderColor = '';
@@ -236,29 +187,18 @@ const handleRequest = (event) => {
     }
 };
 
-const handleBuyNow = (event) => {
-    event.stopPropagation();
-    const button = event.currentTarget;
-    const card = button.closest('.book-card');
-    
-    if (card) {
-        const title = card.querySelector('.book-title')?.textContent;
-        const author = card.querySelector('.book-author')?.textContent;
-        const price = card.querySelector('.book-price')?.textContent;
-        const image = card.querySelector('.card-image')?.getAttribute('src');
-        
-        selectedBookForBuy.value = {
-            title,
-            author,
-            price,
-            image,
-            code: 'SP-' + Math.floor(Math.random() * 10000),
-            year: '2023',
-            category: 'Văn học',
-            publisher: 'NXB Trẻ'
-        };
-        isBuyModalOpen.value = true;
-    }
+const handleBuyNow = (book) => {
+    selectedBookForBuy.value = {
+        title: book.TenSach,
+        author: book.TenTG || 'Chưa rõ',
+        price: formatPrice(book.DonGia),
+        image: `/images/Sach/${book.BiaSach}`,
+        code: 'SP-' + book._id,
+        year: book.NamSanXuat || 'N/A',
+        category: book.TheLoai || 'Văn học',
+        publisher: book.NXB || 'N/A'
+    };
+    isBuyModalOpen.value = true;
 };
 
 const closeBuyModal = () => {
@@ -329,8 +269,8 @@ const confirmBuy = (book) => {
     font-size: 14px;
 }
 
-.search-icon { 
-    color: var(--color-secondary); 
+.search-icon {
+    color: var(--color-secondary);
 }
 
 .category-list {
@@ -438,7 +378,7 @@ const confirmBuy = (book) => {
     background-color: var(--color-surface);
     border: 1px solid rgba(130, 116, 114, 0.3);
     padding: 12px;
-    box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.15);
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
     transition: all 0.3s;
     min-height: 500px;
     position: relative;
@@ -491,7 +431,8 @@ const confirmBuy = (book) => {
     padding-left: 10px;
 }
 
-.book-title:hover, .book-author:hover  {
+.book-title:hover,
+.book-author:hover {
     color: var(--color-secondary);
 }
 

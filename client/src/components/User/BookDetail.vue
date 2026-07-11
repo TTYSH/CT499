@@ -1,10 +1,10 @@
 <template>
-    <div class="book-detail-container">
+    <div class="book-detail-container" v-if="book">
         <!-- Breadcrumbs -->
         <nav class="breadcrumbs">
-            <a class="breadcrumb-link" href="#">Registry</a>
+            <router-link class="breadcrumb-link" :to="{ name: 'collection' }">Tủ sách</router-link>
             <span class="material-symbols-outlined breadcrumb-separator">chevron_right</span>
-            <span class="breadcrumb-current">The Midnight Library</span>
+            <span class="breadcrumb-current">{{ book.TenSach }}</span>
         </nav>
 
         <!-- Book Record Container -->
@@ -13,7 +13,7 @@
             <div class="book-sidebar">
                 <div class="library-card book-cover-card">
                     <img alt="Book Cover" class="book-cover" 
-                    src="/images/Sach/204_7_thoi_quen_cua_ban_tre_thanh_dat.png">
+                    :src="`/images/Sach/${book.BiaSach}`">
                 </div>
                 <div class="action-buttons">
                     <button class="btn-primary buy-now" @click="handleBuyNow">         
@@ -28,36 +28,35 @@
             <!-- Right: Detailed Metadata & Synopsis -->
             <div class="library-card book-details">
                 <header style="margin-bottom: 40px;">
-                    <p class="record-no">mã sách: 9842-XL</p>
-                    <h1 class="book-title">The Midnight Library</h1>
-                    <p class="book-author">Matt Haig</p>
+                    <p class="record-no">mã sách: SP-{{ book._id }}</p>
+                    <h1 class="book-title">{{ book.TenSach }}</h1>
+                    <p class="book-author">{{ book.TenTG || 'Chưa rõ tác giả' }}</p>
                 </header>
                 
                 <div class="meta-grid">
                     <div class="meta-item">
                         <span class="meta-label">Đơn Giá</span>
-                        <span class="meta-value">978-0525559474</span>
+                        <span class="meta-value">{{ formatPrice(book.DonGia) }}</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Năm Sản Xuất</span>
-                        <span class="meta-value">2020</span>
+                        <span class="meta-value">{{ book.NamSanXuat || 'N/A' }}</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Thể Loại</span>
-                        <span class="meta-value">Fantasy / Phil.</span>
+                        <span class="meta-value">{{ book.TheLoai || 'N/A' }}</span>
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Nhà Xuất Bản</span>
-                        <span class="meta-value">304 pp.</span>
+                        <span class="meta-value">{{ book.NXB || 'N/A' }}</span>
                     </div>
                 </div>
 
                 <div>
                     <h3 class="synopsis-title">Tóm tắt nội dung</h3>
                     <div class="synopsis-content">
-                        <p>Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived. To see how things would be if you had made other choices . . . Would you have done anything different, if you had the chance to undo your regrets?</p>
-                        <p>A dazzling novel about all the choices that go into a life well lived, from the internationally bestselling author of Reasons to Stay Alive and How To Stop Time. Somewhere out beyond the edge of the universe there is a library that contains an infinite number of books, each one the story of another reality. One tells the story of your life as it is, along with another book for the other life you could have lived if you had made a different choice at any point in your life.</p>
-                        <p>While we all wonder how our lives might have been, what if you had the chance to go to the library and see for yourself? Would any of these other lives truly be better? In The Midnight Library, Matt Haig’s enchanting blockbuster novel, Nora Seed finds herself faced with this decision.</p>
+                        <p v-if="book.MoTa">{{ book.MoTa }}</p>
+                        <p v-else>Đang cập nhật tóm tắt cho sách này...</p>
                     </div>
                 </div>
             </div>
@@ -123,24 +122,47 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import BuyNowModal from './BuyNowModal.vue';
+import bookService from '@/services/book.service';
 
+const route = useRoute();
+const book = ref(null);
 const isBuyModalOpen = ref(false);
 const selectedBookForBuy = ref(null);
 
+const formatPrice = (price) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+};
+
+const fetchBook = async () => {
+    try {
+        const id = route.params.id;
+        book.value = await bookService.get(id);
+    } catch (error) {
+        console.error("Lỗi tải chi tiết sách:", error);
+    }
+};
+
+onMounted(() => {
+    fetchBook();
+});
+
 const handleBuyNow = () => {
-    selectedBookForBuy.value = {
-        title: 'The Midnight Library',
-        author: 'Matt Haig',
-        code: '9842-XL',
-        price: '105.000đ',
-        year: '2020',
-        category: 'Văn học / Tiểu thuyết',
-        publisher: 'NXB Trẻ',
-        image: '/images/Sach/204_7_thoi_quen_cua_ban_tre_thanh_dat.png'
-    };
-    isBuyModalOpen.value = true;
+    if (book.value) {
+        selectedBookForBuy.value = {
+            title: book.value.TenSach,
+            author: book.value.TenTG || 'Chưa rõ',
+            price: formatPrice(book.value.DonGia),
+            image: `/images/Sach/${book.value.BiaSach}`,
+            code: 'SP-' + book.value._id,
+            year: book.value.NamSanXuat || 'N/A',
+            category: book.value.TheLoai || 'N/A',
+            publisher: book.value.NXB || 'N/A'
+        };
+        isBuyModalOpen.value = true;
+    }
 };
 
 const closeBuyModal = () => {
@@ -164,8 +186,8 @@ const handleRequest = (event) => {
     }
 };
 
-const confirmBuy = (book) => {
-    alert(`Đã đặt mượn sách: ${book.title}`);
+const confirmBuy = (b) => {
+    alert(`Đã đặt mượn sách: ${b.title}`);
     isBuyModalOpen.value = false;
 };
 </script>
