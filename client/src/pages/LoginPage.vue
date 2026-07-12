@@ -30,7 +30,7 @@ const handleLogin = async () => {
         localStorage.setItem('user', JSON.stringify(user))
 
         // Redirect based on role (nếu sau này có role, hiện tại mình cứ redirect về '/')
-        if (user.role === 'admin') {
+        if (user.LoaiTaiKhoan === 'QuanTri') {
             router.push('/admin')
         } else {
             router.push('/')

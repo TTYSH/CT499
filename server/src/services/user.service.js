@@ -1,6 +1,6 @@
 class UserService {
     constructor(client) {
-        this.User = client.db().collection("users");
+        this.User = client.db().collection("NGUOIDUNG");
     }
 
     // Định nghĩa các phương thức xử lý dữ liệu
@@ -9,12 +9,13 @@ class UserService {
             HoTen: payload.name,
             Email: payload.email,
             Password: payload.password,
-            DiaChi: payload.address,
-            // Các trường có thể để trống hoặc giá trị mặc định ban đầu
-            SoDienThoai: null,
-            AnhBiaND: null,
-            LoaiTaiKhoan: "Reader" // Mặc định là tài khoản độc giả
+            SoDienThoai: "",
+            LoaiTaiKhoan: "KhachHang"
         };
+
+        if (payload.address) {
+            user.DiaChi = payload.address;
+        }
         const result = await this.User.insertOne(user);
         return result;
     }
