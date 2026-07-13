@@ -32,7 +32,7 @@
                             <h2 class="tab-title">Thông tin cá nhân</h2>
                         </div>
                     </div>
-                    
+
                     <form class="form-container">
                         <div class="avatar-section">
                             <div class="avatar-wrapper">
@@ -48,24 +48,28 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label class="form-label">Họ tên</label>
-                                <input class="form-input" type="text" value="">
+                                <input class="form-input" type="text" v-model="userInfo.HoTen" :disabled="!isEditing">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Số điện thoại</label>
-                                <input class="form-input" type="tel" value="">
+                                <input class="form-input" type="tel" v-model="userInfo.SoDienThoai"
+                                    :disabled="!isEditing">
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Email</label>
-                                <input class="form-input" type="email" value="">
+                                <input class="form-input" type="email" v-model="userInfo.Email" :disabled="!isEditing">
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Địa chỉ</label>
-                                <input class="form-input" type="text" value="">
+                                <input class="form-input" type="text" v-model="userInfo.DiaChi" :disabled="!isEditing">
                             </div>
                         </div>
 
-                        <div class="form-actions">
-                            <button class="btn-submit" type="button">Cập nhật</button>
+                        <div class="form-actions" style="gap: 12px;">
+                            <button v-if="isEditing" class="btn-cancel" type="button" @click="cancelEdit">Hủy</button>
+                            <button class="btn-submit" type="button" @click="toggleEdit">
+                                {{ isEditing ? 'Lưu' : 'Chỉnh sửa' }}
+                            </button>
                         </div>
                     </form>
                 </section>
@@ -80,7 +84,7 @@
                             <span>Tổng đơn mượn: {{ orders.length }}</span>
                         </div>
                     </div>
-                    
+
                     <div class="order-list">
                         <div v-for="order in orders" :key="order.id" class="order-card">
                             <div class="order-header" @click="toggleOrder(order.id)">
@@ -92,7 +96,8 @@
                                         <h3 class="order-title">Đơn mượn</h3>
                                         <div class="order-meta-group">
                                             <span class="order-code">Mã: {{ order.code }}</span>
-                                            <span class="order-total-books">Tổng: {{ getTotalBooks(order) }} quyển</span>
+                                            <span class="order-total-books">Tổng: {{ getTotalBooks(order) }}
+                                                quyển</span>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +105,7 @@
                                     <span :class="['status-badge', order.statusClass]">{{ order.status }}</span>
                                 </div>
                             </div>
-                            
+
                             <div class="order-content" v-if="expandedOrderId === order.id">
                                 <div class="order-meta">
                                     <div class="meta-item"><strong>Ngày mượn:</strong> {{ order.borrowDate }}</div>
@@ -123,11 +128,13 @@
                     <!-- Pagination -->
                     <div class="pagination-container">
                         <div class="pagination-controls">
-                            <button class="page-btn"><span class="material-symbols-outlined">chevron_left</span></button>
+                            <button class="page-btn"><span
+                                    class="material-symbols-outlined">chevron_left</span></button>
                             <button class="page-btn active">1</button>
                             <button class="page-btn">2</button>
                             <button class="page-btn">3</button>
-                            <button class="page-btn"><span class="material-symbols-outlined">chevron_right</span></button>
+                            <button class="page-btn"><span
+                                    class="material-symbols-outlined">chevron_right</span></button>
                         </div>
                     </div>
                 </section>
@@ -137,9 +144,63 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import UserService from '../../services/user.service'
 
 const activeTab = ref('profile')
+const isEditing = ref(false)
+const userInfo = ref({})
+const originalUserInfo = ref({})
+
+onMounted(async () => {
+    const userStr = localStorage.getItem('user')
+    if (userStr) {
+        const user = JSON.parse(userStr)
+        try {
+            const userData = await UserService.get(user._id)
+            if (userData) {
+                userInfo.value = {
+                    HoTen: userData.HoTen || '',
+                    SoDienThoai: userData.SoDienThoai || '',
+                    Email: userData.Email || '',
+                    DiaChi: userData.DiaChi || ''
+                }
+                originalUserInfo.value = { ...userInfo.value }
+            }
+        } catch (error) {
+            console.error("Lỗi khi tải thông tin:", error)
+        }
+    }
+})
+
+async function toggleEdit() {
+    if (isEditing.value) {
+        try {
+            const userStr = localStorage.getItem('user')
+            if (userStr) {
+                const user = JSON.parse(userStr)
+                await UserService.update(user._id, userInfo.value)
+                
+                // Cập nhật localStorage
+                const updatedUser = { ...user, ...userInfo.value }
+                localStorage.setItem('user', JSON.stringify(updatedUser))
+                originalUserInfo.value = { ...userInfo.value }
+                alert('Cập nhật thông tin thành công!')
+            }
+        } catch (error) {
+            console.error("Lỗi khi cập nhật:", error)
+            alert('Cập nhật thất bại. Vui lòng thử lại.')
+        }
+        isEditing.value = false
+    } else {
+        isEditing.value = true
+    }
+}
+
+function cancelEdit() {
+    userInfo.value = { ...originalUserInfo.value }
+    isEditing.value = false
+}
 
 function switchTab(tab) {
     activeTab.value = tab
@@ -209,21 +270,26 @@ function toggleOrder(id) {
 </script>
 
 <style scoped>
-
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-button, input {
+button,
+input {
     border: none;
     background: none;
     font-family: inherit;
 }
 
-button { cursor: pointer; }
-input { cursor: text; }
+button {
+    cursor: pointer;
+}
+
+input {
+    cursor: text;
+}
 
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -231,7 +297,7 @@ input { cursor: text; }
 }
 
 .paper-card {
-    box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.15);
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
     border: 1px solid rgba(130, 116, 114, 0.2);
     border-radius: 5px;
     position: relative;
@@ -242,8 +308,11 @@ input { cursor: text; }
     margin-bottom: 48px;
     text-align: center;
 }
+
 @media (min-width: 768px) {
-    .page-header { text-align: left; }
+    .page-header {
+        text-align: left;
+    }
 }
 
 .page-title {
@@ -261,8 +330,11 @@ input { cursor: text; }
     flex-direction: column;
     gap: 32px;
 }
+
 @media (min-width: 768px) {
-    .layout-container { flex-direction: row; }
+    .layout-container {
+        flex-direction: row;
+    }
 }
 
 .tab-nav {
@@ -271,8 +343,12 @@ input { cursor: text; }
     flex-direction: column;
     gap: 8px;
 }
+
 @media (min-width: 768px) {
-    .tab-nav { width: 256px; flex-shrink: 0; }
+    .tab-nav {
+        width: 256px;
+        flex-shrink: 0;
+    }
 }
 
 .tab-btn {
@@ -313,8 +389,11 @@ input { cursor: text; }
     padding: 32px;
     margin-bottom: 48px;
 }
+
 @media (min-width: 768px) {
-    .tab-pane { padding: 48px; }
+    .tab-pane {
+        padding: 48px;
+    }
 }
 
 .tab-pane.active {
@@ -346,8 +425,11 @@ input { cursor: text; }
     align-items: center;
     margin-bottom: 32px;
 }
+
 @media (min-width: 768px) {
-    .avatar-section { align-items: flex-start; }
+    .avatar-section {
+        align-items: flex-start;
+    }
 }
 
 .avatar-wrapper {
@@ -361,7 +443,7 @@ input { cursor: text; }
     border: 2px solid var(--color-secondary);
     padding: 3px;
     background-color: var(--color-surface-container-low);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     overflow: hidden;
 }
 
@@ -397,8 +479,11 @@ input { cursor: text; }
     grid-template-columns: 1fr;
     gap: 24px 32px;
 }
+
 @media (min-width: 768px) {
-    .form-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .form-group {
@@ -457,6 +542,24 @@ input { cursor: text; }
     transform: translateY(-1px);
 }
 
+.btn-cancel {
+    background-color: var(--color-surface-container-high);
+    color: var(--color-on-surface);
+    padding: 8px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 5px;
+    transition: transform 0.2s;
+    border: 1px solid var(--color-outline-variant);
+}
+
+.btn-cancel:hover {
+    transform: translateY(-1px);
+    background-color: var(--color-surface-variant);
+}
+
 /* History Tab */
 .history-header {
     display: flex;
@@ -482,7 +585,7 @@ input { cursor: text; }
     border: 1px solid rgba(211, 195, 192, 0.4);
     border-radius: 5px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .order-header {
@@ -562,9 +665,11 @@ input { cursor: text; }
 .status-borrowed {
     color: #1e8e3e;
 }
+
 .status-returned {
     color: #5f6368;
 }
+
 .status-overdue {
     color: #d93025;
 }
@@ -638,10 +743,11 @@ input { cursor: text; }
     padding: 20px 10px 0;
 }
 
-.pagination-controls { 
-    display: flex; 
-    gap: 8px; 
+.pagination-controls {
+    display: flex;
+    gap: 8px;
 }
+
 .page-btn {
     width: 25px;
     height: 25px;
@@ -652,9 +758,11 @@ input { cursor: text; }
     border-radius: 5px;
     transition: all 0.2s;
 }
-.page-btn:hover { 
-    background-color: var(--color-surface-container-high); 
+
+.page-btn:hover {
+    background-color: var(--color-surface-container-high);
 }
+
 .page-btn.active {
     background-color: var(--color-secondary);
     color: var(--color-on-secondary);

@@ -35,6 +35,22 @@ class UserService {
     async findByEmail(email) {
         return await this.User.findOne({ Email: email });
     }
+
+    async update(id, payload) {
+        const { ObjectId } = require("mongodb");
+        const filter = {
+            _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+        };
+        const updateDoc = {
+            $set: payload
+        };
+        const result = await this.User.findOneAndUpdate(
+            filter,
+            updateDoc,
+            { returnDocument: "after" }
+        );
+        return result.value || result;
+    }
 }
 
 module.exports = UserService;
