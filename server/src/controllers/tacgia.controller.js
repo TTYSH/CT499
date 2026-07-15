@@ -28,3 +28,4 @@ class TacgiaController {
         }
     };
 }
+module.exports = new TacgiaController();
