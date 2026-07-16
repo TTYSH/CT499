@@ -1,9 +1,9 @@
 <template>
     <div style="display: flex; min-height: 100vh; width: 100%;">
         <AdminSidebar />
-
+        
         <div class="main-wrapper">
-
+            
             <main class="page-content">
                 <RouterView />
             </main>
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import AdminSidebar from '../components/Admin/AdminSidebar.vue'
+import AdminSidebar from '../components/Admin/Book/AdminSidebar.vue'
 </script>
 
 <style scoped>
@@ -29,13 +29,11 @@ import AdminSidebar from '../components/Admin/AdminSidebar.vue'
     max-width: var(--max-width);
     margin: 0 auto;
     width: 100%;
-    padding-bottom: 80px;
-    /* Space for mobile nav */
+    padding-bottom: 80px; /* Space for mobile nav */
 }
-
 @media (min-width: 768px) {
-    .page-content {
-        padding: 24px;
+    .page-content { 
+        padding: 24px; 
     }
 }
 </style>

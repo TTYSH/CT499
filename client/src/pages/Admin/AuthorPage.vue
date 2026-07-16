@@ -36,55 +36,18 @@
                     </thead>
                     <tbody>
                         <!-- Author 1 -->
-                        <tr @click="openViewModal">
-                            <td class="col-id">1</td>
-                            <td class="col-code">TG01</td>
+                        <tr v-for="(author, index) in authors" :key="author._id || index" @click="openViewModal">
+                            <td class="col-id">{{ index+1 }}</td>
+                            <td class="col-code">{{author._id || '---'}}</td>
                             <td class="col-avatar">
-                                <img alt="Nguyen Nhat Anh" class="author-img" 
-                                src="/images/TacGia/2_nguyen_nhat_anh.jpg">
+                                <img :alt="author.TenTG" class="author-img" 
+                                :src="author.AnhBiaTacGia || '/images/TacGia/2_nguyen_nhat_anh.jpg'">
                             </td>
-                            <td class="author-name">Victor Hugo</td>
-                            <td class="author-nation">Hàn Quốc</td>
-                            <td class="book-quantity">56</td>
+                            <td class="author-name">{{ author.TenTG }}</td>
+                            <td class="author-nation">{{ author.QuocGia}}</td>
+                            <td class="book-quantity"></td>
                             <td>
-                                <div class="author-desc">
-                                    Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
-                                    soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
-                                    thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
-                                    với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
-                                    tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
-                                    đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
-                                    Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-btns">
-                                    <button class="action-btn material-symbols-outlined" @click.stop="openViewModal" style="font-size: 20px;">visibility</button>
-                                    <button class="action-btn edit material-symbols-outlined" @click.stop style="font-size: 20px;">edit</button>
-                                    <button class="action-btn delete material-symbols-outlined" @click.stop style="font-size: 20px;">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Author 2 -->
-                        <tr @click="openViewModal">
-                            <td class="col-id">2</td>
-                            <td class="col-code">TG01</td>
-                            <td class="col-avatar">
-                                <img alt="Victor Hugo" class="author-img" src="/images/TacGia/2_nguyen_nhat_anh.jpg">
-                            </td>
-                            <td class="author-name">Mary Shelley</td>
-                            <td class="author-nation">Nhật Bản</td>
-                            <td class="book-quantity">56</td>
-                            <td>
-                                <div class="author-desc">
-                                    Friedrich Wilhelm Nietzsche là một triết gia, nhà phê bình văn hóa, nhà 
-                                    soạn nhạc, nhà thơ, học giả ngữ văn người Đức. Tác phẩm của ông mang tính đột phá, thách 
-                                    thức các nền tảng tôn giáo, đạo đức truyền thống và triết học đương thời. Nietzsche nổi tiếng 
-                                    với các khái niệm "Siêu nhân" (Übermensch), "Ý chí hùng lực" (Will to Power) và 
-                                    tuyên bố gây tranh cãi "Thượng đế đã chết". Di sản của ông để lại là một kho tàng tri thức 
-                                    đồ sộ, ảnh hưởng sâu sắc đến triết học hiện đại, tâm lý học và nghệ thuật thế kỷ 20. Librarian's 
-                                    Registry vinh dự lưu trữ các bản dịch hiếm nhất của ông để phục vụ giới học thuật.
-                                </div>
+                                <div class="author-desc">{{author.ChiTietTacGia}}</div>
                             </td>
                             <td>
                                 <div class="action-btns">
@@ -116,12 +79,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import AddAuthorModal from '../../components/Admin/Author/AddAuthorModal.vue';
 import ViewAuthorModal from '../../components/Admin/Author/ViewAuthorModal.vue';
+import tacgiaService from '@/services/tacgia.service.js';
 
 const isAddModalOpen = ref(false);
 const isViewModalOpen = ref(false);
+const authors = ref([]);
+
+const fetchAuthors = async () => {
+    try {
+        authors.value = await tacgiaService.getAll();
+    } catch (error) {
+        console.error("Đã xảy ra lỗi khi lấy danh sách tác giả:", error);
+    }
+};
+
+onMounted(() => {
+    fetchAuthors();
+});
 
 function openAddModal() {
     isAddModalOpen.value = true;

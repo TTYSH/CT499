@@ -10,17 +10,18 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  server: {
+    open: true,
+    proxy: {
+      '/api': {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      }
-    }
-  }
 })

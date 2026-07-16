@@ -1,18 +1,11 @@
-const { ObjectId } = require("mongodb");
-
 class TacGiaService {
     constructor(client) {
-        this.TacGia = client.db().collection("TACGIA");
+        this.TacGia = client.db().collection("author");
     }
-
-    async findById(id) {
-        let queryId = id;
-        if (ObjectId.isValid(id)) {
-            queryId = new ObjectId(id);
-        } else if (!isNaN(id)) {
-            queryId = parseInt(id, 10);
-        }
-        return await this.TacGia.findOne({ _id: queryId });
+    
+    async find(filter) {
+        const cursor = await this.TacGia.find(filter);
+        return await cursor.toArray();
     }
 }
 

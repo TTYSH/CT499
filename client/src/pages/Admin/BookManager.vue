@@ -52,15 +52,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(book, index) in books" :key="book.id">
+                        <tr v-for="(book, index) in books" :key="book._id || index">
                             <td>{{ index + 1 }}</td>
-                            <td>{{ book.code }}</td>
-                            <td class="book-title">{{ book.title }}</td>
-                            <td class="book-publisher">{{ book.publisher }}</td>
-                            <td class="book-author">{{ book.author }}</td>
-                            <td><span class="badge" :class="book.genreBadgeClass">{{ book.genre }}</span></td>
-                            <td class="{'text-error': book.stock === 0}">{{ book.stock }}</td>
-                            <td><span class="badge" :class="book.statusBadgeClass">{{ book.statusText }}</span></td>
+                            <td>{{ book.MaTG }}</td>
+                            <td class="book-title">{{ book.TenSach }}</td>
+                            <td class="book-publisher">{{ book.NXB }}</td>
+                            <td class="book-author"></td>
+                            <td><span class="badge">{{ book.TheLoai }}</span></td>
+                            <td>{{ book.SoQuyen }}</td>
+                            <td><span class="badge"></span></td>
                             <td>
                                 <div class="action-btns">
                                     <button class="action-btn material-symbols-outlined" @click="openBookDetail(book)">visibility</button>
@@ -91,73 +91,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import AddBookModal from '../../components/Admin/Book/AddBookModal.vue'
 import ViewBookModal from '../../components/Admin/Book/ViewBookModal.vue'
+import bookService from '../../services/book.service.js'
 
 const isAddModalOpen = ref(false)
 const isViewModalOpen = ref(false)
 const selectedBook = ref(null)
 
-const books = ref([
-    {
-        id: 'book-1',
-        code: 'S001',
-        title: 'Sử Việt: Những cuộc hành trình',
-        publisher: 'NXB Trẻ',
-        author: 'Trần Trọng Kim',
-        genre: 'Lịch sử',
-        genreBadgeClass: 'badge-history',
-        stock: 12,
-        stockText: '12 cuốn',
-        statusText: 'Sẵn có',
-        statusBadgeClass: 'badge-available',
-        isbn: '978-604-12345-6',
-        status: 'Đang có sẵn',
-        bgColor: 'var(--tertiary-fixed)',
-        color: 'var(--on-tertiary-fixed-variant)',
-        img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1974&auto=format&fit=crop',
-        desc: '"Một công trình khảo cứu công phu về dòng chảy lịch sử Việt Nam qua các thời kỳ, tập trung vào những biến động lớn lao và những cuộc di cư mang tính bước ngoặt của dân tộc. Cuốn sách không chỉ là những con số và sự kiện, mà là một câu chuyện kể sống động về bản sắc Việt qua thăng trầm thời gian."'
-    },
-    {
-        id: 'book-2',
-        code: 'S002',
-        title: 'Triết học Nhập môn',
-        publisher: 'NXB Tri Thức',
-        author: 'Phan Ngọc',
-        genre: 'Triết học',
-        genreBadgeClass: 'badge-philosophy',
-        stock: 0,
-        stockText: '0 cuốn (Hết hàng)',
-        statusText: 'Hết hàng',
-        statusBadgeClass: 'badge-outofstock',
-        isbn: '978-604-54321-0',
-        status: 'Đã hết sách',
-        bgColor: 'var(--color-error-container)',
-        color: 'var(--color-error)',
-        img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1798&auto=format&fit=crop',
-        desc: '"Tác phẩm dẫn dắt độc giả bước vào thế giới của tư duy trừu tượng, giải mã các khái niệm triết học căn bản thông qua lăng kính văn hóa Việt Nam. Một bộ công cụ tư duy sắc bén cho bất kỳ ai muốn khám phá bản chất của hiện tồn và tri thức."'
-    },
-    {
-        id: 'book-3',
-        code: 'S003',
-        title: 'Truyện Kiều (Bản hiệu đính)',
-        publisher: 'NXB Văn Học',
-        author: 'Nguyễn Du',
-        genre: 'Văn học',
-        genreBadgeClass: 'badge-literature',
-        stock: 5,
-        stockText: '5 cuốn',
-        statusText: 'Sẵn có',
-        statusBadgeClass: 'badge-available',
-        isbn: '978-604-98765-4',
-        status: 'Sắp hết',
-        bgColor: 'var(--color-secondary-container)',
-        color: 'var(--color-on-secondary-container)',
-        img: 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1888&auto=format&fit=crop',
-        desc: '"Ấn bản đặc biệt kỷ niệm, với các chú giải chi tiết về từ vựng Hán-Việt cổ và những điển tích ẩn sau 3254 câu thơ lục bát bất hủ. Đây là một hành trình đi tìm lại linh hồn của ngôn ngữ Việt qua thiên sử thi bi tráng của nàng Kiều."'
-    }
-])
+const books = ref([]);
+
+const fetchBooks = async () => {
+    try {
+        books.value = await bookService.getAll();
+    } catch (error) {
+        console.error("Đã xảy ra lỗi khi lấy danh sách sách: ", error);
+    } 
+};
+
+onMounted(() => {
+    fetchBooks();
+});
 
 const openBookDetail = (book) => {
     selectedBook.value = { ...book }

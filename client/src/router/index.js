@@ -96,7 +96,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const loggedInUser = localStorage.getItem('user')
-  const user = loggedInUser ? JSON.parse(loggedInUser) : null
+  let user = null
+  try {
+    user = loggedInUser ? JSON.parse(loggedInUser) : null
+  } catch (error) {
+    console.error('Lỗi khi đọc dữ liệu user:', error)
+    localStorage.removeItem('user')
+  }
 
   if (to.meta.requiresAuth && !user) {
     return next('/login')

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import AdminProfileEdit from './Profile/AdminProfileEdit.vue';
+import AdminProfileEdit from '../Profile/AdminProfileEdit.vue';
 
 const router = useRouter();
 const showProfileEdit = ref(false);

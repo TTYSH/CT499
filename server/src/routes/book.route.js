@@ -1,12 +1,7 @@
 const express = require("express");
-const books = require("../controllers/book.controller");
-
+const bookController = require("../controllers/book.controller");
 const router = express.Router();
 
-router.route("/")
-    .get(books.findAll);
-
-router.route("/:id")
-    .get(books.findOne);
+router.get("/", bookController.findAll);
 
 module.exports = router;

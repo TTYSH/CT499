@@ -1,31 +1,16 @@
+const TacGiaService = require("../services/tacgia.service");
+const MongoDB = require("../utils/mongodb.util");
 
-class TacgiaController {
-    async create(req, res) {
+class TacGiaController {
+    async findAll (req, res, next){
         try {
-            const tacgiaService = new TacgiaService(MongoDB.client);
-            const document = await tacgiaService.create(req.body);
+            const tacGiaService = new TacGiaService(MongoDB.client);
+            const document = await tacGiaService.find();
             return res.send(document);
         } catch (error) {
-            return res.status(500).send("Đã xảy ra lỗi khi tạo tác giả.");
+            return res.status(500).json({ message: "Đã xảy ra lỗi khi lấy danh sách tác giả. "})
         }
     }
-    async update(req, res) {
-        try {
-            const tacgiaService = new TacgiaService(MongoDB.client);
-            const document = await tacgiaService.update(req.params.id, req.body);
-            return res.send(document);
-        } catch (error) {
-            return res.status(500).send("Đã xảy ra lỗi khi cập nhật tác giả.");
-        }
-    };
-    async findById(req, res) {
-        try {
-            const tacgiaService = new TacgiaService(MongoDB.client);
-            const document = await tacgiaService.findById(req.params.id);
-            return res.send(document);
-        } catch (error) {
-            return res.status(500).send("Đã xảy ra lỗi khi tìm tác giả.");
-        }
-    };
 }
-module.exports = new TacgiaController();
+
+module.exports = new TacGiaController();
