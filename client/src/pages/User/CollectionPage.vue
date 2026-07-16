@@ -65,27 +65,19 @@
 
         <!-- Book Collection Grid -->
         <div class="content-area">
-            <template v-if="activeAuthor && showFullProfile">
-                <AuthorProfile @back="showFullProfile = false" />
-            </template>
-
-            <template v-else>
-                <header class="page-header"
-                    :style="activeAuthor ? 'background: none; border: none; box-shadow: none; padding: 0 0 16px 0; margin-bottom: 0;' : ''">
-                    <div v-if="!activeAuthor">
-                        <h1 class="page-title">Tủ sách thư viện</h1>
-                    </div>
-                    <div v-else></div>
-                    <div class="sort-control">
-                        <span>Sắp xếp theo:</span>
-                        <select class="sort-select">
-                            <option>Mới nhất</option>
-                            <option>Tác giả A-Z</option>
-                            <option>Năm xuất bản</option>
-                        </select>
-                    </div>
-                </header>
-                <AuthorCollection v-if="activeAuthor" @show-profile="showFullProfile = true" />
+            <header class="page-header">
+                <div>
+                    <h1 class="page-title">Tủ sách thư viện</h1>
+                </div>
+                <div class="sort-control">
+                    <span>Sắp xếp theo:</span>
+                    <select class="sort-select">
+                        <option>Mới nhất</option>
+                        <option>Tác giả A-Z</option>
+                        <option>Năm xuất bản</option>
+                    </select>
+                </div>
+            </header>
                 <div class="book-grid">
                     <div class="book-card" v-for="book in books" :key="book._id" @click="goToBookDetail(book)">
                         <div class="card-image-wrapper">
@@ -93,8 +85,7 @@
                         </div>
                         <div class="card-content">
                             <h2 class="book-title">{{ book.TenSach }}</h2>
-                            <p class="book-author" @click.stop="filterByAuthor(book.TenTG || 'Tác giả')"
-                                style="cursor: pointer;">{{ book.TenTG || 'Tác giả' }}</p>
+                            <p class="book-author" style="cursor: pointer;">{{ book.TenTG || 'Tác giả' }}</p>
                         </div>
                         <p class="book-price">{{ formatPrice(book.DonGia) }}</p>
                         <div class="card-actions">
@@ -118,7 +109,6 @@
                         <span class="material-symbols-outlined">chevron_right</span>
                     </button>
                 </nav>
-            </template>
         </div>
         <BuyNowModal :is-open="isBuyModalOpen" :book="selectedBookForBuy" @close="closeBuyModal"
             @confirm="confirmBuy" />
@@ -128,14 +118,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import AuthorCollection from '@/components/User/AuthorCollection.vue';
-import AuthorProfile from '@/components/User/AuthorProfile.vue';
 import BuyNowModal from '@/components/User/BuyNowModal.vue';
 import bookService from '@/services/book.service';
 
 const router = useRouter();
-const activeAuthor = ref(null);
-const showFullProfile = ref(false);
 const isBuyModalOpen = ref(false);
 const selectedBookForBuy = ref(null);
 const books = ref([]);
@@ -154,16 +140,6 @@ onMounted(() => {
 
 const formatPrice = (price) => {
     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
-};
-
-const filterByAuthor = (authorName) => {
-    activeAuthor.value = authorName;
-    showFullProfile.value = true;
-};
-
-const clearAuthorFilter = () => {
-    activeAuthor.value = null;
-    showFullProfile.value = false;
 };
 
 const goToBookDetail = (book) => {

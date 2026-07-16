@@ -1,6 +1,6 @@
 class UserService {
     constructor(client) {
-        this.User = client.db().collection("user");
+        this.User = client.db().collection("NGUOIDUNG");
     }
 
     // Định nghĩa các phương thức xử lý dữ liệu
