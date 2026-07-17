@@ -44,10 +44,6 @@ const handleSaveProfile = (profileData) => {
                     <span class="material-symbols-outlined">group</span>
                     <span>Quản lý độc giả</span>
                 </router-link>
-                <router-link to="/admin/authors" class="nav-item" active-class="active">
-                    <span class="material-symbols-outlined">person</span>
-                    <span>Quản lý tác giả</span>
-                </router-link>
             </nav>
 
             <div class="sidebar-footer">
@@ -57,7 +53,8 @@ const handleSaveProfile = (profileData) => {
                         <span class="profile-name">Quản trị viên</span>
                         <span class="profile-role">Trần Minh Thư</span>
                     </div>
-                    <button class="logout-btn material-symbols-outlined" @click.stop="handleLogout" title="Đăng xuất">logout</button>
+                    <button class="logout-btn material-symbols-outlined" @click.stop="handleLogout"
+                        title="Đăng xuất">logout</button>
                 </div>
             </div>
         </aside>
@@ -84,10 +81,6 @@ const handleSaveProfile = (profileData) => {
                 <span class="material-symbols-outlined">group</span>
                 <span class="mobile-nav-label">Quản lý độc giả</span>
             </router-link>
-            <router-link to="/admin/authors" class="mobile-nav-item" active-class="active">
-                <span class="material-symbols-outlined">person</span>
-                <span class="mobile-nav-label">Quản lý tác giả</span>
-            </router-link>
             <div class="mobile-nav-item" @click="showProfileEdit = true" style="cursor: pointer;">
                 <span class="material-symbols-outlined">account_circle</span>
                 <span class="mobile-nav-label">Profile</span>
@@ -98,11 +91,7 @@ const handleSaveProfile = (profileData) => {
             </div>
         </nav>
 
-        <AdminProfileEdit 
-            :show="showProfileEdit" 
-            @update:show="showProfileEdit = $event"
-            @save="handleSaveProfile" 
-        />
+        <AdminProfileEdit :show="showProfileEdit" @update:show="showProfileEdit = $event" @save="handleSaveProfile" />
     </div>
 </template>
 
@@ -121,11 +110,16 @@ const handleSaveProfile = (profileData) => {
     z-index: 20;
 }
 
-@media (min-width: 768px) { .sidebar { display: flex; } }
+@media (min-width: 768px) {
+    .sidebar {
+        display: flex;
+    }
+}
 
 .sidebar-header {
     padding: 24px;
 }
+
 .sidebar-title {
     font-family: var(--font-playfair);
     font-size: 30px;
@@ -153,10 +147,12 @@ const handleSaveProfile = (profileData) => {
     border-radius: 4px;
     transition: all 0.2s;
 }
+
 .nav-item:hover {
     background-color: var(--color-surface-container-high);
     transform: translateX(4px);
 }
+
 .nav-item.active {
     background-color: var(--color-secondary-container);
     color: var(--color-on-secondary-container);
@@ -230,15 +226,23 @@ const handleSaveProfile = (profileData) => {
 .mobile-nav {
     display: flex;
     position: fixed;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: var(--color-surface);
     border-top: 1px solid rgba(211, 195, 192, 0.3);
-    box-shadow: 0px -2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.05);
     justify-content: space-around;
     padding: 12px 8px;
     z-index: 40;
 }
-@media (min-width: 768px) { .mobile-nav { display: none; } }
+
+@media (min-width: 768px) {
+    .mobile-nav {
+        display: none;
+    }
+}
+
 .mobile-nav-item {
     display: flex;
     flex-direction: column;
@@ -246,16 +250,18 @@ const handleSaveProfile = (profileData) => {
     gap: 4px;
     color: var(--color-on-surface-variant);
 }
-.mobile-nav-item.active { 
-    color: var(--color-primary); 
-}
-.mobile-nav-label { 
-    font-size: 10px; 
-    font-weight: 700; 
-    text-transform: uppercase; 
+
+.mobile-nav-item.active {
+    color: var(--color-primary);
 }
 
-.sticker-shadow { 
-    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15); 
+.mobile-nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sticker-shadow {
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
 }
 </style>

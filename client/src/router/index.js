@@ -10,7 +10,6 @@ import BookManager from '../pages/Admin/BookManager.vue'
 import RequestPage from '../pages/Admin/RequestPage.vue'
 import ReadersPage from '../pages/Admin/ReadersPage.vue'
 import LedgerPage from '../pages/Admin/LedgerPage.vue'
-import AuthorPage from '../pages/Admin/AuthorPage.vue'
 import DashboardPage from '../pages/Admin/DashboardPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 
@@ -78,11 +77,6 @@ const router = createRouter({
           path: 'ledger',
           name: 'admin-ledger',
           component: LedgerPage,
-        },
-        {
-          path: 'authors',
-          name: 'admin-authors',
-          component: AuthorPage,
         },
         {
           path: '',
