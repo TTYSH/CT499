@@ -5,8 +5,10 @@ defineEmits(['open-cart']);
     <header class="top-nav-bar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="material-symbols-outlined" style="color: var(--color-secondary);">menu_book</span>
-                BookWorm
+                <RouterLink active-class="active" to="/">
+                    <span class="material-symbols-outlined" style="color: var(--color-secondary);">menu_book</span>
+                    BookWorm
+                </RouterLink>
             </div>
             <nav class="nav-links">
                 <RouterLink class="nav-link" exact-active-class="active" to="/">Trang chủ</RouterLink>

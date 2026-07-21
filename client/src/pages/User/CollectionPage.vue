@@ -79,7 +79,7 @@
                 </div>
             </header>
                 <div class="book-grid">
-                    <div class="book-card" v-for="book in books" :key="book._id" @click="goToBookDetail(book)">
+                    <div class="book-card" v-for="book in paginatedBooks" :key="book._id" @click="goToBookDetail(book)">
                         <div class="card-image-wrapper">
                             <img class="card-image" :src="`/images/Sach/${book.BiaSach}`" :alt="book.TenSach">
                         </div>
@@ -98,14 +98,23 @@
                 </div>
 
                 <!-- Pagination -->
-                <nav class="pagination">
-                    <button class="page-item">
+                <nav class="pagination" v-if="totalPages > 1">
+                    <button class="page-item" 
+                        :disabled="currentPage === 1" 
+                        @click="changePage(currentPage - 1)"
+                        :style="{ opacity: currentPage === 1 ? 0.5 : 1, cursor: currentPage === 1 ? 'not-allowed' : 'pointer'}">
                         <span class="material-symbols-outlined">chevron_left</span>
                     </button>
-                    <button class="page-item active">1</button>
-                    <button class="page-item">2</button>
-                    <button class="page-item">3</button>
-                    <button class="page-item">
+                    <button class="page-item" 
+                        v-for="page in totalPages" 
+                        :key="page" :class="{ active: currentPage === page}" 
+                        @click="changePage(page)"> 
+                    {{ page }}
+                    </button>
+                    <button class="page-item" 
+                            :disabled="currentPage === totalPages"
+                            @click="changePage(currentPage + 1)"
+                            :style="{ opacity: currentPage === totalPages ? 0.5 : 1, cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'}">
                         <span class="material-symbols-outlined">chevron_right</span>
                     </button>
                 </nav>
@@ -116,7 +125,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import BuyNowModal from '@/components/User/BuyNowModal.vue';
 import bookService from '@/services/book.service';
@@ -125,6 +134,25 @@ const router = useRouter();
 const isBuyModalOpen = ref(false);
 const selectedBookForBuy = ref(null);
 const books = ref([]);
+const currentPage = ref(1);
+const itemsPerPage = 6;
+
+const totalPages = computed(() => {
+    return Math.ceil(books.value.length / itemsPerPage);
+});
+
+const paginatedBooks = computed(() => {
+    const start = (currentPage.value - 1)*itemsPerPage;
+    const end = start + itemsPerPage;
+    return books.value.slice(start, end);
+});
+
+const changePage = (page) => {
+    if (page >=1 && page <= totalPages.value){
+        currentPage.value = page;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+};
 
 const fetchBooks = async () => {
     try {

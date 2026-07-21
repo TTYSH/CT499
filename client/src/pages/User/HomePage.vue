@@ -34,54 +34,28 @@
             <div class="section-header">
                 <h2 class="section-title">Sách Mới Thêm Vào</h2>
                 <div class="divider"></div>
-                <a class="view-all-link" href="#">
+                <RouterLink class="view-all-link" active-class="active" to="/collection">
                     Xem Tất Cả
                     <span class="material-symbols-outlined view-all-icon">arrow_right_alt</span>
-                </a>
+                </RouterLink>
             </div>
             
-            <div class="horizontal-scroll custom-scrollbar" @wheel.prevent="handleHorizontalScroll">
-                <!-- Book Card 1 -->
-                <div class="book-card-container">
-                    <div class="paper-card">
-                        <img alt="So Do" class="book-cover" src="/images/Sach/101_SoDo.png">
+            <div 
+                class="horizontal-scroll custom-scrollbar" 
+                ref="scrollContainer"
+                @wheel.prevent="handleHorizontalScroll"
+                @mousedown="startDrag"
+                @mouseleave="stopDrag"
+                @mouseup="stopDrag"
+                @mousemove="doDrag"
+            >
+                <div class="book-card-container" v-for="book in books.slice(0, 6)" :key="book._id">
+                    <div class="paper-card" @dragstart.prevent>
+                        <img alt="Sách" class="book-cover" :src="`/images/Sach/${book.BiaSach}`" @dragstart.prevent>
                     </div>
                     <div class="book-info">
-                        <h3 class="book-title">Số Đỏ</h3>
-                        <p class="book-author">Vũ Trọng Phụng</p>
-                    </div>
-                </div>
-                
-                <!-- Book Card 2 -->
-                <div class="book-card-container">
-                    <div class="paper-card">
-                        <img alt="Harry Potter va hon da phu thuy" class="book-cover" src="/images/Sach/502_harry_potter_va_hon_da_phu_thuy.png">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Harry Potter Và Hòn Đá Phù Thủy</h3>
-                        <p class="book-author">J.K.Rowling</p>
-                    </div>
-                </div>
-                
-                <!-- Book Card 3 -->
-                <div class="book-card-container">
-                    <div class="paper-card">
-                        <img alt="Botanical Spirits" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwJx2xa9WAUFAFFVCju7Cy0nwYS-g0E61Mwj21PfnUlzdASNqv8jo_nzc2SEDcd-NV_XR5mxbE-s1Cu6VN0t7_5SqpPXn8VaAzQcnLOUws726iuJvqQTFEALVZunqXwFJypse5Oo27zNEd-L77gvWOVg6Bea_dAdDVusfn6DI0wBBfDPTw3GuAiYsUCKdGVj0RSGCCUIwerre92uJ8w1leWvLdBdLw0aPPnDpwqC5pyquxs_cuoMN8sVBuAKGXIU9RYscY-VEIdgE">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Botanical Spirits</h3>
-                        <p class="book-author">Julian Thorne</p>
-                    </div>
-                </div>
-                
-                <!-- Book Card 4 -->
-                <div class="book-card-container">
-                    <div class="paper-card">
-                        <img alt="The Silent Archive" class="book-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkKXzqYWWArt_ozwecvp5R_ExoUwME207p0gyV7yOrIiXEEEm7BFc4dxS4cpeDvHXmcA5J1ynOPU0PEZt3y6EwKilEH_H1nIceCpKA84ExgGwAzGOyeds85WZSd13gL9LB0AaAV36nG63piNjPSrTlW0ZkFGARxzHJVsKCFrAh12kkXKivBEg35X00Kv361b_TCeVIHohl3fn1b5d23OMuhUO_T5OPt5BsUbh65s-AFP3_m_TxR18L1A4h99sTM3Y8tc5uuEptFOI">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">The Silent Archive</h3>
-                        <p class="book-author">Miriam Gray</p>
+                        <h3 class="book-title">{{ book.TenSach}}</h3>
+                        <p class="book-author">{{ book.TenTG || 'Chưa rõ' }}</p>
                     </div>
                 </div>
             </div>
@@ -134,8 +108,53 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import bookService from '@/services/book.service';
+
+const books = ref([]);
+
+const fetchBooks = async () => {
+    try {
+        books.value = await bookService.getAll();
+    } catch (error) {
+        console.error("Lỗi khi tải dữ liệu sách:", error);
+    }
+};
+
+onMounted(() => {
+    fetchBooks();
+});
+
+//Drag Horizontal Scroll
 const handleHorizontalScroll = (evt) => {
     evt.currentTarget.scrollLeft += evt.deltaY;
+};
+
+const scrollContainer = ref(null);
+let isDown = false;
+let startX;
+let scrollLeft;
+
+const startDrag = (e) => {
+    isDown = true;
+    scrollContainer.value.classList.add('dragging');
+    startX = e.pageX - scrollContainer.value.offsetLeft;
+    scrollLeft = scrollContainer.value.scrollLeft;
+};
+
+const stopDrag = () => {
+    isDown = false;
+    if (scrollContainer.value) {
+        scrollContainer.value.classList.remove('dragging');
+    }
+};
+
+const doDrag = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainer.value.offsetLeft;
+    const walk = (x - startX) * 2; // Tốc độ scroll bằng chuột
+    scrollContainer.value.scrollLeft = scrollLeft - walk;
 };
 </script>
 
@@ -312,9 +331,15 @@ const handleHorizontalScroll = (evt) => {
     gap: var(--gutter);
     padding-bottom: 32px;
     scroll-behavior: smooth;
+    cursor: grab;
+}
+.horizontal-scroll.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto; /* Tắt mượt khi drag để phản hồi nhanh hơn */
+    user-select: none;
 }
 .custom-scrollbar::-webkit-scrollbar { 
-    height: 3px; 
+    height: 4px; 
 }
 .custom-scrollbar::-webkit-scrollbar-track { 
     background: rgba(131, 84, 37, 0.1); 

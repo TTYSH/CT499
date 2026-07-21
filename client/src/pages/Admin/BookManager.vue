@@ -52,8 +52,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(book, index) in books" :key="book._id || index">
-                            <td>{{ index + 1 }}</td>
+                        <tr v-for="(book, index) in paginatedBooks" :key="book._id || index">
+                            <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
                             <td>{{ book.MaTG }}</td>
                             <td class="book-title">{{ book.TenSach }}</td>
                             <td class="book-publisher">{{ book.NXB }}</td>
@@ -75,13 +75,26 @@
         </div>
 
         <!-- Pagination -->
-        <div class="pagination-container">
+        <div class="pagination-container" v-if="totalPages > 1">
             <div class="pagination-controls">
-                <button class="page-btn"><span class="material-symbols-outlined">chevron_left</span></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn"><span class="material-symbols-outlined">chevron_right</span></button>
+                <button class="page-btn"
+                    :disabled="currentPage === 1"
+                    @click="changePage(currentPage - 1)"
+                    :style="{ opacity: currentPage === 1 ? 0.5 : 1, cursor: currentPage === 1 ? 'not-allowed' : 'pointer'}">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="page-btn"
+                    v-for="page in totalPages" 
+                    :key="page" :class="{ active: currentPage === page}" 
+                    @click="changePage(page)">
+                    {{ page }}
+                </button>
+                <button class="page-btn"
+                    :disabled="currentPage === totalPages"
+                    @click="changePage(currentPage + 1)"
+                    :style="{ opacity: currentPage === totalPages ? 0.5 : 1, cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'}">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
             </div>
         </div>
 
@@ -91,7 +104,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import AddBookModal from '../../components/Admin/Book/AddBookModal.vue'
 import ViewBookModal from '../../components/Admin/Book/ViewBookModal.vue'
 import bookService from '../../services/book.service.js'
@@ -101,6 +114,25 @@ const isViewModalOpen = ref(false)
 const selectedBook = ref(null)
 
 const books = ref([]);
+const currentPage = ref(1);
+const itemsPerPage = 6;
+
+const totalPages = computed(() => {
+    return Math.ceil(books.value.length / itemsPerPage);
+});
+
+const paginatedBooks = computed(() => {
+    const start = (currentPage.value - 1)*itemsPerPage;
+    const end = start + itemsPerPage;
+    return books.value.slice(start, end);
+});
+
+const changePage = (page) => {
+    if (page >= 1 && page <= totalPages.value){
+        currentPage.value = page;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+};
 
 const fetchBooks = async () => {
     try {
@@ -242,6 +274,7 @@ const openBookDetail = (book) => {
     padding: 9px;
     text-align: center;
     border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+    white-space: nowrap;
 }
 .data-table td {
     padding: 10px;
