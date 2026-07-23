@@ -37,10 +37,12 @@
                         <div class="avatar-section">
                             <div class="avatar-wrapper">
                                 <div class="avatar-img-container">
-                                    <img src="/images/user_icon.jpg" class="avatar-img" alt="Profile Avatar">
+                                    <img :src="userInfo.AnhBiaND ? `/images/Avatar/${userInfo.AnhBiaND}` : '/images/user_icon.jpg'"
+                                        class="avatar-img" alt="Profile Avatar">
                                 </div>
-                                <button type="button" class="avatar-btn">
-                                    <span class="material-symbols-outlined" style="font-size: 16px;">photo_camera</span>
+                                <button v-if="isEditing" type="button" class="avatar-btn"
+                                    @click="showAvatarModal = true">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
                                 </button>
                             </div>
                         </div>
@@ -54,6 +56,19 @@
                                 <label class="form-label">Số điện thoại</label>
                                 <input class="form-input" type="tel" v-model="userInfo.SoDienThoai"
                                     :disabled="!isEditing">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ngày sinh</label>
+                                <input class="form-input" type="date" v-model="userInfo.NgaySinh"
+                                    :disabled="!isEditing">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Giới tính</label>
+                                <select class="form-input" v-model="userInfo.GioiTinh" :disabled="!isEditing">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+
+                                </select>
                             </div>
                             <div class="form-group full-width">
                                 <label class="form-label">Email</label>
@@ -140,6 +155,22 @@
                 </section>
             </div>
         </div>
+
+        <!-- Avatar Selection Modal -->
+        <div v-if="showAvatarModal" class="modal-overlay" @click="showAvatarModal = false">
+            <div class="modal-content" @click.stop>
+                <div class="modal-header">
+                    <h3>Chọn ảnh đại diện</h3>
+                    <button class="close-btn" @click="showAvatarModal = false"><span
+                            class="material-symbols-outlined">close</span></button>
+                </div>
+                <div class="avatar-list">
+                    <img v-for="avatar in availableAvatars" :key="avatar" :src="`/images/Avatar/${avatar}`"
+                        class="avatar-option" :class="{ selected: userInfo.AnhBiaND === avatar }"
+                        @click="selectAvatar(avatar)" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -152,6 +183,13 @@ const activeTab = ref('profile')
 const isEditing = ref(false)
 const userInfo = ref({})
 const originalUserInfo = ref({})
+const showAvatarModal = ref(false)
+const availableAvatars = ['default.png', 'man.png', 'woman.png']
+
+function selectAvatar(avatar) {
+    userInfo.value.AnhBiaND = avatar;
+    showAvatarModal.value = false;
+}
 
 onMounted(async () => {
     const userStr = localStorage.getItem('user')
@@ -163,8 +201,11 @@ onMounted(async () => {
                 userInfo.value = {
                     HoTen: userData.HoTen || '',
                     SoDienThoai: userData.SoDienThoai || '',
+                    NgaySinh: userData.NgaySinh ? userData.NgaySinh.split('T')[0] : '',
+                    GioiTinh: userData.GioiTinh || 'Nam',
                     Email: userData.Email || '',
-                    DiaChi: userData.DiaChi || ''
+                    DiaChi: userData.DiaChi || '',
+                    AnhBiaND: userData.AnhBiaND || ''
                 }
                 originalUserInfo.value = { ...userInfo.value }
             }
@@ -754,5 +795,74 @@ input {
     font-weight: 700;
     box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.15);
     border-color: transparent;
+}
+
+/* Avatar Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-playfair);
+}
+
+.close-btn {
+    font-size: 20px;
+    color: var(--color-on-surface-variant);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.avatar-list {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.avatar-option {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+    object-fit: cover;
+}
+
+.avatar-option:hover {
+    transform: scale(1.05);
+}
+
+.avatar-option.selected {
+    border-color: var(--color-secondary);
 }
 </style>
