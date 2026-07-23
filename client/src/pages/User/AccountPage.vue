@@ -146,6 +146,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import UserService from '../../services/user.service'
+import LedgerService from '../../services/ledger.service'
 
 const activeTab = ref('profile')
 const isEditing = ref(false)
@@ -167,6 +168,36 @@ onMounted(async () => {
                 }
                 originalUserInfo.value = { ...userInfo.value }
             }
+
+            // Fetch borrow history
+            try {
+                const historyData = await LedgerService.getByUser(user._id);
+                if (historyData && Array.isArray(historyData)) {
+                    orders.value = historyData.map((phieu, index) => {
+                        let statusClass = 'status-borrowed';
+                        if (phieu.TrangThai === 'Đã trả') statusClass = 'status-returned';
+                        else if (phieu.TrangThai === 'Quá hạn') statusClass = 'status-overdue';
+
+                        return {
+                            id: phieu._id || phieu.MaPhieuMuon || index,
+                            code: phieu._id || phieu.MaPhieuMuon || 'Unknown',
+                            borrowDate: phieu.NgayMuon || '',
+                            returnDate: phieu.NgayTra || '',
+                            status: phieu.TrangThai || 'Đang mượn',
+                            statusClass: statusClass,
+                            books: (phieu.books || []).map(b => ({
+                                id: b.MaSach || b.SachId,
+                                name: b.TenSach || 'Sách chưa có tên',
+                                quantity: b.SoLuong || 1,
+                                image: b.BiaSach ? (b.BiaSach.startsWith('/') ? b.BiaSach : `/images/Sach/${b.BiaSach}`) : '/images/user_icon.jpg'
+                            }))
+                        }
+                    });
+                }
+            } catch (err) {
+                console.error("Lỗi khi tải lịch sử đơn mượn:", err);
+            }
+
         } catch (error) {
             console.error("Lỗi khi tải thông tin:", error)
         }
@@ -180,7 +211,7 @@ async function toggleEdit() {
             if (userStr) {
                 const user = JSON.parse(userStr)
                 await UserService.update(user._id, userInfo.value)
-                
+
                 // Cập nhật localStorage
                 const updatedUser = { ...user, ...userInfo.value }
                 localStorage.setItem('user', JSON.stringify(updatedUser))
@@ -210,53 +241,7 @@ function getTotalBooks(order) {
     return order.books.reduce((sum, book) => sum + book.quantity, 0)
 }
 
-const orders = ref([
-    {
-        id: 1,
-        code: '692302bb28c90cdb80fe4187',
-        borrowDate: '05/11/1954',
-        returnDate: '19/11/1954',
-        status: 'Đang mượn',
-        statusClass: 'status-borrowed',
-        books: [
-            { id: 101, name: 'Đại gia Gatsby', quantity: 2, image: '/images/Sach/104_dai_gia_gatsby.png' }
-        ]
-    },
-    {
-        id: 2,
-        code: '692302bb28c90cdb80fe4188',
-        borrowDate: '02/11/1954',
-        returnDate: '16/11/1954',
-        status: 'Đã trả',
-        statusClass: 'status-returned',
-        books: [
-            { id: 102, name: 'Số Đỏ', quantity: 1, image: '/images/Sach/101_SoDo.png' },
-            { id: 105, name: 'Mắt Biếc', quantity: 1, image: '/images/Sach/102_mat_biec.png' }
-        ]
-    },
-    {
-        id: 3,
-        code: '692302bb28c90cdb80fe4189',
-        borrowDate: '25/10/1954',
-        returnDate: '08/11/1954',
-        status: 'Quá hạn',
-        statusClass: 'status-overdue',
-        books: [
-            { id: 103, name: 'Đắc Nhân Tâm', quantity: 1, image: '/images/Sach/201_dac_nhan_tam.png' }
-        ]
-    },
-    {
-        id: 4,
-        code: '692302bb28c90cdb80fe4190',
-        borrowDate: '10/10/1954',
-        returnDate: '24/10/1954',
-        status: 'Đã trả',
-        statusClass: 'status-returned',
-        books: [
-            { id: 104, name: 'Giết con chim nhại', quantity: 3, image: '/images/Sach/103_giet_con_chim_nhai.png' }
-        ]
-    }
-])
+const orders = ref([])
 
 const expandedOrderId = ref(null)
 
