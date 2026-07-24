@@ -49,7 +49,7 @@
                 @mouseup="stopDrag"
                 @mousemove="doDrag"
             >
-                <div class="book-card-container" v-for="book in books" :key="book._id">
+                <div class="book-card-container" v-for="book in books" :key="book._id" @click="goToBookDetail(book._id)">
                     <div class="paper-card" @dragstart.prevent>
                         <img alt="Sách" class="book-cover" :src="`/images/Sach/${book.BiaSach}`" @dragstart.prevent>
                     </div>
@@ -109,8 +109,10 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import bookService from '@/services/book.service';
 
+const router = useRouter();
 const books = ref([]);
 
 const fetchBooks = async () => {
@@ -134,9 +136,11 @@ const scrollContainer = ref(null);
 let isDown = false;
 let startX;
 let scrollLeft;
+let isDragging = false;
 
 const startDrag = (e) => {
     isDown = true;
+    isDragging = false;
     scrollContainer.value.classList.add('dragging');
     startX = e.pageX - scrollContainer.value.offsetLeft;
     scrollLeft = scrollContainer.value.scrollLeft;
@@ -154,7 +158,14 @@ const doDrag = (e) => {
     e.preventDefault();
     const x = e.pageX - scrollContainer.value.offsetLeft;
     const walk = (x - startX) * 2; // Tốc độ scroll bằng chuột
+    if (Math.abs(walk) > 5) isDragging = true;
     scrollContainer.value.scrollLeft = scrollLeft - walk;
+};
+
+const goToBookDetail = (bookId) => {
+    if (!isDragging) {
+        router.push({ name: 'book-detail', params: { id: bookId } });
+    }
 };
 </script>
 
@@ -367,6 +378,7 @@ const doDrag = (e) => {
     box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.1);
     border-radius: 8px;
     transition: all 0.2s ease;
+    max-width: 100%;
 }
 .book-card-container:hover .paper-card {
     transform: translate(-1px, -1px);

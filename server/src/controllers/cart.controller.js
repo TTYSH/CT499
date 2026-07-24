@@ -42,6 +42,21 @@ class cartController {
             return res.status(500).send("Lỗi khi xoá sản phẩm khỏi giỏ hàng.");
         }
     }
+
+    async updateQuantity(req, res, next) {
+        try {
+            const { quantity } = req.body;
+            if (quantity === undefined) {
+                return res.status(400).send({ message: "Thiếu thông tin số lượng." });
+            }
+            const cartService = new CartService(MongoDB.client);
+            await cartService.updateCartItemQuantity(req.params.itemId, Number(quantity));
+            return res.send({ message: "Cập nhật số lượng thành công" });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Lỗi khi cập nhật số lượng.");
+        }
+    }
 }
 
 module.exports = new cartController();

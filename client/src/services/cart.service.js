@@ -16,6 +16,10 @@ class CartService {
     async removeItem(itemId) {
         return (await this.api.delete(`/item/${itemId}`)).data;
     }
+
+    async updateQuantity(itemId, quantity) {
+        return (await this.api.put(`/item/${itemId}`, { quantity })).data;
+    }
 }
 
 export default new CartService();

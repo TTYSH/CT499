@@ -64,6 +64,21 @@ class CartService {
         }
         return true;
     }
+
+    async updateCartItemQuantity(itemId, quantity) {
+        const objId = ObjectId.isValid(itemId) ? new ObjectId(itemId) : null;
+        if (!objId) return false;
+        
+        if (quantity <= 0) {
+            return await this.removeCartItem(itemId);
+        }
+
+        const result = await this.CartDetail.updateOne(
+            { _id: objId },
+            { $set: { SoLuong: quantity } }
+        );
+        return result.modifiedCount > 0 || result.matchedCount > 0;
+    }
 }
 
 module.exports = CartService;

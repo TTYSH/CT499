@@ -33,9 +33,9 @@
                             </div>
 
                             <div class="item-quantity">
-                                <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
+                                <button class="qty-btn" @click="changeQuantity(item, -1)"><span class="material-symbols-outlined">remove</span></button>
                                 <span class="qty-value">{{ item.SoLuong }}</span>
-                                <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
+                                <button class="qty-btn" @click="changeQuantity(item, 1)"><span class="material-symbols-outlined">add</span></button>
                             </div>
                             <div class="item-total">{{ (item.bookInfo?.DonGia * item.SoLuong).toLocaleString('vi-VN')
                             }}đ</div>
@@ -56,7 +56,14 @@
                     <span class="total-label">Tổng số lượng: <span class="total-value">{{ totalQuantity }}</span></span>
                 </div>
                 <div class="footer-input-group">
-
+                    <div class="date-display">
+                        <span class="date-label">Thời hạn mượn</span>
+                        <div class="date-range">
+                            <span class="date-box">{{ todayStr }}</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                            <span class="date-box">{{ dueStr }}</span>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn-submit" @click="submitRequest">
                     Yêu Cầu Mượn
@@ -80,6 +87,15 @@ const props = defineProps({
 
 const emit = defineEmits(['close']);
 const cartItems = ref([]);
+
+const formatDate = (date) => {
+    const d = String(date.getDate()).padStart(2, '0');
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const y = date.getFullYear();
+    return `${d}/${m}/${y}`;
+};
+const todayStr = ref(formatDate(new Date()));
+const dueStr = ref(formatDate(new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)));
 
 const fetchCartData = async () => {
     const userStr = localStorage.getItem('user');
@@ -132,6 +148,26 @@ const removeItem = async (itemId) => {
         }
     }
 };
+
+const changeQuantity = async (item, delta) => {
+    const newQuantity = item.SoLuong + delta;
+    if (newQuantity <= 0) {
+        removeItem(item._id);
+        return;
+    }
+    
+    try {
+        // Cập nhật giao diện trước cho nhanh
+        item.SoLuong = newQuantity;
+        await CartService.updateQuantity(item._id, newQuantity);
+    } catch (error) {
+        console.error("Lỗi khi cập nhật số lượng:", error);
+        alert("Có lỗi xảy ra khi cập nhật số lượng.");
+        // Nếu lỗi thì hoàn tác
+        item.SoLuong -= delta; 
+        fetchCartData();
+    }
+};
 </script>
 
 <style scoped>
@@ -162,7 +198,7 @@ const removeItem = async (itemId) => {
     position: relative;
     width: 90%;
     max-width: 950px;
-    max-height: 110vh;
+    max-height: 90vh;
     background-color: #fbf9f4;
     border: 1px solid #e8e2d6;
     border-radius: 5px;
@@ -422,7 +458,7 @@ const removeItem = async (itemId) => {
 @media (min-width: 768px) {
     .drawer-footer {
         flex-direction: row;
-        align-items: flex-end;
+        align-items: center;
         gap: 37px;
     }
 }
@@ -447,6 +483,41 @@ const removeItem = async (itemId) => {
     position: relative;
     width: 100%;
     max-width: 320px;
+    display: flex;
+    justify-content: center;
+}
+
+.date-display {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.date-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #46464b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #171920;
+}
+
+.date-box {
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #e8e2d6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .input-date {
