@@ -11,6 +11,10 @@ class BookService {
         return await cursor.toArray();
     }
 
+    async getCategories() {
+        return await this.Book.distinct("TheLoai");
+    }
+
     async findById(id) {
         let queryId = id;
         if (ObjectId.isValid(id) && typeof id === 'string' && id.length === 24) {

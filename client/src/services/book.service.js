@@ -9,6 +9,10 @@ class BookService {
         return (await this.api.get('/')).data;
     }
 
+    async getCategories() {
+        return (await this.api.get('/categories')).data;
+    }
+
     async get(id) {
         return (await this.api.get(`/${id}`)).data;
     }

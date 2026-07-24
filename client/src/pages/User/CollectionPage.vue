@@ -6,59 +6,18 @@
                 <section class="filter-section">
                     <div class="search-wrapper">
                         <span class="material-symbols-outlined search-icon">search</span>
-                        <input class="search-input" placeholder="Tìm kiếm..." type="text">
+                        <input class="search-input" placeholder="Tìm kiếm sách, tác giả..." type="text" v-model="searchQuery">
                     </div>
                     <h3>Thể loại</h3>
-                    <ul class="category-list">
-                        <li>
+                    <ul class="category-list" v-if="categories.length > 0">
+                        <li v-for="category in categories" :key="category">
                             <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Văn học/Tiểu thuyết</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Kỹ năng sống/Phát triển bản thân</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Tâm lý học</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Kinh dị/Giật gân</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Khoa học viễn tưởng</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Lịch sử</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Kinh doanh/Tài chính</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="category-item">
-                                <input class="category-checkbox" type="checkbox">
-                                <span class="category-label">Thiếu nhi</span>
+                                <input class="category-checkbox" type="checkbox" :value="category" v-model="selectedCategories">
+                                <span class="category-label">{{ category }}</span>
                             </label>
                         </li>
                     </ul>
+                    <div v-else class="loading-categories">Đang tải thể loại...</div>
                 </section>
             </div>
         </aside>
@@ -71,10 +30,10 @@
                 </div>
                 <div class="sort-control">
                     <span>Sắp xếp theo:</span>
-                    <select class="sort-select">
-                        <option>Mới nhất</option>
-                        <option>Tác giả A-Z</option>
-                        <option>Năm xuất bản</option>
+                    <select class="sort-select" v-model="sortBy">
+                        <option value="newest">Mới nhất</option>
+                        <option value="author">Tác giả A-Z</option>
+                        <option value="year">Năm xuất bản</option>
                     </select>
                 </div>
             </header>
@@ -125,7 +84,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import BuyNowModal from '@/components/User/BuyNowModal.vue';
 import bookService from '@/services/book.service';
@@ -134,17 +93,52 @@ const router = useRouter();
 const isBuyModalOpen = ref(false);
 const selectedBookForBuy = ref(null);
 const books = ref([]);
+const categories = ref([]);
+const selectedCategories = ref([]);
+const searchQuery = ref('');
+const sortBy = ref('newest');
 const currentPage = ref(1);
 const itemsPerPage = 6;
 
+const filteredBooks = computed(() => {
+    let result = [...books.value];
+
+    if (selectedCategories.value.length > 0) {
+        result = result.filter(book => selectedCategories.value.includes(book.TheLoai));
+    }
+
+    if (searchQuery.value.trim() !== '') {
+        const query = searchQuery.value.toLowerCase().trim();
+        result = result.filter(book => 
+            (book.TenSach && book.TenSach.toLowerCase().includes(query)) || 
+            (book.TenTG && book.TenTG.toLowerCase().includes(query))
+        );
+    }
+
+    // Sắp xếp
+    if (sortBy.value === 'newest') {
+        result.sort((a, b) => new Date(b.NgayThemSach || 0) - new Date(a.NgayThemSach || 0));
+    } else if (sortBy.value === 'author') {
+        result.sort((a, b) => (a.TenTG || '').localeCompare(b.TenTG || ''));
+    } else if (sortBy.value === 'year') {
+        result.sort((a, b) => (b.NamSanXuat || 0) - (a.NamSanXuat || 0));
+    }
+
+    return result;
+});
+
 const totalPages = computed(() => {
-    return Math.ceil(books.value.length / itemsPerPage);
+    return Math.ceil(filteredBooks.value.length / itemsPerPage) || 1;
 });
 
 const paginatedBooks = computed(() => {
     const start = (currentPage.value - 1)*itemsPerPage;
     const end = start + itemsPerPage;
-    return books.value.slice(start, end);
+    return filteredBooks.value.slice(start, end);
+});
+
+watch([selectedCategories, searchQuery, sortBy], () => {
+    currentPage.value = 1;
 });
 
 const changePage = (page) => {
@@ -162,8 +156,17 @@ const fetchBooks = async () => {
     }
 };
 
+const fetchCategories = async () => {
+    try {
+        categories.value = await bookService.getCategories();
+    } catch (error) {
+        console.error("Lỗi khi tải thể loại:", error);
+    }
+};
+
 onMounted(() => {
     fetchBooks();
+    fetchCategories();
 });
 
 const formatPrice = (price) => {
