@@ -77,6 +77,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import CartService from '@/services/cart.service';
+import RequestService from '@/services/request.service';
 
 const props = defineProps({
     isOpen: {
@@ -132,9 +133,30 @@ const totalPrice = computed(() => {
     }, 0);
 });
 
-const submitRequest = () => {
-    // You can handle submission logic here
-    emit('close');
+const submitRequest = async () => {
+    if (cartItems.value.length === 0) {
+        alert("Giỏ hàng của bạn đang trống!");
+        return;
+    }
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+        alert("Vui lòng đăng nhập để tiếp tục!");
+        return;
+    }
+
+    try {
+        const user = JSON.parse(userStr);
+        const res = await RequestService.checkout(user._id);
+        alert(res.message || "Gửi yêu cầu mượn thành công!");
+        cartItems.value = []; // Làm trống giỏ hàng trên giao diện
+        emit('close');
+        // Kích hoạt load lại giỏ hàng từ component cha nếu cần thiết, emit('cartUpdated') hoặc tương tự
+        // (tùy vào cách bạn đang implement update cart number trên header)
+        window.dispatchEvent(new Event('cart-updated')); // Dispatch custom event để update giỏ hàng (nếu có sử dụng)
+    } catch (error) {
+        console.error("Lỗi khi gửi yêu cầu mượn:", error);
+        alert(error.response?.data?.message || "Có lỗi xảy ra khi tạo yêu cầu mượn.");
+    }
 };
 
 const removeItem = async (itemId) => {

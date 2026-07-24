@@ -3,7 +3,6 @@ const ledgerController = require("../controllers/ledger.controller");
 
 const router = express.Router();
 
-router.route("/user/:id")
-    .get(ledgerController.findAllByUser);
+router.get("/user/:id", ledgerController.findAllByUser);
 
 module.exports = router;
