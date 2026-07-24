@@ -17,6 +17,10 @@ class BookService {
         return (await this.api.get('/newbooks')).data;
     }
 
+    async getRelatedBooks(params = {}) {
+        return (await this.api.get('/related', { params })).data;
+    }
+
     async get(id) {
         return (await this.api.get(`/${id}`)).data;
     }

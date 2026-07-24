@@ -12,6 +12,20 @@ class BookController {
         }
     }
 
+    async getRelatedBooks(req, res, next) {
+        try {
+            const bookService = new BookService(MongoDB.client);
+            const condition = {};
+            if (req.query.TheLoai) {
+                condition.TheLoai = req.query.TheLoai;
+            }
+            const documents = await bookService.find(condition);
+            return res.send(documents);
+        } catch (error) {
+            return res.status(500).json({ message: "Đã xảy ra lỗi khi lấy sách liên quan." });
+        }
+    }
+
     async getCategories(req, res, next) {
         try {
             const bookService = new BookService(MongoDB.client);

@@ -64,12 +64,15 @@
                         :style="{ opacity: currentPage === 1 ? 0.5 : 1, cursor: currentPage === 1 ? 'not-allowed' : 'pointer'}">
                         <span class="material-symbols-outlined">chevron_left</span>
                     </button>
-                    <button class="page-item" 
-                        v-for="page in totalPages" 
-                        :key="page" :class="{ active: currentPage === page}" 
-                        @click="changePage(page)"> 
-                    {{ page }}
-                    </button>
+                    <template v-for="(page, index) in visiblePages" :key="index">
+                        <button v-if="page !== '...'" 
+                            class="page-item" 
+                            :class="{ active: currentPage === page }" 
+                            @click="changePage(page)"> 
+                            {{ page }}
+                        </button>
+                        <span v-else class="page-dots">...</span>
+                    </template>
                     <button class="page-item" 
                             :disabled="currentPage === totalPages"
                             @click="changePage(currentPage + 1)"
@@ -135,6 +138,35 @@ const paginatedBooks = computed(() => {
     const start = (currentPage.value - 1)*itemsPerPage;
     const end = start + itemsPerPage;
     return filteredBooks.value.slice(start, end);
+});
+
+const visiblePages = computed(() => {
+    const total = totalPages.value;
+    const current = currentPage.value;
+    const delta = 1; 
+    const range = [];
+    const rangeWithDots = [];
+    let l;
+
+    for (let i = 1; i <= total; i++) {
+        if (i === 1 || i === total || (i >= current - delta && i <= current + delta)) {
+            range.push(i);
+        }
+    }
+
+    for (let i of range) {
+        if (l) {
+            if (i - l === 2) {
+                rangeWithDots.push(l + 1);
+            } else if (i - l !== 1) {
+                rangeWithDots.push('...');
+            }
+        }
+        rangeWithDots.push(i);
+        l = i;
+    }
+
+    return rangeWithDots;
 });
 
 watch([selectedCategories, searchQuery, sortBy], () => {

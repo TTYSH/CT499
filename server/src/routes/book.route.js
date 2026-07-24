@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get("/", bookController.findAll);
 router.get("/newbooks", bookController.getNewBooks);
+router.get("/related", bookController.getRelatedBooks);
 router.get("/categories", bookController.getCategories);
 router.get("/:id", bookController.findOne);
 
