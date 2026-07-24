@@ -1,114 +1,77 @@
 <template>
-  <div v-if="isOpen" class="cart-modal-wrapper">
-    <!-- Overlay -->
-    <div class="backdrop-overlay" @click="$emit('close')"></div>
-    
-    <!-- Drawer / Modal -->
-    <div class="drawer-container">
-        <!-- Header -->
-        <div class="drawer-header">
-            <h2 class="drawer-title">Giỏ hàng</h2>
-            <button class="btn-close" aria-label="Close drawer" @click="$emit('close')">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
+    <div v-if="isOpen" class="cart-modal-wrapper">
+        <!-- Overlay -->
+        <div class="backdrop-overlay" @click="$emit('close')"></div>
 
-        <!-- Cart Items List -->
-        <div class="drawer-body">
-            <div class="items-list">
-                <!-- Item 1 -->
-                <div class="cart-item">
-                    <div class="item-spine">
-                        <div class="spine-shadow"></div>
-                        <span class="spine-text">Vol I</span>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-info">
-                            <h3 class="item-title">The Architecture of Happiness</h3>
-                            <p class="item-author">Alain de Botton</p>
-                            <div class="item-price">105.000đ</div>
-                        </div>
-                        
-                        <div class="item-quantity">
-                            <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
-                            <span class="qty-value">1</span>
-                            <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
-                        </div>
-                        <div class="item-total">105.000đ</div>
-                    </div>
-                    <button class="btn-remove">
-                        <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
-                    </button>
-                </div>
-                <!-- Item 2 -->
-                <div class="cart-item">
-                    <div class="item-spine">
-                        <div class="spine-shadow"></div>
-                        <span class="spine-text">Vol II</span>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-info">
-                            <h3 class="item-title">In Praise of Shadows</h3>
-                            <p class="item-author">Jun'ichirō Tanizaki</p>
-                            <div class="item-price">105.000đ</div>
-                        </div>
-                        <div class="item-quantity">
-                            <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
-                            <span class="qty-value">1</span>
-                            <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
-                        </div>
-                        <div class="item-total">105.000đ</div>
-                    </div>
-                    <button class="btn-remove">
-                        <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
-                    </button>
-                </div>
-                <!-- Item 3 -->
-                <div class="cart-item">
-                    <div class="item-spine">
-                        <div class="spine-shadow"></div>
-                        <span class="spine-text">Atlas</span>
-                    </div>
-                    <div class="item-details">
-                        <div class="item-info">
-                            <h3 class="item-title">A Pattern Language</h3>
-                            <p class="item-author">Christopher Alexander</p>
-                            <div class="item-price">105.000đ</div>
-                        </div>
-                        <div class="item-quantity">
-                            <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
-                            <span class="qty-value">2</span>
-                            <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
-                        </div>
-                        <div class="item-total">210.000đ</div>
-                    </div>
-                    <button class="btn-remove">
-                        <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
-                    </button>
-                </div>
+        <!-- Drawer / Modal -->
+        <div class="drawer-container">
+            <!-- Header -->
+            <div class="drawer-header">
+                <h2 class="drawer-title">Giỏ hàng</h2>
+                <button class="btn-close" aria-label="Close drawer" @click="$emit('close')">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <div class="drawer-footer">
-            <div class="footer-total">
-                <span class="total-label">Tổng số lượng: <span class="total-value">3</span></span>
-                <span class="total-label" style="margin-top: 4px;">Tổng tiền: <span class="total-value" style="color: crimson;">315.000đ</span></span>
+            <!-- Cart Items List -->
+            <div class="drawer-body">
+                <div class="items-list" v-if="cartItems.length > 0">
+                    <div class="cart-item" v-for="item in cartItems" :key="item._id">
+                        <div class="item-image-container">
+                            <img v-if="item.bookInfo?.BiaSach" :src="`/images/Sach/${item.bookInfo?.BiaSach}`"
+                                :alt="item.bookInfo?.TenSach" class="book-cover-img" />
+                            <div v-else class="item-spine">
+                                <div class="spine-shadow"></div>
+                                <span class="spine-text">Vol</span>
+                            </div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-info">
+                                <h3 class="item-title">{{ item.bookInfo?.TenSach }}</h3>
+                                <p class="item-author">{{ item.bookInfo?.TenTG }}</p>
+                                <div class="item-price">{{ item.bookInfo?.DonGia?.toLocaleString('vi-VN') }}đ</div>
+                            </div>
+
+                            <div class="item-quantity">
+                                <button class="qty-btn"><span class="material-symbols-outlined">remove</span></button>
+                                <span class="qty-value">{{ item.SoLuong }}</span>
+                                <button class="qty-btn"><span class="material-symbols-outlined">add</span></button>
+                            </div>
+                            <div class="item-total">{{ (item.bookInfo?.DonGia * item.SoLuong).toLocaleString('vi-VN')
+                            }}đ</div>
+                        </div>
+                        <button class="btn-remove" @click="removeItem(item._id)">
+                            <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                        </button>
+                    </div>
+                </div>
+                <div v-else class="empty-cart-msg">
+                    <p>Giỏ hàng của bạn đang trống.</p>
+                </div>
             </div>
-            <div class="footer-input-group">
-    
+
+            <!-- Footer -->
+            <div class="drawer-footer">
+                <div class="footer-total">
+                    <span class="total-label">Tổng số lượng: <span class="total-value">{{ totalQuantity }}</span></span>
+                </div>
+                <div class="footer-input-group">
+
+                </div>
+                <button class="btn-submit" @click="submitRequest">
+                    Yêu Cầu Mượn
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                </button>
             </div>
-            <button class="btn-submit" @click="submitRequest">
-                Yêu Cầu Mượn
-                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
-            </button>
         </div>
     </div>
-  </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref, computed, watch, onMounted } from 'vue';
+import CartService from '@/services/cart.service';
+
+const props = defineProps({
     isOpen: {
         type: Boolean,
         default: false
@@ -116,10 +79,58 @@ defineProps({
 });
 
 const emit = defineEmits(['close']);
+const cartItems = ref([]);
+
+const fetchCartData = async () => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+        try {
+            const user = JSON.parse(userStr);
+            cartItems.value = await CartService.get(user._id);
+        } catch (error) {
+            console.error("Lỗi khi lấy dữ liệu giỏ hàng:", error);
+        }
+    }
+};
+
+watch(() => props.isOpen, (newVal) => {
+    if (newVal) {
+        fetchCartData();
+    }
+});
+
+onMounted(() => {
+    if (props.isOpen) {
+        fetchCartData();
+    }
+});
+
+const totalQuantity = computed(() => {
+    return cartItems.value.reduce((total, item) => total + item.SoLuong, 0);
+});
+
+const totalPrice = computed(() => {
+    return cartItems.value.reduce((total, item) => {
+        const price = item.bookInfo?.DonGia || 0;
+        return total + (price * item.SoLuong);
+    }, 0);
+});
 
 const submitRequest = () => {
     // You can handle submission logic here
     emit('close');
+};
+
+const removeItem = async (itemId) => {
+    if (confirm('Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?')) {
+        try {
+            await CartService.removeItem(itemId);
+            fetchCartData();
+        } catch (error) {
+            console.error("Lỗi khi xoá sản phẩm:", error);
+            alert("Có lỗi xảy ra khi xoá sản phẩm.");
+        }
+    }
 };
 </script>
 
@@ -159,7 +170,7 @@ const submitRequest = () => {
     z-index: 50;
     display: flex;
     flex-direction: column;
-    background-image: 
+    background-image:
         linear-gradient(to right, rgba(232, 226, 214, 0.1), rgba(232, 226, 214, 0.05)),
         repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(209, 201, 186, 0.02) 2px, rgba(209, 201, 186, 0.02) 4px);
 }
@@ -173,6 +184,7 @@ const submitRequest = () => {
     align-items: flex-start;
     flex-shrink: 0;
 }
+
 .drawer-title {
     font-family: var(--font-playfair);
     font-size: 32px;
@@ -181,11 +193,13 @@ const submitRequest = () => {
     color: #171920;
     margin-bottom: 8px;
 }
+
 .drawer-subtitle {
     font-size: 16px;
     color: #46464b;
     margin: 0;
 }
+
 .btn-close {
     color: #46464b;
     padding: 8px;
@@ -194,7 +208,10 @@ const submitRequest = () => {
     border: none;
     cursor: pointer;
 }
-.btn-close:hover { color: #171920; }
+
+.btn-close:hover {
+    color: #171920;
+}
 
 /* Cart Items */
 .drawer-body {
@@ -218,10 +235,31 @@ const submitRequest = () => {
     border: 1px solid #e8e2d6;
     border-radius: 5px;
     position: relative;
-    box-shadow: 2px 2px 0px 0px rgba(62,39,35,0.05);
+    box-shadow: 2px 2px 0px 0px rgba(62, 39, 35, 0.05);
     transition: transform 0.2s;
 }
-.cart-item:hover { transform: translateY(-2px); }
+
+.cart-item:hover {
+    transform: translateY(-2px);
+}
+
+.item-image-container {
+    width: 56px;
+    height: 84px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .item-spine {
     width: 56px;
@@ -234,14 +272,18 @@ const submitRequest = () => {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 2px 0 4px rgba(0,0,0,0.05);
+    box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.05);
 }
+
 .spine-shadow {
     position: absolute;
-    left: 0; top: 0; bottom: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: 4px;
-    background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
 }
+
 .spine-text {
     font-family: 'EB Garamond', serif;
     font-size: 20px;
@@ -252,12 +294,13 @@ const submitRequest = () => {
     white-space: nowrap;
 }
 
-.item-details { 
-    flex: 1; 
+.item-details {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
 @media (min-width: 768px) {
     .item-details {
         flex-direction: row;
@@ -267,7 +310,11 @@ const submitRequest = () => {
     }
 }
 
-.item-info { flex: 1; min-width: 0; }
+.item-info {
+    flex: 1;
+    min-width: 0;
+}
+
 .item-title {
     font-family: 'Manrope', sans-serif;
     font-size: 16px;
@@ -278,19 +325,24 @@ const submitRequest = () => {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .item-author {
     font-size: 14px;
     color: #46464b;
     margin: 0;
 }
 
-.item-price, .item-total {
+.item-price,
+.item-total {
     font-size: 16px;
     font-weight: 600;
     color: crimson;
 }
+
 @media (max-width: 767px) {
-    .item-price { display: none; }
+    .item-price {
+        display: none;
+    }
 }
 
 .item-quantity {
@@ -302,6 +354,7 @@ const submitRequest = () => {
     border-radius: 6px;
     border: 1px solid #e8e2d6;
 }
+
 .qty-btn {
     display: flex;
     align-items: center;
@@ -312,16 +365,19 @@ const submitRequest = () => {
     border-radius: 4px;
     cursor: pointer;
     color: #46464b;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s;
 }
+
 .qty-btn:hover {
     background-color: #f0f0f0;
     color: #171920;
 }
+
 .qty-btn .material-symbols-outlined {
     font-size: 16px;
 }
+
 .qty-value {
     font-size: 15px;
     font-weight: 600;
@@ -343,7 +399,8 @@ const submitRequest = () => {
     transition: all 0.2s;
     margin-left: 8px;
 }
-.btn-remove:hover { 
+
+.btn-remove:hover {
     background: #ffdad6;
     color: #93000a;
     border-color: #ffdad6;
@@ -361,6 +418,7 @@ const submitRequest = () => {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
 @media (min-width: 768px) {
     .drawer-footer {
         flex-direction: row;
@@ -374,6 +432,7 @@ const submitRequest = () => {
     flex-direction: column;
     align-items: flex-start;
 }
+
 .total-label {
     display: flex;
     align-items: center;
@@ -383,17 +442,13 @@ const submitRequest = () => {
     letter-spacing: 0.05em;
     color: #46464b;
 }
-.total-value {
-    font-size: 17px;
-    font-weight: 500;
-    color: #171920;
-}
 
 .footer-input-group {
     position: relative;
     width: 100%;
     max-width: 320px;
 }
+
 .input-date {
     width: 100%;
     background: transparent;
@@ -405,11 +460,19 @@ const submitRequest = () => {
     transition: border-color 0.2s;
     outline: none;
 }
-.input-date:focus { border-bottom-color: #6e5c37; }
-.input-date::placeholder { color: rgba(70, 70, 75, 0.5); }
+
+.input-date:focus {
+    border-bottom-color: #6e5c37;
+}
+
+.input-date::placeholder {
+    color: rgba(70, 70, 75, 0.5);
+}
+
 .input-label {
     position: absolute;
-    top: -16px; left: 0;
+    top: -16px;
+    left: 0;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.03em;
@@ -433,5 +496,11 @@ const submitRequest = () => {
     border-radius: 5px;
     cursor: pointer;
 }
-.btn-submit:hover { background-color: #1b1a12; }
+
+.empty-cart-msg {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #46464b;
+}
 </style>

@@ -49,7 +49,7 @@
                         <p class="book-price">{{ formatPrice(book.DonGia) }}</p>
                         <div class="card-actions">
                             <button class="buy-now-btn" @click.stop="handleBuyNow(book)">Mượn ngay</button>
-                            <button class="add-btn" @click.stop="handleRequest" title="Thêm vào giỏ hàng">
+                            <button class="add-btn" @click.stop="handleRequest(book, $event)" title="Thêm vào giỏ hàng">
                                 <span class="material-symbols-outlined">shopping_cart</span>
                             </button>
                         </div>
@@ -91,6 +91,7 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import BuyNowModal from '@/components/User/BuyNowModal.vue';
 import bookService from '@/services/book.service';
+import CartService from '@/services/cart.service';
 
 const router = useRouter();
 const isBuyModalOpen = ref(false);
@@ -209,20 +210,36 @@ const goToBookDetail = (book) => {
     router.push({ name: 'book-detail', params: { id: book._id } });
 };
 
-const handleRequest = (event) => {
+const handleRequest = async (book, event) => {
     event.stopPropagation();
     const button = event.currentTarget;
-    const icon = button.querySelector('.material-symbols-outlined');
-    if (icon && icon.textContent.trim() === 'shopping_cart') {
-        button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
-        button.style.borderColor = '#4caf50';
-        button.style.backgroundColor = '#e8f5e9';
+    
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+        alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+        router.push({ name: 'login' });
+        return;
+    }
+    const user = JSON.parse(userStr);
 
-        setTimeout(() => {
-            button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
-            button.style.borderColor = '';
-            button.style.backgroundColor = 'transparent';
-        }, 2000);
+    try {
+        await CartService.add({ userId: user._id, bookId: book._id, quantity: 1 });
+        
+        const icon = button.querySelector('.material-symbols-outlined');
+        if (icon && icon.textContent.trim() === 'shopping_cart') {
+            button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
+            button.style.borderColor = '#4caf50';
+            button.style.backgroundColor = '#e8f5e9';
+
+            setTimeout(() => {
+                button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
+                button.style.borderColor = '';
+                button.style.backgroundColor = 'transparent';
+            }, 2000);
+        }
+    } catch(err) {
+        console.error(err);
+        alert("Thêm vào giỏ hàng thất bại.");
     }
 };
 

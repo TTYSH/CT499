@@ -92,6 +92,7 @@ import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BuyNowModal from './BuyNowModal.vue';
 import bookService from '@/services/book.service';
+import CartService from '@/services/cart.service';
 
 const route = useRoute();
 const router = useRouter();
@@ -149,20 +150,36 @@ const closeBuyModal = () => {
     isBuyModalOpen.value = false;
 };
 
-const handleRequest = (event) => {
+const handleRequest = async (event) => {
     event.stopPropagation();
     const button = event.currentTarget;
-    const icon = button.querySelector('.material-symbols-outlined');
-    if (icon && icon.textContent.trim() === 'shopping_cart') {
-        button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
-        button.style.borderColor = '#4caf50';
-        button.style.backgroundColor = '#e8f5e9';
+    
+    const userStr = localStorage.getItem('user');
+    if (!userStr) {
+        alert("Vui lòng đăng nhập để thêm vào giỏ hàng!");
+        router.push({ name: 'login' });
+        return;
+    }
+    const user = JSON.parse(userStr);
 
-        setTimeout(() => {
-            button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
-            button.style.borderColor = '';
-            button.style.backgroundColor = 'transparent';
-        }, 2000);
+    try {
+        await CartService.add({ userId: user._id, bookId: book.value._id, quantity: 1 });
+        
+        const icon = button.querySelector('.material-symbols-outlined');
+        if (icon && icon.textContent.trim() === 'shopping_cart') {
+            button.innerHTML = '<span class="material-symbols-outlined" style="color: #4caf50;">shopping_cart</span> <span style="color: #4caf50; font-weight: bold; margin-left: 4px;">✓</span>';
+            button.style.borderColor = '#4caf50';
+            button.style.backgroundColor = '#e8f5e9';
+
+            setTimeout(() => {
+                button.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span>';
+                button.style.borderColor = '';
+                button.style.backgroundColor = 'transparent';
+            }, 2000);
+        }
+    } catch (error) {
+        console.error("Lỗi khi thêm giỏ hàng:", error);
+        alert("Thêm vào giỏ hàng thất bại.");
     }
 };
 
