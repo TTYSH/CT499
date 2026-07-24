@@ -15,6 +15,11 @@ class BookService {
         return await this.Book.distinct("TheLoai");
     }
 
+    async getNewBooks(limit = 5) {
+        const cursor = await this.Book.find({}).sort({ NgayThemSach: -1 }).limit(limit);
+        return await cursor.toArray();
+    }
+
     async findById(id) {
         let queryId = id;
         if (ObjectId.isValid(id) && typeof id === 'string' && id.length === 24) {

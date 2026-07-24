@@ -49,7 +49,7 @@
                 @mouseup="stopDrag"
                 @mousemove="doDrag"
             >
-                <div class="book-card-container" v-for="book in books.slice(0, 6)" :key="book._id">
+                <div class="book-card-container" v-for="book in books" :key="book._id">
                     <div class="paper-card" @dragstart.prevent>
                         <img alt="Sách" class="book-cover" :src="`/images/Sach/${book.BiaSach}`" @dragstart.prevent>
                     </div>
@@ -115,9 +115,9 @@ const books = ref([]);
 
 const fetchBooks = async () => {
     try {
-        books.value = await bookService.getAll();
+        books.value = await bookService.getNewBooks();
     } catch (error) {
-        console.error("Lỗi khi tải dữ liệu sách:", error);
+        console.error("Lỗi khi tải dữ liệu sách mới:", error);
     }
 };
 

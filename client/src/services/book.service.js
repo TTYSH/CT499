@@ -13,6 +13,10 @@ class BookService {
         return (await this.api.get('/categories')).data;
     }
 
+    async getNewBooks() {
+        return (await this.api.get('/newbooks')).data;
+    }
+
     async get(id) {
         return (await this.api.get(`/${id}`)).data;
     }

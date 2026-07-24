@@ -23,6 +23,16 @@ class BookController {
         }
     }
 
+    async getNewBooks(req, res, next) {
+        try {
+            const bookService = new BookService(MongoDB.client);
+            const documents = await bookService.getNewBooks(5);
+            return res.send(documents);
+        } catch (error) {
+            return res.status(500).json({ message: "Đã xảy ra lỗi khi lấy danh sách sách mới." });
+        }
+    }
+
     async findOne(req, res, next) {
         try {
             const bookService = new BookService(MongoDB.client);
